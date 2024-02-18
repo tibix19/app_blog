@@ -1,0 +1,51 @@
+<?php
+namespace App\Controllers;
+use Database\DBConnection;
+
+abstract class Controller
+{
+    protected $db;
+
+    public function __construct(DBConnection $db)
+    {
+        // si pas de session on la démarre
+        if (session_status() === PHP_SESSION_NONE){
+            session_start();
+        }
+        $this->db = $db;
+    }
+
+    protected function view(string $path, array $params = null): void
+    {
+        ob_start();
+        $path = str_replace('.', DIRECTORY_SEPARATOR, $path);
+        require VIEWS . $path . '.php';
+        $content = ob_get_clean();
+        require VIEWS . 'layout.php';
+    }
+
+    protected function getDB()
+    {
+        return $this->db;
+    }
+
+    // permet de savoir si la personne est loguer en temps que user ou admin et de la redirige ou pas sur la page
+    protected function isAdmin()
+    {
+        if (isset($_SESSION['auth']) && $_SESSION['auth'] === 1) {
+            return true;
+        } else{
+            header('Location: /login');
+        }
+    }
+
+    protected function isUser()
+    {
+        if (isset($_SESSION['auth']) && $_SESSION['auth'] === 2) {
+            return true;
+        } else{
+            header('Location: /login');
+        }
+    }
+
+}

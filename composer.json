@@ -1,0 +1,17 @@
+{
+    "name": "timeo/app_blog",
+    "authors": [
+        {
+            "name": "timeo",
+            "email": "timeo.beuchat@eduvaud.ch"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Router\\": "routes/",
+            "App\\": "app/",
+            "Database\\": "database/"
+        }
+    },
+    "require": {}
+}
