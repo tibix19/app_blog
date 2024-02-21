@@ -30,21 +30,23 @@ abstract class Controller
     }
 
     // permet de savoir si la personne est loguer en temps que user ou admin et de la redirige ou pas sur la page
-    protected function isAdmin()
+    protected function isAdmin(): bool
     {
-        if (isset($_SESSION['auth']) && $_SESSION['auth'] === 1) {
+        if (isset($_SESSION['authAdmin']) && $_SESSION['authAdmin'] === 1) {
             return true;
         } else{
             header('Location: /login');
+            return false;
         }
     }
 
-    protected function isUser()
+    protected function isUser(): bool
     {
-        if (isset($_SESSION['auth']) && $_SESSION['auth'] === 2) {
+        if (isset($_SESSION['auth']) && $_SESSION['auth'] === 0) {
             return true;
         } else{
             header('Location: /login');
+            return false;
         }
     }
 

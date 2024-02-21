@@ -20,7 +20,7 @@ class User extends Model
         return (new DateTime($this->created_at))->format('d/m/y à H:i');
     }
 
-    
+
 
 
 }

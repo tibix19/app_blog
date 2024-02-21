@@ -20,12 +20,15 @@
             </ul>
             <ul class="navbar-nav ml-auto">
             <?php // affiche le lien pour accéder à la page admin et le bouton pour se deco si connecter
-             if(isset($_SESSION['auth'])): ?>
+             if(isset($_SESSION['authAdmin']) == 1 ): ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/posts">Page admin</a>
+                    <a class="nav-link" href="/admin/posts">Panel Post Admin</a>
                 </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="/account/<?= $_SESSION['auth'] ?>">Account</a>
+                     <a class="nav-link" href="/admin/account">Panel Account Admin</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/account"></a>
                  </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Se déconnecter</a>

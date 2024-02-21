@@ -29,7 +29,7 @@ $router->post('/login', 'App\Controllers\UserController@loginPost');
 $router->get('/logout', 'App\Controllers\UserController@logout');
 
 // voir est modifier les infos du user
-$router->get('/account/:id','App\Controllers\UserController@editAccount');
+$router->get('/admin/account','App\Controllers\Admin\UserController@index');
 
 // route qui affiche les posts
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');

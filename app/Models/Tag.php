@@ -7,7 +7,6 @@ class Tag extends Model
 
     protected $table = 'tags';
 
-
     public function getPosts()
     {
         return $this->querySQL("

@@ -35,7 +35,9 @@ class UserController extends Controller
         }
 
         if(password_verify($_POST['password'], $user->password)) {
-            $_SESSION['auth'] = (int) $user->admin;
+            // $_SESSION['auth'] va etre egale à 1 ou 0 en fonction de si la personne est admin ou non
+            $_SESSION['authAdmin'] = (int) $user->admin;
+            $_SESSION['idUser'] = (int) $user->id;
             return header('Location: /admin/posts?success=true');
         } else{
             return header('Location: /login?password=fasle');
