@@ -17,7 +17,7 @@ class NotFoundException extends Exception
     public function error404() : void
     {
         http_response_code(404);
-        $content = "<h1>La page demandée est introuvable !</h1>";
+        $content = "<h1>La page demandé est introuvable !</h1>";
         require VIEWS . 'layout.php';
     }
 }

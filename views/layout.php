@@ -19,7 +19,7 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-            <?php // affiche le lien pour accéder à la page admin et le bouton pour se deco
+            <?php // affiche le lien pour accéder à la page admin et le bouton pour se deco si connecter
              if(isset($_SESSION['auth'])): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/posts">Page admin</a>
@@ -30,7 +30,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Se déconnecter</a>
                 </li>
-            <?php // affiche le lien pour se connecter
+            <?php // affiche le lien pour se connecter si pas connecter
              else: ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Se connecter</a>

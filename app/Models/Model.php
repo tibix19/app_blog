@@ -23,10 +23,18 @@ abstract class Model
     }
 
     // requete qiu permet de recup les elemnts d'un table par son id
-    public function findById(int $id): Model
+    public function findById(int $id): ?Model
     {
-        return $this->querySQL("SELECT * FROM {$this->table} WHERE id = ?", [$id], true);
+        $result = $this->querySQL("SELECT * FROM {$this->table} WHERE id = ?", [$id], true);
+    
+        // Vérifiez si $result est un objet de type Model
+        if ($result instanceof Model) {
+            return $result;
+        } else {
+            return null;
+        }
     }
+
 
     public function  create_model(array $data, ?array $relations = null)
     {
