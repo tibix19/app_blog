@@ -23,5 +23,5 @@
             <?php endforeach; ?>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary"><?= isset($params['post']) ? 'Enregistrer les modification' : 'Enregistrer mon article' ?></button>
+    <button type="submit" class="btn btn-primary"><?= isset($params['post']) ? 'Enregistrer les modifications' : 'Enregistrer mon article' ?></button>
 </form>

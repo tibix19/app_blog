@@ -42,7 +42,7 @@ abstract class Controller
 
     protected function isUser(): bool
     {
-        if (isset($_SESSION['auth']) && $_SESSION['auth'] === 0) {
+        if (isset($_SESSION['auth']) && $_SESSION['authAdmin'] === 2) {
             return true;
         } else{
             header('Location: /login');

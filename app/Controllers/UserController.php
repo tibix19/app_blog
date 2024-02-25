@@ -25,20 +25,16 @@ class UserController extends Controller
             header('Location: /login');
             exit;
         }
-
         $users = new User($this->getDB());
-
-        try {
-            $user = $users->getByUsername($_POST['username']);
-        } catch(\Exception$e){
-            return header('Location: /login?password=fasle');
-        }
+        $user = $users->getByUsername($_POST['username']);
 
         if(password_verify($_POST['password'], $user->password)) {
-            // $_SESSION['auth'] va etre egale à 1 ou 0 en fonction de si la personne est admin ou non
+            // $_SESSION['auth'] va etre egale à 1 ou 2 en fonction de si la personne est admin ou non
             $_SESSION['authAdmin'] = (int) $user->admin;
             $_SESSION['idUser'] = (int) $user->id;
-            return header('Location: /admin/posts?success=true');
+            $_SESSION['username'] = $user->username;
+            $_SESSION['pass'] = $user->password;
+            return header('Location: /account?success=true');
         } else{
             return header('Location: /login?password=fasle');
         }
@@ -50,10 +46,11 @@ class UserController extends Controller
         return header('Location: /');
     }
 
-    public function editAccount(int $id)
+    public function editAccount()
     {
-        $user = (new User($this->getDB()))->findById($id);
-        return $this->view('account.account', compact('user'));
+        #$this->isAdmin();
+        $user = (new User($this->getDB()));
+        return $this->view('auth.account', compact('user'));
     }
 
 

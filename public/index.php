@@ -31,6 +31,9 @@ $router->get('/logout', 'App\Controllers\UserController@logout');
 // voir est modifier les infos du user
 $router->get('/admin/account','App\Controllers\Admin\UserController@index');
 
+// your account
+$router->get('/account','App\Controllers\UserController@editAccount');
+
 // route qui affiche les posts
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');
 // route pour create un post

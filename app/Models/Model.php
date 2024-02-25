@@ -43,12 +43,12 @@ abstract class Model
         $i = 1;
 
         foreach ($data as $key => $value)
-            {
-                $comma = $i == count($data) ? "" : ', ';
-                $firstParenthesis .= "{$key}{$comma}";
-                $secondParenthesis .= ":{$key}{$comma}";
-                $i++;
-            }
+        {
+            $comma = $i == count($data) ? "" : ', ';
+            $firstParenthesis .= "{$key}{$comma}";
+            $secondParenthesis .= ":{$key}{$comma}";
+            $i++;
+        }
 
         return $this->querySQL("INSERT INTO {$this->table} ($firstParenthesis) 
                                     VALUES ($secondParenthesis)", $data);

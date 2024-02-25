@@ -20,7 +20,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
             <?php // affiche le lien pour accéder à la page admin et le bouton pour se deco si connecter
-             if(isset($_SESSION['authAdmin']) == 1 ): ?>
+             if(isset($_SESSION['authAdmin']) &&  $_SESSION['authAdmin'] == 1 ): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/posts">Panel Post Admin</a>
                 </li>
@@ -28,16 +28,25 @@
                      <a class="nav-link" href="/admin/account">Panel Account Admin</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="/account"></a>
+                     <a class="nav-link" href="/account">Account</a>
                  </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Se déconnecter</a>
                 </li>
+             <?php // affiche le lien pour se connecter si pas connecter
+             elseif(isset($_SESSION['authAdmin']) == 2) : ?>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/account">Account</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/logout">Se déconnecter</a>
+                 </li>
             <?php // affiche le lien pour se connecter si pas connecter
              else: ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Se connecter</a>
                 </li>
+
             <?php endif; ?>
             </ul>
         </div>
