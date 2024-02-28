@@ -64,8 +64,15 @@ class UserController extends Controller
         $user = new User($this->getDB());
         // recup l'id pour update
         $id = (int) $_SESSION['idUser'];
+
+        $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $userData = [
+            'username' => $_POST['username'],
+            'password' => $mdp
+        ];
+
         // fait l'update dans le model avec les data
-        $result = $user->update_model($id, $_POST);
+        $result = $user->update_model($id, $userData);
 
         if ($result){
             // revient sur la page
