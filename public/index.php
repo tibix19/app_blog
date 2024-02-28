@@ -28,10 +28,9 @@ $router->post('/login', 'App\Controllers\UserController@loginPost');
 // destroy de la session
 $router->get('/logout', 'App\Controllers\UserController@logout');
 
-// account of the user
+// ACCOUNT
 $router->get('/account','App\Controllers\UserController@editAccount');
 $router->post('/account','App\Controllers\UserController@updateAccount');
-
 // singup
 $router->get('/signup', 'App\Controllers\UserController@signup');
 $router->post('/signup', 'App\Controllers\UserController@signupPost');

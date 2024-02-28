@@ -36,6 +36,16 @@ HTML;
                                     WHERE pt.post_id = ?", [$this->id]);
     }
 
+    public function getCreatorPost(): string
+    {
+        $user = $this->querySQL("SELECT username FROM users u
+                                    INNER JOIN user_post up ON up.user_id = u.id
+                                    WHERE up.post_id = ?", [$this->id]);
+        // si c'est vide ça retourne rien sion ça retourne le username
+        return !empty($user) ? $user[0]->username : '';
+    }
+
+
     public function create_model(array $data, ?array $relations = null)
     {
         parent::create_model($data);

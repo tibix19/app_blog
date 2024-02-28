@@ -10,6 +10,7 @@
                     <?php endforeach; ?>
                 </div>
             <small class="text-info">Publié le <?= $post->getCreatedAt() ?></small>
+            <small class="text-info">par <?= $post->getCreatorPost(); ?></small>
             <p><?= $post->getExcerpt() ?></p>
             <?= $post->getButton() ?>
         </div>

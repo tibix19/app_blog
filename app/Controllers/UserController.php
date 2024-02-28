@@ -93,13 +93,11 @@ class UserController extends Controller
             'username' => ['required', 'min:3'],
             'password' => ['required', 'min:3']
         ]);
-
         if($errors){
             $_SESSION['errors'][] = $errors;
             header('Location: /signup');
             exit;
         }
-
         // Vérification si le nom d'utilisateur existe déjà
         $user = new User($this->getDB());
         $existingUser = $user->getByUsername($_POST['username']);
@@ -108,7 +106,6 @@ class UserController extends Controller
             header('Location: /signup');
             exit;
         }
-        $user = new User($this->getDB());
         // Hash du mot de passe
         $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $userData = [
