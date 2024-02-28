@@ -63,7 +63,7 @@ abstract class Model
         foreach ($data as $key => $value)
         {
             $comma = $i == count($data) ? "" : ', ';
-            // le point egale va rajouter ce qui a après le égal à la variable. (cancatenation !) https://openclassrooms.com/forum/sujet/que-signifie-un-point-avant-un-egal-en-php-53333
+            // le point egale va rajouter ce qui a après le égal à la variable. (concatenation !) https://openclassrooms.com/forum/sujet/que-signifie-un-point-avant-un-egal-en-php-53333
             $sqlRequestPart .= "{$key} = :{$key}{$comma}";
             $i++;
         }
@@ -77,7 +77,7 @@ abstract class Model
     }
 
 
-    // function qui prepare les requete sql et ne de pas reecrire tout le code à chaque fois
+    // function qui prepare les requete sql et ne de pas recrire tout le code à chaque fois
     public function querySQL(string $sql, array $param = null, bool $single = null)
     {
         $method = is_null($param) ? 'query' : "prepare";

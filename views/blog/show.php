@@ -5,5 +5,6 @@
     <?php endforeach; ?>
 </div>
 <p><?= $params['post']->content ?> </p>
-<small>Publié le <?= $params['post']->getCreatedAt() ?></small></br></br>
+<small>Publié le <?= $params['post']->getCreatedAt() ?></small>
+<small>par <?= $params['post']->getCreatorPost() ?></small></br></br>
 <a href="/posts" class="btn btn-secondary">Retourner en arrière</a>

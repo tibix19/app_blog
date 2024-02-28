@@ -33,8 +33,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Se déconnecter</a>
                 </li>
-             <?php // affiche le lien pour se connecter si pas connecter
+             <?php // affiche le lien pour se connecter si pas connecter mais pour les users standard seulement ces liens vont s'afficher
              elseif(isset($_SESSION['authAdmin']) == 2) : ?>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/create">Créer un post</a>
+                 </li>
                  <li class="nav-item">
                      <a class="nav-link" href="/account">Account</a>
                  </li>
@@ -42,11 +45,13 @@
                      <a class="nav-link" href="/logout">Se déconnecter</a>
                  </li>
             <?php // affiche le lien pour se connecter si pas connecter
-             else: ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Se connecter</a>
-                </li>
-
+             else: // si pas connecter on afficher la page pour se co ?>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/create">Créer un post</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/account">Se connecter</a>
+                 </li>
             <?php endif; ?>
             </ul>
         </div>

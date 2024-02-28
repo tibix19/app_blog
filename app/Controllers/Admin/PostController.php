@@ -21,7 +21,7 @@ class PostController extends Controller
     // retourne la bonne view
     public function create()
     {
-        $this->isAdmin();
+        $this->isConnected();
         $tags = (new Tag($this->getDB()))->all();
         return $this->view('admin.post.form', compact('tags'));
     }
@@ -29,7 +29,7 @@ class PostController extends Controller
     // function qui traite les données en POST
     public function createPost()
     {
-        $this->isAdmin();
+        $this->isConnected();
         $post = new Post($this->getDB());
         // array pop reprend les elements du premier tableau de $_POST
         $tags = array_pop($_POST);
@@ -38,7 +38,7 @@ class PostController extends Controller
 
         if ($result){
             // revient sur le panel admin après la creation
-            return header('Location: /admin/posts');
+            return header('Location: /posts');
         }
     }
 
