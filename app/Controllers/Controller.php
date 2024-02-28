@@ -50,4 +50,16 @@ abstract class Controller
         }
     }
 
+
+    protected function isConnected(): bool
+    {
+        // si c'est connecté on renvoie vrai sinon faux
+        if (isset($_SESSION['authAdmin']) OR $_SESSION['authAdmin'] === 2 OR $_SESSION['authAdmin'] === 1) {
+            return true;
+        } else{
+            header('Location: /login');
+            return false;
+        }
+    }
+
 }

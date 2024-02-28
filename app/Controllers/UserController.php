@@ -14,17 +14,18 @@ class UserController extends Controller
 
     public function loginPost()
     {
+        // check si les entrées des user sont ok
         $validator = new Validator($_POST);
         $errors = $validator->validate([
             'username' => ['required', 'min:3'],
             'password' => ['required']
         ]);
-
         if($errors){
             $_SESSION['errors'][] = $errors;
             header('Location: /login');
             exit;
         }
+        // puis on regarde si le user est existant
         $users = new User($this->getDB());
         $user = $users->getByUsername($_POST['username']);
 
@@ -32,10 +33,12 @@ class UserController extends Controller
             // $_SESSION['auth'] va etre egale à 1 ou 2 en fonction de si la personne est admin ou non
             $_SESSION['authAdmin'] = (int) $user->admin;
             $_SESSION['idUser'] = (int) $user->id;
-            $_SESSION['username'] = $user->username;
-            $_SESSION['pass'] = $user->password;
+
             return header('Location: /account?success=true');
         } else{
+            // message incorrect credentials
+            $errorsCred = $validator->incorrectCredentials();
+            $_SESSION['errors'][] = $errorsCred;
             return header('Location: /login?password=fasle');
         }
     }
@@ -48,11 +51,25 @@ class UserController extends Controller
 
     public function editAccount()
     {
-        #$this->isAdmin();
-        $user = (new User($this->getDB()));
+        $this->isConnected();
+        $users = new User($this->getDB());
+        // on recup les infos du user avec son id qui es dans une variable de session initier quand le user se connecte
+        $user = $users->findById($_SESSION['idUser']);
         return $this->view('auth.account', compact('user'));
     }
 
+    public function updateAccount()
+    {
+        $this->isConnected();
+        $user = new User($this->getDB());
+        // recup l'id pour update
+        $id = (int) $_SESSION['idUser'];
+        // fait l'update dans le model avec les data
+        $result = $user->update_model($id, $_POST);
 
-
+        if ($result){
+            // revient sur la page
+            return header('Location: /account');
+        }
+    }
 }

@@ -57,4 +57,13 @@ class Validator
         return $this->error;
     }
 
+    public function IncorrectCredentials()
+    {
+        return [['incorrectCredentials' => 'Le nom d\'utilisateur ou le mot de passe est incorrect.']];
+    }
+
+    public function modificationSave()
+    {
+        return  ['modificationSave' => 'Les modifications ont été enregistrées.'];
+    }
 }

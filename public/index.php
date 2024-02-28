@@ -28,11 +28,21 @@ $router->post('/login', 'App\Controllers\UserController@loginPost');
 // destroy de la session
 $router->get('/logout', 'App\Controllers\UserController@logout');
 
+// account of the user
+$router->get('/account','App\Controllers\UserController@editAccount');
+$router->post('/account','App\Controllers\UserController@updateAccount');
+
+// singup
+
+
+// ADMIN
 // voir est modifier les infos du user
 $router->get('/admin/account','App\Controllers\Admin\UserController@index');
-
-// your account
-$router->get('/account','App\Controllers\UserController@editAccount');
+// create user admin
+$router->get('/admin/account/create','App\Controllers\Admin\UserController@create');
+$router->post('/admin/account/create','App\Controllers\Admin\UserController@createUser');
+// delete user
+$router->post('/admin/account/delete/:id','App\Controllers\Admin\UserController@deleteUser');
 
 // route qui affiche les posts
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');
