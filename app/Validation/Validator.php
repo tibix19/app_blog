@@ -66,4 +66,9 @@ class Validator
     {
         return  ['modificationSave' => 'Les modifications ont été enregistrées.'];
     }
+
+    public function userAlreadyExist()
+    {
+        return  $this->error = [['userAlreadyExist' => 'Le nom d\'utilisateur existe déjà']];
+    }
 }

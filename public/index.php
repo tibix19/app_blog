@@ -33,7 +33,8 @@ $router->get('/account','App\Controllers\UserController@editAccount');
 $router->post('/account','App\Controllers\UserController@updateAccount');
 
 // singup
-
+$router->get('/signup', 'App\Controllers\UserController@signup');
+$router->post('/signup', 'App\Controllers\UserController@signupPost');
 
 // ADMIN
 // voir est modifier les infos du user
@@ -56,7 +57,7 @@ $router->get('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit
 // route qui permet d'aller modifier dans la db les posts
 $router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');
 
-// Si l url n existe pas redirige vers page d erreur
+// Si url n existe pas redirige vers page d erreur
 try {
     $router->run();
 }

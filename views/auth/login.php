@@ -26,7 +26,7 @@ if(isset($_SESSION['errors'])): ?>
         <input type="password" class="form-control" name="password" id="password">
     </div>
     <button type="submit" class="btn btn-primary ">Se connecter</button>
-    <a href="/singup" class="btn btn-secondary">Créer un compte</a>
+    <a href="/signup" class="btn btn-secondary">Créer un compte</a>
 </form>
 
 

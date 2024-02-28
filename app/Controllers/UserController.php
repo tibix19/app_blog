@@ -79,4 +79,53 @@ class UserController extends Controller
             return header('Location: /account');
         }
     }
+
+    public function signup()
+    {
+        return $this->view('auth.signup');
+    }
+
+    public function signupPost()
+    {
+        // Vérification des entrées utilisateur
+        $validator = new Validator($_POST);
+        $errors = $validator->validate([
+            'username' => ['required', 'min:3'],
+            'password' => ['required', 'min:3']
+        ]);
+
+        if($errors){
+            $_SESSION['errors'][] = $errors;
+            header('Location: /signup');
+            exit;
+        }
+
+        // Vérification si le nom d'utilisateur existe déjà
+        $user = new User($this->getDB());
+        $existingUser = $user->getByUsername($_POST['username']);
+        if ($existingUser) {
+            $_SESSION['errors'][] = $validator->userAlreadyExist();
+            header('Location: /signup');
+            exit;
+        }
+        $user = new User($this->getDB());
+        // Hash du mot de passe
+        $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $userData = [
+            'username' => $_POST['username'],
+            'password' => $hashedPassword
+        ];
+        // Envoie les données vers la base de données pour créer le compte
+        $result = $user->create_model($userData);
+
+        if ($result){
+            // Connexion automatique après la création du compte
+            $newUser = $user->getByUsername($_POST['username']);
+            $_SESSION['authAdmin'] = (int) $newUser->admin;
+            $_SESSION['idUser'] = (int) $newUser->id;
+
+            // Rediriger l'utilisateur vers sa session
+            return header('Location: /account?success=true');
+        }
+    }
 }
