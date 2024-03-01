@@ -50,7 +50,6 @@ abstract class Controller
         }
     }
 
-
     protected function isConnected(): bool
     {
         // si c'est connecté on renvoie vrai sinon faux

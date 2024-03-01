@@ -20,7 +20,7 @@ class Post extends Model
         return substr($this->content, 0, 200) . '...';
     }
 
-    // funtion d'un bouton fait avec heredoc pour voir l'article en entien
+    // funtion d'un bouton fait avec heredoc pour voir l'article en entier
     public function getButton() : string
     {
         return <<<HTML
@@ -45,7 +45,7 @@ HTML;
         return !empty($user) ? $user[0]->username : '';
     }
 
-
+    
     public function create_model(array $data, ?array $relations = null)
     {
         parent::create_model($data);
@@ -53,9 +53,24 @@ HTML;
         $id = $this->db->getPDO()->lastINSERTid();
 
         foreach ($relations as $tagId){
+            // insere dans table intermédiaire post_tag quels tags a ce post
             $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (?, ?)");
+            // insere dans table intermédiaire user_post quel user a fait quel post
+            $stmtUserPost = $this->db->getPDO()->prepare("INSERT INTO user_post (user_id, post_id) VALUES (?, ?)");
+            // execution des requetes avec les données
+            $stmtUserPost->execute([$_SESSION['idUser'], $id]);
             $stmt->execute([$id, $tagId]);
         }
         return true;
     }
+
+    // function qui permet de recupérer les postes du user qui est connecté.
+    public function myPosts()
+    {
+        // recuper les posts du user avec la variable de session idUser
+        return $this->querySQL('SELECT * FROM posts p
+                                INNER JOIN user_post up on up.post_id=p.id
+                                WHERE up.user_id=?',[$_SESSION["idUser"]]) ;
+    }
+
 }

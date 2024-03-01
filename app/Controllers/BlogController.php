@@ -48,13 +48,6 @@ class BlogController extends Controller
         }
     }
 
-    public function getCreatorPost()
-    {
-
-    }
-
-
-
     public function tag(int $id)
     {
         $tag = new Tag($this->getDB());

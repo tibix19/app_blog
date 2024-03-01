@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Models\Post;
 use App\Validation\Validator;
 
 class UserController extends Controller
@@ -125,4 +126,15 @@ class UserController extends Controller
             return header('Location: /account?success=true');
         }
     }
+
+
+    public function myPostsPanelIndex()
+    {
+        $this->isConnected();
+
+        $myPosts = (new Post($this->getDB()))->myPosts();
+        // retourner les users dans une views
+        return $this->view('account.postIndex', compact('myPosts'));
+    }
+
 }

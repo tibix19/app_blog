@@ -33,7 +33,6 @@ class PostController extends Controller
         $post = new Post($this->getDB());
         // array pop reprend les elements du premier tableau de $_POST
         $tags = array_pop($_POST);
-
         $result = $post->create_model($_POST, $tags);
 
         if ($result){

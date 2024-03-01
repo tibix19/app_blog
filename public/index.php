@@ -35,6 +35,9 @@ $router->post('/account','App\Controllers\UserController@updateAccount');
 $router->get('/signup', 'App\Controllers\UserController@signup');
 $router->post('/signup', 'App\Controllers\UserController@signupPost');
 
+// Post des utilisateurs
+$router->get('/myposts', 'App\Controllers\UserController@myPostsPanelIndex');
+
 // ADMIN
 // voir est modifier les infos du user
 $router->get('/admin/account','App\Controllers\Admin\UserController@index');

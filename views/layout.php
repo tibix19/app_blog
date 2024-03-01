@@ -28,6 +28,9 @@
                      <a class="nav-link" href="/admin/account">Panel Account Admin</a>
                  </li>
                  <li class="nav-item">
+                     <a class="nav-link" href="/myposts">Voir mes postes</a>
+                 </li>
+                 <li class="nav-item">
                      <a class="nav-link" href="/account">Account</a>
                  </li>
                 <li class="nav-item">
@@ -37,6 +40,9 @@
              elseif(isset($_SESSION['authAdmin']) == 2) : ?>
                  <li class="nav-item">
                      <a class="nav-link" href="/create">Créer un post</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/myposts">Voir mes postes</a>
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="/account">Account</a>
