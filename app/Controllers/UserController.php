@@ -130,7 +130,7 @@ class UserController extends Controller
     }
 
 
-    // affiche les posts que le user à créé
+    // affiche les posts que l'user a créés
     public function myPostsPanelIndex()
     {
         $this->isConnected();
@@ -177,5 +177,34 @@ class UserController extends Controller
             return $error->error403();
         }
     }
+
+    public function updatePostUser(int $postId)
+    {
+        $this->isConnected();
+        $post = new Post($this->getDB());
+
+        $tags = array_pop($_POST);
+
+        $result = $post->update_model($postId, $_POST, $tags);
+
+        if ($result){
+            // revient sur le panel admin après la modification
+            return header('Location: /myposts');
+        }
+    }
+
+    public function destroyPostUser(int $id)
+    {
+        $this->isConnected();
+        $post = new Post($this->getDB());
+        $result = $post->destroy_model($id);
+
+        if ($result){
+            // revient sur le panel admin après la supp
+            return header('Location: /myposts');
+        }
+    }
+
+
 }
 

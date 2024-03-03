@@ -24,7 +24,7 @@
                 <td><?= $post->getCreatedAt() ?></td>
                 <td>
                     <a href="/post/edit/<?= $post->post_id ?>" class="btn btn-warning">Modifier</a>
-                    <form action="/admin/posts/delete/<?= $post->post_id ?>" method="POST" class="d-inline">
+                    <form action="/post/delete/<?= $post->post_id ?>" method="POST" class="d-inline">
                         <button type="submit" class="btn btn-danger">Supprimer</button>
                     </form>
 

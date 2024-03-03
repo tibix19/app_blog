@@ -21,7 +21,7 @@ $router->get('/posts/:id','App\Controllers\BlogController@show');
 // affiche articles par tag
 $router->get('/tags/:id','App\Controllers\BlogController@tag');
 
-// route pour ce connecter
+// route pour se connecter
 $router->get('/login', 'App\Controllers\UserController@login');
 // route pour envoyer les données à la db
 $router->post('/login', 'App\Controllers\UserController@loginPost');
@@ -35,18 +35,18 @@ $router->post('/account','App\Controllers\UserController@updateAccount');
 $router->get('/signup', 'App\Controllers\UserController@signup');
 $router->post('/signup', 'App\Controllers\UserController@signupPost');
 
-// Post des utilisateurs
+// POST DES USER
 $router->get('/myposts', 'App\Controllers\UserController@myPostsPanelIndex');
-// la route create pour que les user puisse faire le propre post mais on garde les function de PostController dans le dossier Admin (pas ouf)
+// la route create pour que les user puisse faire le propre post, mais on garde les function de PostController dans le dossier Admin (pas ouf)
 $router->get('/create', 'App\Controllers\Admin\PostController@create');
 $router->post('/create', 'App\Controllers\Admin\PostController@createPost');
-// modifier leur propre pose et aussi supprimer
+// modifier leurs propres postes et aussi les supprimer
 $router->get('/post/edit/:id', 'App\Controllers\UserController@editPostUser');
 $router->post('/post/edit/:id', 'App\Controllers\UserController@updatePostUser');
-
+$router->post('/post/delete/:id', 'App\Controllers\UserController@destroyPostUser');
 
 // ADMIN
-// voir est modifier les infos du user
+// voir et modifier les infos du user
 $router->get('/admin/account','App\Controllers\Admin\UserController@index');
 // create user admin
 $router->get('/admin/account/create','App\Controllers\Admin\UserController@create');
@@ -67,7 +67,7 @@ $router->get('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit
 // route qui permet d'aller modifier dans la db les posts
 $router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');
 
-// Si url n existe pas redirige vers page d erreur
+// Si url n'existe pas redirige vers page d'erreur
 try {
     $router->run();
 }

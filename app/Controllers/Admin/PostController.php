@@ -59,7 +59,7 @@ class PostController extends Controller
         $result = $post->update_model($id, $_POST, $tags);
 
         if ($result){
-            // revient sur la panel admin après l'update
+            // revient sur le panel admin après l'update
             return header('Location: /admin/posts');
         }
     }
@@ -71,7 +71,7 @@ class PostController extends Controller
         $result = $post->destroy_model($id);
 
         if ($result){
-            // revient sur la panel admin après la supp
+            // revient sur le panel admin après la supp
             return header('Location: /admin/posts');
         }
     }
