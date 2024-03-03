@@ -37,6 +37,13 @@ $router->post('/signup', 'App\Controllers\UserController@signupPost');
 
 // Post des utilisateurs
 $router->get('/myposts', 'App\Controllers\UserController@myPostsPanelIndex');
+// la route create pour que les user puisse faire le propre post mais on garde les function de PostController dans le dossier Admin (pas ouf)
+$router->get('/create', 'App\Controllers\Admin\PostController@create');
+$router->post('/create', 'App\Controllers\Admin\PostController@createPost');
+// modifier leur propre pose et aussi supprimer
+$router->get('/post/edit/:id', 'App\Controllers\UserController@editPostUser');
+$router->post('/post/edit/:id', 'App\Controllers\UserController@updatePostUser');
+
 
 // ADMIN
 // voir est modifier les infos du user
@@ -52,9 +59,7 @@ $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');
 // route pour create un post
 $router->get('/admin/posts/create', 'App\Controllers\Admin\PostController@create');
 $router->post('/admin/posts/create', 'App\Controllers\Admin\PostController@createPost');
-// la route create pour que les user puisse faire le propre post mais on garde les function de PostController dans le dossier Admin (pas ouf)
-$router->get('/create', 'App\Controllers\Admin\PostController@create');
-$router->post('/create', 'App\Controllers\Admin\PostController@createPost');
+
 // route pour delete un post
 $router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy');
 // routes pour editer les post , route qui permet de d'aller sur la page pour modif les posts

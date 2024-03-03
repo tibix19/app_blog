@@ -19,12 +19,12 @@
     <tbody>
         <?php foreach ($params['myPosts'] as $post): ?>
             <tr>
-                <th scope="row"><?= $post->id ?></th>
+                <th scope="row"><?= $post->post_id ?></th>
                 <td><?= $post->title ?></td>
                 <td><?= $post->getCreatedAt() ?></td>
                 <td>
-                    <a href="/admin/posts/edit/<?= $post->id ?>" class="btn btn-warning">Modifier</a>
-                    <form action="/admin/posts/delete/<?= $post->id ?>" method="POST" class="d-inline">
+                    <a href="/post/edit/<?= $post->post_id ?>" class="btn btn-warning">Modifier</a>
+                    <form action="/admin/posts/delete/<?= $post->post_id ?>" method="POST" class="d-inline">
                         <button type="submit" class="btn btn-danger">Supprimer</button>
                     </form>
 

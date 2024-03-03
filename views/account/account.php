@@ -1,6 +1,10 @@
+<?php if(isset($_GET['success'])): ?>
+    <div class="alert alert-success">Vous étes connecté !</div>
+<?php endif; ?>
+
 <h1>Account</h1>
 
-<form action="/account" method="POST" >
+<form action="../../public/index.php" method="POST" >
     <div class="form-group">
         <label for="username" >Nom d'utiliateur</label>
         <input type="text" class="form-control" name="username" id="username" value="<?= $params['user']->username ?>">

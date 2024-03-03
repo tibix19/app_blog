@@ -59,6 +59,7 @@ class Validator
 
     public function IncorrectCredentials()
     {
+        http_response_code(401);
         return [['incorrectCredentials' => 'Le nom d\'utilisateur ou le mot de passe est incorrect.']];
     }
 

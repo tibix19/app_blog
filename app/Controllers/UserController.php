@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\NotFoundException;
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Post;
 use App\Validation\Validator;
@@ -56,7 +58,7 @@ class UserController extends Controller
         $users = new User($this->getDB());
         // on recup les infos du user avec son id qui es dans une variable de session initier quand le user se connecte
         $user = $users->findById($_SESSION['idUser']);
-        return $this->view('auth.account', compact('user'));
+        return $this->view('account.account', compact('user'));
     }
 
     public function updateAccount()
@@ -128,13 +130,52 @@ class UserController extends Controller
     }
 
 
+    // affiche les posts que le user à créé
     public function myPostsPanelIndex()
     {
         $this->isConnected();
-
+        $userId = $_SESSION['idUser'];
+        // recupe ces postes
         $myPosts = (new Post($this->getDB()))->myPosts();
         // retourner les users dans une views
         return $this->view('account.postIndex', compact('myPosts'));
     }
 
+    public function editPostUser($postId)
+    {
+        // Vérifier si l'utilisateur est connecté
+        $this->isConnected();
+
+        // Vérifier si l'ID du post est un entier
+        if (!ctype_digit($postId)) {
+            // Si ce n'est pas un entier, afficher une erreur 404
+            $error = new NotFoundException();
+            return $error->error404();
+        }
+
+        // Convertir l'ID du post en entier
+        $postId = (int)$postId;
+
+        // Vérifier si le post existe
+        $post = (new Post($this->getDB()))->findById($postId);
+        if (is_null($post)) {
+            // Si le post n'existe pas, afficher une erreur 404
+            $error = new NotFoundException();
+            return $error->error404();
+        }
+
+        // Vérifier si l'utilisateur est l'auteur du post
+        $isAuthor = (new Post($this->getDB()))->checkPostAuthor($postId);
+        // check si le user qui a fait le post est égale à l'id de la personne qui est connecté
+        if ($isAuthor->user_id == $_SESSION['idUser']) {
+            // L'utilisateur connecté est l'auteur du post, permettre la modification
+            $tags = (new Tag($this->getDB()))->all();
+            return $this->view('account.formPostUser', compact('post', 'tags'));
+        } else {
+            // L'utilisateur connecté n'est pas l'auteur du post, afficher un message d'erreur
+            $error = new NotFoundException();
+            return $error->error403();
+        }
+    }
 }
+

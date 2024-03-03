@@ -73,4 +73,11 @@ HTML;
                                 WHERE up.user_id=?',[$_SESSION["idUser"]]) ;
     }
 
+
+    public function checkPostAuthor(int $postId)
+    {
+        // Vérifier si l'association entre le post et l'utilisateur existe dans la table user_post
+        return $this->querySQL("SELECT * FROM user_post WHERE post_id = ?", [$postId], true);
+    }
+
 }

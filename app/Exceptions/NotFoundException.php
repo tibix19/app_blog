@@ -20,4 +20,11 @@ class NotFoundException extends Exception
         $content = "<h1>La page demandé est introuvable !</h1>";
         require VIEWS . 'layout.php';
     }
+
+    public function error403() : void
+    {
+        http_response_code(403);
+        $content = "<h1>Vous n'êtes pas autorisé à accéder à cette page.</h1>";
+        require VIEWS . 'layout.php';
+    }
 }
