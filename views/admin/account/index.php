@@ -18,14 +18,18 @@
                 <th scope="row"><?= $user->id ?></th>
                 <td><?= $user->username ?></td>
                 <td>
-                    <?php // il faire en sorte qu'on puisse choisir entre 1 ou 0 ?>
-                    <?= $user->admin ?>
+                    <form action="/admin/account/edit/<?= $user->id ?>" method="POST" class="d-inline">
+                        <label for="admin">
+                            <select name="admin" id="admin" class="form-control">
+                                <option value="0" <?= ($user->admin == 0) ? 'selected' : '' ?>>User</option>
+                                <option value="1" <?= ($user->admin == 1) ? 'selected' : '' ?>>Admin</option>
+                            </select>
+                        </label>
+                        <button type="submit" class="btn btn-warning">Save</button>
+                    </form>
                 </td>
                 <td><?= $user->getCreatedAt() ?></td>
                 <td>
-                    <form action="/admin/account/update/<?= $user->id ?>" method="POST" class="d-inline">
-                        <button type="submit" class="btn btn-warning">Modifier</button>
-                    </form>
                     <form action="/admin/account/delete/<?= $user->id ?>" method="POST" class="d-inline">
                         <button type="submit" class="btn btn-danger">Supprimer</button>
                     </form>

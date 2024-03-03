@@ -22,4 +22,5 @@
 7. [] les admins qui peuvent changer le level d'un user
 8. [] docker
 9. [] front end uikit
+10. [] Créer un authController et mettre les function de login et de signup dedans pour simplifier le UserController
 

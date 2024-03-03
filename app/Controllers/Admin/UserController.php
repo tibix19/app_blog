@@ -31,14 +31,40 @@ class UserController extends Controller
         $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $userData = [
             'username' => $_POST['username'],
-            'password' => $mdp
+            'password' => $mdp,
+            'admin' => $_POST['admin']
         ];
         // envoie des données dans vers la db
         $result = $user->create_model($userData);
 
         if ($result){
-            // revient sur la panel admin après la creation
+            // revient sur le panel admin après la creation
             return header('Location: /admin/account');
+        }
+    }
+
+    public function changeLevelUser(int $id)
+    {
+        $this->isAdmin();
+
+        var_dump($_POST);
+
+        // Vérifiez si le niveau de l'utilisateur est défini dans la requête POST
+        if (isset($_POST['admin'])) {
+            // Créez un tableau de données à mettre à jour
+            $data = [
+                'admin' => $_POST['admin']
+            ];
+
+            // Mettre à jour le niveau de l'utilisateur dans la db
+            $user = new User($this->getDB());
+            $result = $user->update_model($id, $data);
+
+            if ($result) {
+                // Redirigez vers le panneau admin après la mise à jour
+                header('Location: /admin/account');
+                exit();
+            }
         }
     }
 

@@ -3,7 +3,7 @@
 use App\Exceptions\NotFoundException;
 use Router\Router;
 
-//  autoloader pour que les class ce charge automatiquement
+//  autoloader pour que les class se chargent automatiquement
 require '../vendor/autoload.php';
 
 define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views'  . DIRECTORY_SEPARATOR);
@@ -47,13 +47,15 @@ $router->post('/post/edit/:id', 'App\Controllers\UserController@updatePostUser')
 $router->post('/post/delete/:id', 'App\Controllers\UserController@destroyPostUser');
 
 // ADMIN
-// voir et modifier les infos du user
+// voir, supprimer et (modifier) les infos du user
 $router->get('/admin/account','App\Controllers\Admin\UserController@index');
 // create user admin
 $router->get('/admin/account/create','App\Controllers\Admin\UserController@create');
 $router->post('/admin/account/create','App\Controllers\Admin\UserController@createUser');
 // delete user
 $router->post('/admin/account/delete/:id','App\Controllers\Admin\UserController@deleteUser');
+// modifier le level du user
+$router->post('/admin/account/edit/:id','App\Controllers\Admin\UserController@changeLevelUser');
 
 // route qui affiche les posts
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');
@@ -63,7 +65,7 @@ $router->post('/admin/posts/create', 'App\Controllers\Admin\PostController@creat
 
 // route pour delete un post
 $router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy');
-// routes pour editer les post , route qui permet de d'aller sur la page pour modif les posts
+// routes pour editer les post, route qui permet de d'aller sur la page pour modif les posts
 $router->get('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit');
 // route qui permet d'aller modifier dans la db les posts
 $router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');

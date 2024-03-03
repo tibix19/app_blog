@@ -90,7 +90,7 @@ class UserController extends Controller
 
     public function signupPost()
     {
-        // Vérification des entrées utilisateur
+        // Vérification des entrées utilisatrices
         $validator = new Validator($_POST);
         $errors = $validator->validate([
             'username' => ['required', 'min:3'],
