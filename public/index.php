@@ -23,12 +23,13 @@ $router->get('/tags/:id','App\Controllers\BlogController@tag');
 
 // route pour se connecter
 $router->get('/login', 'App\Controllers\UserController@login');
-// route pour envoyer les données à la db
+// route pour envoyer les données de connexion à la db
 $router->post('/login', 'App\Controllers\UserController@loginPost');
 // destroy de la session
 $router->get('/logout', 'App\Controllers\UserController@logout');
 
 // ACCOUNT
+// modifier les credentials de son compte
 $router->get('/account','App\Controllers\UserController@editAccount');
 $router->post('/account','App\Controllers\UserController@updateAccount');
 // singup

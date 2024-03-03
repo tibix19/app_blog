@@ -9,21 +9,17 @@
 - Puis se rendre sur localhost
 
 
-TO DO
 
-- Chaque user peut créer, modifier et suppimer ces propres postes 
-- Captcha
-- flux RSS
-- changer hash password to sha256
-- Afficher tout les postes d'un user
-- Faire en sorte que la modif des tags fonctionne
-- les photos / paragraphe dans le texte, couleur et autre suptilié du texte dans le poste (framwork nodejs pour faire ça)
-- panel pour les user ou ils peuvent voir leur postes et les modifier ou les suppiemer comme ils le souhaitent
-- les admin qui peuvent changer le level d'un user
-- docker 
-- front end uikit
+**TO DO**
+1. [x] faire en sorte que le nom du user qui a fait le poste s'enregistre pour qu'il s'affiche - OK
+2. [x] Chaque user peut créer, modifier et supprimer leurs propres postes
+3. [] Captcha
+4. [] flux RSS
+3. [] changer hash password to sha256
+4. [x] Afficher tout les postes d'un user
+5. [] Faire en sorte que la modif des tags fonctionne
+6. [] les photos / paragraphe dans le texte, couleur et autre subtilité du texte dans le poste (framework nodejs pour faire ça)
+7. [] les admins qui peuvent changer le level d'un user
+8. [] docker
+9. [] front end uikit
 
-
-
-C'est fait
-- faire en sorte que le nom du user qui a fait le poste s'enregistre pour qu'il s'affiche - OK
