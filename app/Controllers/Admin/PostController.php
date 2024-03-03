@@ -53,7 +53,6 @@ class PostController extends Controller
     {
         $this->isAdmin();
         $post = new Post($this->getDB());
-
         $tags = array_pop($_POST);
 
         $result = $post->update_model($id, $_POST, $tags);

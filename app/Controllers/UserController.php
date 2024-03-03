@@ -184,7 +184,6 @@ class UserController extends Controller
         $post = new Post($this->getDB());
 
         $tags = array_pop($_POST);
-
         $result = $post->update_model($postId, $_POST, $tags);
 
         if ($result){

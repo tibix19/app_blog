@@ -19,8 +19,12 @@
 4. [x] Afficher tout les postes d'un user
 5. [] Faire en sorte que la modif des tags fonctionne
 6. [] les photos / paragraphe dans le texte, couleur et autre subtilité du texte dans le poste (framework nodejs pour faire ça)
-7. [] les admins qui peuvent changer le level d'un user
+7. [x] les admins qui peuvent changer le level d'un user
 8. [] docker
 9. [] front end uikit
 10. [] Créer un authController et mettre les function de login et de signup dedans pour simplifier le UserController
+11. [] Mettre des messages à chaque fois qu'une modfi est effectué (Modification enregistré)
+12. [] Mettre des validations à chaque formulaire
+13. [] Ajouter les commentaires
+14. [] Faire une barre de recherche
 
