@@ -29,15 +29,20 @@ class  authController extends Controller {
             header('Location: /login');
             exit;
         }
-        // puis on regarde si le user est existant
+        // puis, on regarde si le user est existant
         $users = new User($this->getDB());
         $user = $users->getByUsername($_POST['username']);
 
-        if(password_verify($_POST['password'], $user->password)) {
-            // $_SESSION['auth'] va etre egale à 1 ou 2 en fonction de si la personne est admin ou non
+        // Hasher le mot de passe fourni par l'utilisateur en utilisant SHA-256 avec un salt
+        $salt = "i;151-120#";
+        $hashedPassword = hash('sha256', $salt . $_POST['password']);
+        //var_dump($hashedPassword); die();
+
+        // Vérifier si le mot de passe hashé correspond au hachage stocké dans la base de données
+        if(hash_equals($hashedPassword, $user->password)){
+            // $_SESSION['auth'] va etre egale à 1 ou 0 en fonction de si la personne est admin ou non
             $_SESSION['authAdmin'] = (int) $user->admin;
             $_SESSION['idUser'] = (int) $user->id;
-
             return header('Location: /account?success=true');
         } else{
             // message incorrect credentials
@@ -84,13 +89,14 @@ class  authController extends Controller {
             header('Location: /signup');
             exit;
         }
-        // Hash du mot de passe
-        $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        // Hash du mot de passe avec le salt
+        $salt = "i;151-120#";
+        $hashedPassword = hash('sha256', $salt . $_POST['password']);
         $userData = [
             'username' => $_POST['username'],
             'password' => $hashedPassword
         ];
-        // Envoie les données vers la base de données pour créer le compte
+        // Envoie les données vers la base de données
         $result = $user->create_model($userData);
 
         if ($result){

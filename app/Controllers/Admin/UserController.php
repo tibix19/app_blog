@@ -48,11 +48,12 @@ class UserController extends Controller
             header('Location: /admin/account/create');
             exit;
         }
-        // hash du mot de passe
-        $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        // hash du mot de passe avec le salt
+        $salt = "i;151-120#";
+        $hashedPassword = hash('sha256', $salt . $_POST['password']);
         $userData = [
             'username' => $_POST['username'],
-            'password' => $mdp,
+            'password' => $hashedPassword,
             'admin' => $_POST['admin']
         ];
         // envoie des données dans vers la db

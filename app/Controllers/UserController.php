@@ -39,11 +39,12 @@ class UserController extends Controller
 
         // recup l'id pour update
         $id = (int) $_SESSION['idUser'];
-
-        $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        // Hash du mot de passe avec le salt
+        $salt = "i;151-120#";
+        $hashedPassword = hash('sha256', $salt . $_POST['password']);
         $userData = [
             'username' => $_POST['username'],
-            'password' => $mdp
+            'password' => $hashedPassword
         ];
 
         // fait l'update dans le model avec les data
