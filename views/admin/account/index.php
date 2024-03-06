@@ -1,7 +1,19 @@
 <h1>Administration des utilisateurs </h1>
 
- <a href="/admin/account/create" class="btn btn-success my-3">Créer un nouvel utilisateur</a>
+<?php 
+$message = "";
+if(isset($_GET['success'])) {
+    $message = "Modification effectuée !";
+} 
+elseif(isset($_GET['delete'])) {
+    $message = "Utilisateur supprimé avec succès !";
+} ?>
 
+<?php if(!empty($message)): ?>
+    <div class="alert alert-success"><?php echo $message; ?></div>
+<?php endif; ?>
+
+<a href="/admin/account/create" class="btn btn-success my-3">Créer un nouvel utilisateur</a>
 <table class="table">
     <thead>
         <tr>

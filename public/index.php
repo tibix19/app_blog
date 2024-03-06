@@ -21,20 +21,21 @@ $router->get('/posts/:id','App\Controllers\BlogController@show');
 // affiche articles par tag
 $router->get('/tags/:id','App\Controllers\BlogController@tag');
 
-// route pour se connecter
-$router->get('/login', 'App\Controllers\UserController@login');
-// route pour envoyer les données de connexion à la db
-$router->post('/login', 'App\Controllers\UserController@loginPost');
+// AUTH
+// login
+$router->get('/login', 'App\Controllers\authController@login');
+$router->post('/login', 'App\Controllers\authController@loginPost');
 // destroy de la session
-$router->get('/logout', 'App\Controllers\UserController@logout');
+$router->get('/logout', 'App\Controllers\authController@logout');
+// singup
+$router->get('/signup', 'App\Controllers\authController@signup');
+$router->post('/signup', 'App\Controllers\authController@signupPost');
 
 // ACCOUNT
 // modifier les credentials de son compte
 $router->get('/account','App\Controllers\UserController@editAccount');
 $router->post('/account','App\Controllers\UserController@updateAccount');
-// singup
-$router->get('/signup', 'App\Controllers\UserController@signup');
-$router->post('/signup', 'App\Controllers\UserController@signupPost');
+
 
 // POST DES USER
 $router->get('/myposts', 'App\Controllers\UserController@myPostsPanelIndex');

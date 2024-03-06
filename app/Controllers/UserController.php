@@ -10,47 +10,6 @@ use App\Validation\Validator;
 
 class UserController extends Controller
 {
-    public function login()
-    {
-        return $this->view('auth.login');
-    }
-
-    public function loginPost()
-    {
-        // check si les entrées des user sont ok
-        $validator = new Validator($_POST);
-        $errors = $validator->validate([
-            'username' => ['required', 'min:3'],
-            'password' => ['required']
-        ]);
-        if($errors){
-            $_SESSION['errors'][] = $errors;
-            header('Location: /login');
-            exit;
-        }
-        // puis on regarde si le user est existant
-        $users = new User($this->getDB());
-        $user = $users->getByUsername($_POST['username']);
-
-        if(password_verify($_POST['password'], $user->password)) {
-            // $_SESSION['auth'] va etre egale à 1 ou 2 en fonction de si la personne est admin ou non
-            $_SESSION['authAdmin'] = (int) $user->admin;
-            $_SESSION['idUser'] = (int) $user->id;
-
-            return header('Location: /account?success=true');
-        } else{
-            // message incorrect credentials
-            $errorsCred = $validator->incorrectCredentials();
-            $_SESSION['errors'][] = $errorsCred;
-            return header('Location: /login?password=fasle');
-        }
-    }
-
-    public function logout()
-    {
-        session_destroy();
-        return header('Location: /');
-    }
 
     public function editAccount()
     {
@@ -65,6 +24,19 @@ class UserController extends Controller
     {
         $this->isConnected();
         $user = new User($this->getDB());
+
+        // Vérification des entrées utilisatrices
+        $validator = new Validator($_POST);
+        $errors = $validator->validate([
+            'username' => ['required', 'min:3'],
+            'password' => ['required', 'min:3']
+        ]);
+        if($errors){
+            $_SESSION['errors'][] = $errors;
+            header('Location: /account');
+            exit;
+        }
+
         // recup l'id pour update
         $id = (int) $_SESSION['idUser'];
 
@@ -83,52 +55,7 @@ class UserController extends Controller
         }
     }
 
-    public function signup()
-    {
-        return $this->view('auth.signup');
-    }
-
-    public function signupPost()
-    {
-        // Vérification des entrées utilisatrices
-        $validator = new Validator($_POST);
-        $errors = $validator->validate([
-            'username' => ['required', 'min:3'],
-            'password' => ['required', 'min:3']
-        ]);
-        if($errors){
-            $_SESSION['errors'][] = $errors;
-            header('Location: /signup');
-            exit;
-        }
-        // Vérification si le nom d'utilisateur existe déjà
-        $user = new User($this->getDB());
-        $existingUser = $user->getByUsername($_POST['username']);
-        if ($existingUser) {
-            $_SESSION['errors'][] = $validator->userAlreadyExist();
-            header('Location: /signup');
-            exit;
-        }
-        // Hash du mot de passe
-        $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $userData = [
-            'username' => $_POST['username'],
-            'password' => $hashedPassword
-        ];
-        // Envoie les données vers la base de données pour créer le compte
-        $result = $user->create_model($userData);
-
-        if ($result){
-            // Connexion automatique après la création du compte
-            $newUser = $user->getByUsername($_POST['username']);
-            $_SESSION['authAdmin'] = (int) $newUser->admin;
-            $_SESSION['idUser'] = (int) $newUser->id;
-
-            // Rediriger l'utilisateur vers sa session
-            return header('Location: /account?success=true');
-        }
-    }
-
+    
 
     // affiche les posts que l'user a créés
     public function myPostsPanelIndex()
@@ -139,7 +66,7 @@ class UserController extends Controller
         $myPosts = (new Post($this->getDB()))->myPosts();
         // retourner les users dans une views
         return $this->view('account.postIndex', compact('myPosts'));
-    }
+    } 
 
     public function editPostUser($postId)
     {

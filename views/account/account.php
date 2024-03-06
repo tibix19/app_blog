@@ -2,9 +2,21 @@
     <div class="alert alert-success">Vous étes connecté !</div>
 <?php endif; ?>
 
+<?php if(isset($_SESSION['errors'])): ?>
+    <?php foreach ($_SESSION['errors'] as $errorArray): ?>
+        <?php foreach ($errorArray as $errors): ?>
+            <div class="alert alert-danger">
+                <?php foreach ($errors as $error): ?>
+                    <li><?= $error ?></li>
+                <?php endforeach;?>
+            </div>
+        <?php endforeach;?>
+    <?php endforeach;?>
+<?php endif ?>
+
 <h1>Account</h1>
 
-<form action="../../public/index.php" method="POST" >
+<form action="/account" method="POST" >
     <div class="form-group">
         <label for="username" >Nom d'utiliateur</label>
         <input type="text" class="form-control" name="username" id="username" value="<?= $params['user']->username ?>">

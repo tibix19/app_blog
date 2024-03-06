@@ -11,20 +11,23 @@
 
 
 **TO DO**
-1. [x] faire en sorte que le nom du user qui a fait le poste s'enregistre pour qu'il s'affiche - OK
-2. [x] Chaque user peut créer, modifier et supprimer leurs propres postes
-3. [] Captcha
-4. [] flux RSS
-3. [] changer hash password to sha256
-4. [x] Afficher tout les postes d'un user
-5. [] Faire en sorte que la modif des tags fonctionne
-6. [] les photos / paragraphe dans le texte, couleur et autre subtilité du texte dans le poste (framework nodejs pour faire ça)
-7. [x] les admins qui peuvent changer le level d'un user
-8. [] docker
-9. [] front end uikit
-10. [] Créer un authController et mettre les function de login et de signup dedans pour simplifier le UserController
-11. [] Mettre des messages à chaque fois qu'une modfi est effectué (Modification enregistré)
-12. [] Mettre des validations à chaque formulaire
-13. [] Ajouter les commentaires
-14. [] Faire une barre de recherche
+- [x] faire en sorte que le nom du user qui a fait le poste s'enregistre pour qu'il s'affiche
+- [x] Chaque user peut créer, modifier et supprimer leurs propres postes
+- [] Captcha https://github.com/LordDashMe/php-simple-captcha
+- [] flux RSS
+- [] changer hash password to sha256 + paper et salt
+- [x] Afficher tout les postes d'un user
+- [x] Faire en sorte que la modif des tags fonctionne
+- [] les photos / paragraphe dans le texte, couleur et autre subtilité du texte dans le poste (framework nodejs pour faire ça)
+- [x] les admins qui peuvent changer le level d'un user
+- [] docker
+- [] front-end uikit
+- [x] Créer un authController et mettre les function de login et de signup dedans pour simplifier le UserController
+- [] Mettre des messages à chaque fois qu'une modfi est effectué (Modification enregistré)
+- [] Mettre des validations à chaque formulaire
+- [] Ajouter les commentaires
+- [] Faire une barre de recherche
+- [] Admin peut ajouter ou enlever des tags 
+- [] Voir tous les postes d'un utilisateur
+- [] Mettre un bouton ou on peut save les postes qu'on a aimés
 

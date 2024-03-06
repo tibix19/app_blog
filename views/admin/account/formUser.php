@@ -1,3 +1,17 @@
+<?php if(isset($_SESSION['errors'])): ?>
+    <?php foreach ($_SESSION['errors'] as $errorArray): ?>
+        <?php foreach ($errorArray as $errors): ?>
+            <div class="alert alert-danger">
+                <?php foreach ($errors as $error): ?>
+                    <li><?= $error ?></li>
+                <?php endforeach;?>
+            </div>
+        <?php endforeach;?>
+    <?php endforeach;?>
+    <?php unset($_SESSION['errors']); // supprimer la variable de session pour pas que les messages ne restent pas afficher ?> 
+<?php endif ?>
+
+
 <h1>Créer un nouvel utilisateur</h1>
 
 <form action="/admin/account/create" method="POST" >

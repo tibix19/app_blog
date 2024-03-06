@@ -2,8 +2,10 @@
 
 namespace App\Controllers\Admin;
 
+use App\Exceptions\NotFoundException;
 use App\Controllers\Controller;
 use App\Models\User;
+use App\Validation\Validator;
 
 class UserController extends Controller
 {
@@ -26,7 +28,26 @@ class UserController extends Controller
     public function createUser()
     {
         $this->isAdmin();
+        // Vérification des entrées utilisatrices
+        $validator = new Validator($_POST);
+        $errors = $validator->validate([
+            'username' => ['required', 'min:3'],
+            'password' => ['required', 'min:3']
+        ]);
+        if($errors){
+            $_SESSION['errors'][] = $errors;
+            header('Location: /admin/account/create');
+            exit;
+        }    
+
+        // Vérification si le nom d'utilisateur existe déjà
         $user = new User($this->getDB());
+        $existingUser = $user->getByUsername($_POST['username']);
+        if ($existingUser) {
+            $_SESSION['errors'][] = $validator->userAlreadyExist();
+            header('Location: /admin/account/create');
+            exit;
+        }
         // hash du mot de passe
         $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $userData = [
@@ -36,9 +57,7 @@ class UserController extends Controller
         ];
         // envoie des données dans vers la db
         $result = $user->create_model($userData);
-
         if ($result){
-            // revient sur le panel admin après la creation
             return header('Location: /admin/account');
         }
     }
@@ -46,23 +65,19 @@ class UserController extends Controller
     public function changeLevelUser(int $id)
     {
         $this->isAdmin();
-
-        var_dump($_POST);
-
         // Vérifiez si le niveau de l'utilisateur est défini dans la requête POST
         if (isset($_POST['admin'])) {
             // Créez un tableau de données à mettre à jour
             $data = [
                 'admin' => $_POST['admin']
             ];
-
             // Mettre à jour le niveau de l'utilisateur dans la db
             $user = new User($this->getDB());
             $result = $user->update_model($id, $data);
 
             if ($result) {
                 // Redirigez vers le panneau admin après la mise à jour
-                header('Location: /admin/account');
+                header('Location: /admin/account?success='. $_POST['admin']);
                 exit();
             }
         }
@@ -77,7 +92,7 @@ class UserController extends Controller
 
         if ($result){
             // revient sur la page admin des comptes
-            return header('Location: /admin/account');
+            return header('Location: /admin/account?delete=' . $id);
         }
     }
 
