@@ -15,7 +15,7 @@
 - [x] Chaque user peut créer, modifier et supprimer leurs propres postes
 - [] Captcha https://github.com/LordDashMe/php-simple-captcha
 - [] flux RSS
-- [] changer hash password to sha256 + paper et salt
+- [x] changer hash password to sha256 + paper et salt
 - [x] Afficher tout les postes d'un user
 - [x] Faire en sorte que la modif des tags fonctionne
 - [] les photos / paragraphe dans le texte, couleur et autre subtilité du texte dans le poste (framework nodejs pour faire ça)
@@ -23,11 +23,10 @@
 - [] docker
 - [] front-end uikit
 - [x] Créer un authController et mettre les function de login et de signup dedans pour simplifier le UserController
-- [] Mettre des messages à chaque fois qu'une modfi est effectué (Modification enregistré)
+- [] Mettre des messages à chaque fois qu'une modfi est effectué (Modification enregistrée)
 - [] Mettre des validations à chaque formulaire
 - [] Ajouter les commentaires
 - [] Faire une barre de recherche
 - [] Admin peut ajouter ou enlever des tags 
 - [] Voir tous les postes d'un utilisateur
 - [] Mettre un bouton ou on peut save les postes qu'on a aimés
-

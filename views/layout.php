@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Blog</title>
     <link rel="stylesheet" href="<?= SCRIPTS . 'css' . DIRECTORY_SEPARATOR . 'app.css' ?>">
 </head>
@@ -36,7 +36,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Se déconnecter</a>
                 </li>
-             <?php // affiche le lien pour se connecter si pas connecter mais pour les users standard seulement ces liens vont s'afficher
+             <?php // affiche le lien pour se connecter si pas connecter, mais pour les users standard seulement ces liens vont s'afficher
              elseif(isset($_SESSION['authAdmin']) == 2) : ?>
                  <li class="nav-item">
                      <a class="nav-link" href="/create">Créer un post</a>

@@ -11,6 +11,11 @@ class ComposerStaticInitcb469c240d9beb17cfd30461b1f757b7
         array (
             'Router\\' => 7,
         ),
+        'L' => 
+        array (
+            'LordDashMe\\StaticClassInterface\\' => 32,
+            'LordDashMe\\SimpleCaptcha\\' => 25,
+        ),
         'D' => 
         array (
             'Database\\' => 9,
@@ -25,6 +30,14 @@ class ComposerStaticInitcb469c240d9beb17cfd30461b1f757b7
         'Router\\' => 
         array (
             0 => __DIR__ . '/../..' . '/routes',
+        ),
+        'LordDashMe\\StaticClassInterface\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lorddashme/php-static-class-interface/src',
+        ),
+        'LordDashMe\\SimpleCaptcha\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lorddashme/php-simple-captcha/src',
         ),
         'Database\\' => 
         array (

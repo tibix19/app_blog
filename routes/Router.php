@@ -33,7 +33,7 @@ class Router
             }
         }
 
-        throw new NotFoundException("Page demandé est introuvale");
+        throw new NotFoundException("Page demandé est introuvable");
     }
 
 }

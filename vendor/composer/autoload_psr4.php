@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Router\\' => array($baseDir . '/routes'),
+    'LordDashMe\\StaticClassInterface\\' => array($vendorDir . '/lorddashme/php-static-class-interface/src'),
+    'LordDashMe\\SimpleCaptcha\\' => array($vendorDir . '/lorddashme/php-simple-captcha/src'),
     'Database\\' => array($baseDir . '/database'),
     'App\\' => array($baseDir . '/app'),
 );
