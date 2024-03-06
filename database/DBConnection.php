@@ -22,7 +22,7 @@ class DBConnection
 
     public function getPDO(): PDO
     {
-        // instencier un nouvelle con si pas null en faisant un opérateur ternaire
+        // instencier une nouvelle con si pas null en faisant un opérateur ternaire
         return $this->pdo ?? $this->pdo = new PDO("mysql:dbname={$this->dbname};host={$this->host}", $this->username, $this->password,
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

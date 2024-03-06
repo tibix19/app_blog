@@ -13,7 +13,7 @@
 **TO DO**
 - [x] faire en sorte que le nom du user qui a fait le poste s'enregistre pour qu'il s'affiche
 - [x] Chaque user peut créer, modifier et supprimer leurs propres postes
-- [] Captcha https://github.com/LordDashMe/php-simple-captcha
+- [x] Captcha https://github.com/LordDashMe/php-simple-captcha
 - [] flux RSS
 - [x] changer hash password to sha256 + paper et salt
 - [x] Afficher tout les postes d'un user

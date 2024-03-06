@@ -3,7 +3,7 @@
         'name' => 'timeo/app_blog',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '6de1b4533c776f446af40f8e2f1dd8fd5c336b33',
+        'reference' => '657969f8d13513e004d9e4a8786d68275cb71eb8',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'timeo/app_blog' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '6de1b4533c776f446af40f8e2f1dd8fd5c336b33',
+            'reference' => '657969f8d13513e004d9e4a8786d68275cb71eb8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

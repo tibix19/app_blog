@@ -40,16 +40,6 @@ abstract class Controller
         }
     }
 
-    protected function isUser(): bool
-    {
-        if (isset($_SESSION['auth']) && $_SESSION['authAdmin'] === 2) {
-            return true;
-        } else{
-            header('Location: /login');
-            return false;
-        }
-    }
-
     protected function isConnected(): bool
     {
         // si c'est connecté on renvoie vrai sinon faux

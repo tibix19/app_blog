@@ -2,20 +2,21 @@
 
 namespace App\Controllers;
 
-use App\Exceptions\NotFoundException;
 use App\Models\User;
 use App\Validation\Validator;
+use LordDashMe\SimpleCaptcha\Captcha;
 
 
 class  authController extends Controller {
 
+    private string $codeCaptcha;
+
     // login
     public function login()
     {
-        return $this->view('auth.login');
+        $this->view('auth.login');
     }
 
-    
     public function loginPost()
     {
         // check si les entrées des user sont ok
@@ -52,21 +53,20 @@ class  authController extends Controller {
         }
     }
 
-
     // logout
     public function logout()
     {
-        session_destroy();
-        return header('Location: /');
+        session_destroy()
+;        return header('Location: /');
     }
-
-
 
     // sign up
     public function signup()
     {
-        return $this->view('auth.signup');
+        // Afficher le formulaire avec le captcha
+        return $this->view('auth.signup',);
     }
+
 
     public function signupPost()
     {
@@ -81,6 +81,15 @@ class  authController extends Controller {
             header('Location: /signup');
             exit;
         }
+
+        // si faux message d'erreur
+        if($this->captcha() == false)
+        {
+            $_SESSION['errors'][] = [["Captcha erroné !!!"]];
+            header('Location: /signup');
+            exit();
+        }
+
         // Vérification si le nom d'utilisateur existe déjà
         $user = new User($this->getDB());
         $existingUser = $user->getByUsername($_POST['username']);
@@ -89,6 +98,7 @@ class  authController extends Controller {
             header('Location: /signup');
             exit;
         }
+
         // Hash du mot de passe avec le salt
         $salt = "i;151-120#";
         $hashedPassword = hash('sha256', $salt . $_POST['password']);
@@ -104,9 +114,26 @@ class  authController extends Controller {
             $newUser = $user->getByUsername($_POST['username']);
             $_SESSION['authAdmin'] = (int) $newUser->admin;
             $_SESSION['idUser'] = (int) $newUser->id;
-
             // Rediriger l'utilisateur vers sa session
             return header('Location: /account?success=true');
         }
     }
+
+
+    // check si le code du captcha correspond à l'entrée du user
+    private function captcha(): bool
+    {
+        session_abort();
+        $captcha = new Captcha();
+        $data = $captcha->getSession();
+
+        if ($_POST['captcha'] !== $data['code']) {
+            session_start();
+            return false;
+        } else {
+            session_start();
+            return true;
+        }
+    }
 }
+
