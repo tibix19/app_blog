@@ -23,7 +23,7 @@
 - [] docker
 - [] front-end uikit
 - [x] Créer un authController et mettre les function de login et de signup dedans pour simplifier le UserController
-- [] Mettre des messages à chaque fois qu'une modfi est effectué (Modification enregistrée)
+- [x] Mettre des messages à chaque fois qu'une modfi est effectué (Modification enregistrée)
 - [x] Mettre des validations à chaque formulaire
 - [] Ajouter les commentaires
 - [] Faire une barre de recherche

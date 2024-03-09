@@ -11,20 +11,38 @@ class BlogController extends Controller
 
     public function welcome()
     {
-        return $this->view('blog.welcome');
+        $this->view('blog.welcome');
     }
 
-    // controller qui affiche tout les articles
+    // controller qui affiche tous les articles
     public function index()
     {
-        // recup la con de la db
-        $post = new Post($this->getDB());
-        // recup tout les elements de la tables posts dans un array
-        $posts = $post->all();
-        return $this->view('blog.index', compact('posts'));
+        // Si un terme de recherche est présent dans l'URL
+        if (isset($_GET['search'])) {
+            // Récupérer le terme de recherche
+            $searchTerm = $_GET['search'];
+            // Récupérer les articles correspondants à la recherche
+            $post = new Post($this->getDB());
+            $posts = $post->searchPosts($searchTerm);
+            // Vérifier s'il y a des articles trouvés
+            if (empty($posts)) {
+                // Afficher un message si aucun article n'est trouvé et aussi tous les posts
+                $message = "Aucun article trouvé pour le terme de recherche : '$searchTerm'";
+                $post = new Post($this->getDB());
+                $posts = $post->all();
+                $this->view('blog.index', compact('posts', 'message'));
+                return;
+            }
+        } else {
+            // Si aucun terme de recherche n'est présent, récupérer tous les articles
+            $post = new Post($this->getDB());
+            $posts = $post->all();
+        }
+        // Passer les articles à la vue
+        $this->view('blog.index', compact('posts'));
     }
 
-    // controller qui affiche les posts seul
+    // controller qui affiche les posts seuls
     public function show($id)
     {
         // Vérifie si $id est une chaîne de caractères représentant un entier
@@ -44,7 +62,7 @@ class BlogController extends Controller
             $error = new NotFoundException();
             return $error->error404();
         } else {
-            return $this->view('blog.show', compact('post'));
+            $this->view('blog.show', compact('post'));
         }
     }
 
@@ -52,6 +70,6 @@ class BlogController extends Controller
     {
         $tag = new Tag($this->getDB());
         $tag = $tag->findById($id);
-        return $this->view('blog.tag', compact('tag'));
+        $this->view('blog.tag', compact('tag'));
     }
 }

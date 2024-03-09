@@ -101,4 +101,14 @@ HTML;
         return $this->querySQL("SELECT * FROM user_post WHERE post_id = ?", [$postId], true);
     }
 
+    public function searchPosts($searchTerm)
+    {
+        // Effectuer la requête SQL pour rechercher dans les titres et le contenu des articles
+        $querySearchTitleAndContent = "SELECT * FROM posts WHERE title LIKE ? OR content LIKE ?";
+        // Met des % pour que ça
+        $searchTerm = '%' . $searchTerm . '%';
+        return $this->querySQL($querySearchTitleAndContent, [$searchTerm, $searchTerm]);
+    }
+
+
 }

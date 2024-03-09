@@ -1,5 +1,11 @@
  <h1>Les derniers articles </h1>
 
+
+ <?php if(!empty($params['message'])): ?>
+     <div class="alert alert-warning"><?php echo $params['message']; ?></div>
+ <?php endif; ?>
+
+
 <?php foreach ($params['posts'] as $post):  ?>
     <div class="card mb-3">
         <div class="card-body">

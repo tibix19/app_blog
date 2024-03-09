@@ -60,6 +60,11 @@
                  </li>
             <?php endif; ?>
             </ul>
+            <form action="/posts" method="GET">
+                <label>
+                    <input type="search" class="form-control" name="search" placeholder="Rechercher...">
+                </label>
+            </form>
         </div>
     </nav>
     <div class="container">
