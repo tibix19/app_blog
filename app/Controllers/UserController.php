@@ -17,7 +17,7 @@ class UserController extends Controller
         $users = new User($this->getDB());
         // on recup les infos du user avec son id qui es dans une variable de session initier quand le user se connecte
         $user = $users->findById($_SESSION['idUser']);
-        return $this->view('account.account', compact('user'));
+        $this->view('account.account', compact('user'));
     }
 
     public function updateAccount()
@@ -52,7 +52,7 @@ class UserController extends Controller
 
         if ($result){
             // revient sur la page
-            return header('Location: /account');
+            header('Location: /account');
         }
     }
 
@@ -66,7 +66,7 @@ class UserController extends Controller
         // recupe ces postes
         $myPosts = (new Post($this->getDB()))->myPosts();
         // retourner les users dans une views
-        return $this->view('account.postIndex', compact('myPosts'));
+        $this->view('account.postIndex', compact('myPosts'));
     } 
 
     public function editPostUser($postId)
@@ -98,7 +98,7 @@ class UserController extends Controller
         if ($isAuthor->user_id == $_SESSION['idUser']) {
             // L'utilisateur connecté est l'auteur du post, permettre la modification
             $tags = (new Tag($this->getDB()))->all();
-            return $this->view('account.formPostUser', compact('post', 'tags'));
+            $this->view('account.formPostUser', compact('post', 'tags'));
         } else {
             // L'utilisateur connecté n'est pas l'auteur du post, afficher un message d'erreur
             $error = new NotFoundException();
@@ -133,7 +133,7 @@ class UserController extends Controller
 
             if ($result){
                 // revient sur le panel admin après la modification
-                return header('Location: /myposts');
+                header('Location: /myposts?update=success?' . $postId);
             }
         }
     }
@@ -146,7 +146,7 @@ class UserController extends Controller
 
         if ($result){
             // revient sur le panel admin après la supp
-            return header('Location: /myposts');
+            header('Location: /myposts?delete=success' . $id);
         }
     }
 }

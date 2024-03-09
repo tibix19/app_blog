@@ -15,14 +15,14 @@ class UserController extends Controller
         // con à la db + recup tous les users avec la function all()
         $users = (new User($this->getDB()))->all();
         // retourner les users dans une views
-        return $this->view('admin.account.index', compact('users'));
+        $this->view('admin.account.index', compact('users'));
     }
 
 
     public function create()
     {
         $this->isAdmin();
-        return $this->view('admin.account.formUser');
+        $this->view('admin.account.formUser');
     }
 
     public function createUser()
@@ -59,7 +59,7 @@ class UserController extends Controller
         // envoie des données dans vers la db
         $result = $user->create_model($userData);
         if ($result){
-            return header('Location: /admin/account');
+            header('Location: /admin/account?create=success');
         }
     }
 
@@ -78,7 +78,7 @@ class UserController extends Controller
 
             if ($result) {
                 // Redirigez vers le panneau admin après la mise à jour
-                header('Location: /admin/account?success='. $_POST['admin']);
+                header('Location: /admin/account?updatelevel=' . $id . '?' . $_POST['admin']);
                 exit();
             }
         }
@@ -93,7 +93,7 @@ class UserController extends Controller
 
         if ($result){
             // revient sur la page admin des comptes
-            return header('Location: /admin/account?delete=' . $id);
+            header('Location: /admin/account?delete=' . $id);
         }
     }
 

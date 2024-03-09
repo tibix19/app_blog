@@ -4,6 +4,21 @@
     <div class="alert alert-success">Vous étes connecté !</div>
 <?php endif; ?>
 
+<?php
+$message = "";
+if(isset($_GET['update'])) {
+    $message = "Modification effectuée !";
+}
+elseif(isset($_GET['delete'])) {
+    $message = "Post supprimé !";
+}
+elseif (isset($_GET['create'])) {
+    $message = "Post créé avec succès !";
+}?>
+
+<?php if(!empty($message)): ?>
+    <div class="alert alert-success"><?php echo $message; ?></div>
+<?php endif; ?>
 
 <a href="/create" class="btn btn-success my-3">Créer un nouvel article</a>
 

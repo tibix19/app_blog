@@ -1,13 +1,15 @@
 <h1>Administration des utilisateurs </h1>
-
-<?php 
+<?php
 $message = "";
-if(isset($_GET['success'])) {
+if(isset($_GET['updatelevel'])) {
     $message = "Modification effectuée !";
 } 
 elseif(isset($_GET['delete'])) {
     $message = "Utilisateur supprimé avec succès !";
-} ?>
+}
+elseif (isset($_GET['create'])) {
+    $message = "Utilisateur crée avec succès !";
+}?>
 
 <?php if(!empty($message)): ?>
     <div class="alert alert-success"><?php echo $message; ?></div>

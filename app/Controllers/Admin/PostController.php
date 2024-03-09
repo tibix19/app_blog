@@ -16,7 +16,7 @@ class PostController extends Controller
         // con à la db + recup tous les articles avec la function all()
         $posts = (new Post($this->getDB()))->all();
         // retourner les articles dans une views
-        return $this->view('admin.post.index', compact('posts'));
+        $this->view('admin.post.index', compact('posts'));
     }
 
     // retourne la bonne view
@@ -24,7 +24,7 @@ class PostController extends Controller
     {
         $this->isConnected();
         $tags = (new Tag($this->getDB()))->all();
-        return $this->view('admin.post.form', compact('tags'));
+        $this->view('admin.post.form', compact('tags'));
     }
 
     // function qui traite les données en POST
@@ -56,7 +56,7 @@ class PostController extends Controller
             $result = $post->create_model($_POST, $tags);
             if ($result){
                 // revient sur le panel admin après la creation
-                return header('Location: /posts');
+                header('Location: /myposts?create=success');
             }
         }
     }
@@ -96,7 +96,7 @@ class PostController extends Controller
 
             if ($result){
                 // revient sur le panel admin après la modification
-                return header('Location: /admin/posts');
+                header('Location: /admin/posts?update=success?'. $id);
             }
         }
     }
@@ -109,7 +109,7 @@ class PostController extends Controller
 
         if ($result){
             // revient sur le panel admin après la supp
-            return header('Location: /admin/posts');
+            header('Location: /admin/posts?delete=success?'.$id);
         }
     }
 
