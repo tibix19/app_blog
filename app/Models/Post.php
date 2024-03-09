@@ -72,7 +72,7 @@ HTML;
         parent::create_model($data);
         // permet de recup l'id du post qu'on vient de créer
         $id = $this->db->getPDO()->lastINSERTid();
-
+        
         foreach ($relations as $tagId){
             // insere dans table intermédiaire post_tag quels tags a ce post
             $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (?, ?)");

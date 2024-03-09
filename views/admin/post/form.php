@@ -1,5 +1,16 @@
-<h1><?= $params['post']->title ?? 'Créer un nouvelle article'?> </h1>
+<?php if(isset($_SESSION['errors'])): ?>
+    <?php foreach ($_SESSION['errors'] as $errorArray): ?>
+        <?php foreach ($errorArray as $errors): ?>
+            <div class="alert alert-danger">
+                <?php foreach ($errors as $error): ?>
+                    <li><?= $error ?></li>
+                <?php endforeach;?>
+            </div>
+        <?php endforeach;?>
+    <?php endforeach;?>
+<?php endif ?>
 
+<h1><?= $params['post']->title ?? 'Créer un nouvelle article'?> </h1>
 
 <form action="<?= isset($params['post']) ? "/admin/posts/edit/{$params['post']->id}" : "/admin/posts/create"?>" method="POST" >
     <div class="form-group">
@@ -25,3 +36,4 @@
     </div>
     <button type="submit" class="btn btn-primary"><?= isset($params['post']) ? 'Enregistrer les modifications' : 'Enregistrer mon article' ?></button>
 </form>
+<?php unset($_SESSION['errors']); ?>

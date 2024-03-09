@@ -111,12 +111,30 @@ class UserController extends Controller
         $this->isConnected();
         $post = new Post($this->getDB());
 
-        $tags = array_pop($_POST);
-        $result = $post->update_model($postId, $_POST, $tags);
+        $validator = new Validator($_POST);
+        $errors = $validator->validate([
+            'title' => ['required', 'min:4'],
+            'content' => ['required' , 'min:10']
+        ]);
+        if($errors){
+            $_SESSION['errors'][] = $errors;
+            header('Location: /create');
+            exit;
+        }
 
-        if ($result){
-            // revient sur le panel admin après la modification
-            return header('Location: /myposts');
+        if($_POST['tags'] == null) {
+            $_SESSION['errors'][] = [['Veuillez insérer un tags']];
+            header('Location: /create');
+            exit;
+        }
+        else {
+            $tags = array_pop($_POST);
+            $result = $post->update_model($postId, $_POST, $tags);
+
+            if ($result){
+                // revient sur le panel admin après la modification
+                return header('Location: /myposts');
+            }
         }
     }
 
@@ -131,7 +149,5 @@ class UserController extends Controller
             return header('Location: /myposts');
         }
     }
-
-
 }
 

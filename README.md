@@ -24,9 +24,9 @@
 - [] front-end uikit
 - [x] Créer un authController et mettre les function de login et de signup dedans pour simplifier le UserController
 - [] Mettre des messages à chaque fois qu'une modfi est effectué (Modification enregistrée)
-- [] Mettre des validations à chaque formulaire
+- [x] Mettre des validations à chaque formulaire
 - [] Ajouter les commentaires
 - [] Faire une barre de recherche
-- [] Admin peut ajouter ou enlever des tags 
+- [] (Admin peut ajouter ou enlever des tags)
 - [] Voir tous les postes d'un utilisateur
-- [] Mettre un bouton ou on peut save les postes qu'on a aimés
+- [] (Mettre un bouton ou on peut save les postes qu'on a aimés)

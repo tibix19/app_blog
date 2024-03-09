@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'timeo/app_blog',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => 'eddc864b1266843438b4018f2b311b36ad356f77',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => NULL,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'timeo/app_blog' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'eddc864b1266843438b4018f2b311b36ad356f77',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => NULL,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
