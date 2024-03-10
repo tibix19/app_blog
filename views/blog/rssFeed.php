@@ -11,6 +11,7 @@ header("Content-Type: application/rss+xml;");
         <copyright>2024 LogYourKnowLedge. Tous droits reserves.</copyright>
         <?php foreach ($posts as $article): ?>
             <item>
+                <guid><?= $article->id ?></guid>
                 <title><?= $article->title ?></title>
                 <description><?= substr($article->content, 0, 100). '...' ?></description>
                 <pubDate><?= date(DATE_RSS, strtotime($article->created_at)) ?></pubDate>

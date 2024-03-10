@@ -12,9 +12,6 @@ class RssFeed extends Controller
         $post = new Post($this->getDB());
         // Récupérer le dernier article
         $latestPost = $post->latestPost();
-
-        //var_dump($latestPost); die();
-
         // Récupérer les autres articles
         $posts = $post->all();
         // charger tout ça dans une vue
