@@ -34,22 +34,29 @@ class  authController extends Controller {
         $users = new User($this->getDB());
         $user = $users->getByUsername($_POST['username']);
 
-        // Hasher le mot de passe fourni par l'utilisateur en utilisant SHA-256 avec un salt
-        $salt = "i;151-120#";
-        $hashedPassword = hash('sha256', $salt . $_POST['password']);
-        //var_dump($hashedPassword); die();
+        // Vérifier si un utilisateur a été trouvé
+        if ($user) {
+            // Hacher le mot de passe fourni par l'utilisateur en utilisant SHA-256 avec un sel
+            $salt = "i;151-120#";
+            $hashedPassword = hash('sha256', $salt . $_POST['password']);
 
-        // Vérifier si le mot de passe hashé correspond au hachage stocké dans la base de données
-        if(hash_equals($hashedPassword, $user->password)){
-            // $_SESSION['auth'] va etre egale à 1 ou 0 en fonction de si la personne est admin ou non
-            $_SESSION['authAdmin'] = (int) $user->admin;
-            $_SESSION['idUser'] = (int) $user->id;
-            return header('Location: /account?success=true');
-        } else{
-            // message incorrect credentials
+            // Vérifier si le mot de passe hashé correspond au hachage stocké dans la base de données
+            if (hash_equals($hashedPassword, $user->password)) {
+                // Définir les informations d'authentification de session
+                $_SESSION['authAdmin'] = (int)$user->admin;
+                $_SESSION['idUser'] = (int)$user->id;
+                header('Location: /account?success=true');
+            } else {
+                // Mauvaises informations d'identification
+                $errorsCred = $validator->incorrectCredentials();
+                $_SESSION['errors'][] = $errorsCred;
+                header('Location: /login?credentials=false');
+            }
+        } else {
+            // Mauvaises informations d'identification
             $errorsCred = $validator->incorrectCredentials();
             $_SESSION['errors'][] = $errorsCred;
-            return header('Location: /login?password=fasle');
+            header('Location: /login?credentials=false');
         }
     }
 
