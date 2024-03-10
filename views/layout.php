@@ -22,10 +22,13 @@
             <?php // affiche le lien pour accéder à la page admin et le bouton pour se deco si connecter
              if(isset($_SESSION['authAdmin']) &&  $_SESSION['authAdmin'] == 1 ): ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/posts">Panel Post Admin</a>
+                    <a class="nav-link" href="/admin/posts">Panel Post</a>
                 </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="/admin/account">Panel Account Admin</a>
+                     <a class="nav-link" href="/admin/account">Panel Account</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/admin/tags">Panel Tags</a>
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="/myposts">Voir mes postes</a>

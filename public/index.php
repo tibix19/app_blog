@@ -71,6 +71,12 @@ $router->get('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit
 // route qui permet d'aller modifier dans la db les posts
 $router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');
 
+// Panel Tag
+$router->get('/admin/tags/', 'App\Controllers\Admin\TagController@viewAllTag');
+$router->post('/admin/tag/update/:id', 'App\Controllers\Admin\TagController@updateNameTag');
+$router->post('/admin/tag/create', 'App\Controllers\Admin\TagController@createTag');
+$router->post('/admin/tag/delete/:id', 'App\Controllers\Admin\TagController@destroyTag');
+
 // RSS FEED
 $router->get('/rss.xml', 'App\Controllers\RssFeed@rssFeed');
 
