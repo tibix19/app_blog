@@ -26,7 +26,7 @@
 - [x] Mettre des messages à chaque fois qu'une modfi est effectué (Modification enregistrée)
 - [x] Mettre des validations à chaque formulaire
 - [] Ajouter les commentaires
-- [] Faire une barre de recherche
+- [x] Faire une barre de recherche
 - [] (Admin peut ajouter ou enlever des tags)
 - [] Voir tous les postes d'un utilisateur
 - [] (Mettre un bouton ou on peut save les postes qu'on a aimés)

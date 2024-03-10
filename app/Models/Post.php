@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use DateTime;
+use PDO;
 
 class Post extends Model
 {
@@ -110,5 +111,11 @@ HTML;
         return $this->querySQL($querySearchTitleAndContent, [$searchTerm, $searchTerm]);
     }
 
-
+    public function latestPost()
+    {
+        // recup le dernier post pour afficher la date du dernier post créé
+        $queryLatestPost = 'SELECT created_at FROM posts ORDER BY created_at DESC LIMIT 0,1';
+        $stmt = $this->db->getPDO()->query($queryLatestPost);
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
 }

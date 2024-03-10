@@ -9,7 +9,7 @@ require '../vendor/autoload.php';
 define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views'  . DIRECTORY_SEPARATOR);
 define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR);
 
-// recup l url
+// récupérer l'url
 $router = new Router($_GET['url']);
 
 // ce qui est après le @ est la function
@@ -27,7 +27,7 @@ $router->get('/login', 'App\Controllers\authController@login');
 $router->post('/login', 'App\Controllers\authController@loginPost');
 // destroy de la session
 $router->get('/logout', 'App\Controllers\authController@logout');
-// singup
+// signup
 $router->get('/signup', 'App\Controllers\authController@signup');
 $router->post('/signup', 'App\Controllers\authController@signupPost');
 
@@ -71,10 +71,14 @@ $router->get('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit
 // route qui permet d'aller modifier dans la db les posts
 $router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');
 
+// RSS FEED
+$router->get('/rss.xml', 'App\Controllers\RssFeed@rssFeed');
+
+
 // Si url n'existe pas redirige vers page d'erreur
 try {
     $router->run();
 }
 catch (NotFoundException $e) {
-    echo $e->error404();
+    $e->error404();
 }
