@@ -1,13 +1,15 @@
 <?php
-
 // affiche les errors
 if(isset($_SESSION['errors'])): ?>
     <?php foreach ($_SESSION['errors'] as $errorArray): ?>
         <?php foreach ($errorArray as $errors): ?>
-            <div class="alert alert-danger">
-                <?php foreach ($errors as $error): ?>
-                    <li><?= $error ?></li>
-                <?php endforeach;?>
+            <div class="uk-alert uk-alert-danger" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <ul class="uk-list">
+                    <?php foreach ($errors as $error): ?>
+                        <li><?= $error ?></li>
+                    <?php endforeach;?>
+                </ul>
             </div>
         <?php endforeach;?>
     <?php endforeach;?>
@@ -26,24 +28,30 @@ var_dump($captcha->getCode());
 
 ?>
 
-
-<form action="/signup" method="POST" >
-    <div class="form-group">
-        <label for="username">Nom d'utilisateur</label>
-        <input type="text" class="form-control" name="username" id="username">
+<form action="/signup" method="POST" class="uk-form-stacked">
+    <div class="uk-margin">
+        <label class="uk-form-label" for="username">Nom d'utilisateur</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" type="text" name="username" id="username">
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="password">Mot de passe</label>
-        <input type="password" class="form-control" name="password" id="password">
+    <div class="uk-margin">
+        <label class="uk-form-label" for="password">Mot de passe</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" type="password" name="password" id="password">
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="captcha">Code Captcha</label>
-        <input type="text" class="form-control" name="captcha" id="captcha" value="">
-        <img src="<?= $captcha->getImage() ?>" alt="Captcha Image">
+    <div class="uk-margin">
+        <label class="uk-form-label" for="captcha">Code Captcha</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" type="text" name="captcha" id="captcha" value="">
+            <img src="<?= $captcha->getImage() ?>" alt="Captcha Image">
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary ">Créer un compte</button>
+
+    <button type="submit" class="uk-button uk-button-primary">Créer un compte</button>
 </form>
 
 

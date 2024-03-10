@@ -1,4 +1,4 @@
-<h1>Administration des tags</h1>
+<h1 class="uk-heading-medium">Administration des tags</h1>
 
 <?php
 $message = "";
@@ -13,18 +13,21 @@ elseif (isset($_GET['create'])) {
 }?>
 
 <?php if(!empty($message)): ?>
-    <div class="alert alert-success"><?php echo $message; ?></div>
+    <div class="uk-alert-success" uk-alert>
+        <a class="uk-alert-close" uk-close></a>
+        <p><?= $message ?></p>
+    </div>
 <?php endif; ?>
 
-<form action="/admin/tag/create/" method="post" class="d-inline">
-    <label for="name">
-        <input type="text" name="name" id="name">
-    </label>
-    <button type="submit" class="btn btn-success">Enregistrer le nouveau tag</button>
+<form action="/admin/tag/create/" method="post" class="uk-form-stacked uk-margin">
+    <label class="uk-form-label" for="name">Nom du tag :</label>
+    <div class="uk-form-controls">
+        <input class="uk-input" type="text" name="name" id="name">
+    </div>
+    <button type="submit" class="uk-button uk-button-primary">Enregistrer le nouveau tag</button>
 </form>
 
-
-<table class="table">
+<table class="uk-table uk-table-divider">
     <thead>
     <tr>
         <th scope="col">id</th>
@@ -38,17 +41,17 @@ elseif (isset($_GET['create'])) {
         <tr>
             <th scope="row"><?= $tag->id ?></th>
             <td>
-                <form action="/admin/tag/update/<?= $tag->id ?>" method="post" class="d-inline">
-                    <label for="tag">
-                        <input type="text" name="tag" id="tag" value="<?= $tag->name; ?>">
-                    </label>
-                    <button type="submit" class="btn btn-warning">Save</button>
+                <form action="/admin/tag/update/<?= $tag->id ?>" method="post" class="uk-form-stacked uk-margin-remove-bottom">
+                    <div class="uk-inline">
+                        <input class="uk-input" type="text" name="tag" id="tag" value="<?= $tag->name; ?>">
+                    </div>
+                    <button type="submit" class="uk-button uk-button-primary uk-margin-small-left">Enregistrer</button>
                 </form>
             </td>
             <td><?= $tag->getCreatedAt() ?></td>
             <td>
-                <form action="/admin/tag/delete/<?= $tag->id ?>" method="POST" class="d-inline">
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                <form action="/admin/tag/delete/<?= $tag->id ?>" method="POST" class="uk-form-stacked uk-margin-remove-bottom">
+                    <button type="submit" class="uk-button uk-button-danger">Supprimer</button>
                 </form>
             </td>
         </tr>

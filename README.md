@@ -5,8 +5,8 @@
 - modifier les infos de connexion à la db (DBConnexion.php)
 - importer le dump qui est dans le dossier database
 - lance xampp ou autre dans le dossier public
-- faire un `composer dump-autoload` dans le meme dossier que composer.json
-- Puis se rendre sur localhost
+- faire un `composer dump-autoload` dans le meme dossier où se trouve composer.json
+- Puis se rendre sur localhost dans le navigateur
 
 
 
@@ -27,6 +27,6 @@
 - [x] Mettre des validations à chaque formulaire
 - [] Ajouter les commentaires
 - [x] Faire une barre de recherche
-- [] (Admin peut ajouter ou enlever des tags)
+- [x] (Admin peut ajouter ou enlever des tags)
 - [] Voir tous les postes d'un utilisateur
-- [] (Mettre un bouton ou on peut save les postes qu'on a aimés)
+- [] Faire en sorte que les postes aient 2 états (brouillon et en ligne)

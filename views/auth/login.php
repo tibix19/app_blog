@@ -1,12 +1,13 @@
 <?php
-# si pas reussi ou error afficher les
-# login pour ce connecter au panel admin
+# si pas reussi ou error afficher une erreur
+# login pour se connecter au panel admin
 if(isset($_SESSION['errors'])): ?>
     <?php foreach ($_SESSION['errors'] as $errorArray): ?>
         <?php foreach ($errorArray as $errors): ?>
-            <div class="alert alert-danger">
+            <div class="uk-alert-danger" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
                 <?php foreach ($errors as $error): ?>
-                    <li><?= $error ?></li>
+                    <p><?= $error ?></p>
                 <?php endforeach;?>
             </div>
         <?php endforeach;?>
@@ -16,17 +17,20 @@ if(isset($_SESSION['errors'])): ?>
 
 <h1>Se connecter</h1>
 
-<form action="/login" method="POST" >
-    <div class="form-group">
-        <label for="username">Nom d'utilisateur</label>
-        <input type="text" class="form-control" name="username" id="username">
+<form action="/login" method="POST" class="uk-form-stacked">
+    <div class="uk-margin">
+        <label class="uk-form-label" for="username">Nom d'utilisateur</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" type="text" name="username" id="username">
+        </div>
     </div>
-    <div class="form-group">
-        <label for="password">Mot de passe</label>
-        <input type="password" class="form-control" name="password" id="password">
+    <div class="uk-margin">
+        <label class="uk-form-label" for="password">Mot de passe</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" type="password" name="password" id="password">
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary ">Se connecter</button>
-    <a href="/signup" class="btn btn-secondary">Créer un compte</a>
+    <button type="submit" class="uk-button uk-button-primary">Se connecter</button>
+    <a href="/signup" class="uk-button uk-button-secondary">Créer un compte</a>
 </form>
-
 
