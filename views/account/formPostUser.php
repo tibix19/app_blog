@@ -1,18 +1,17 @@
 <h1><?= $params['post']->title ?? 'Créer un nouvelle article'?> </h1>
 
-
-<form action="/post/edit/<?= $params['post']->id ?>" method="POST" >
-    <div class="form-group">
-        <label for="title" >Titre de l'article</label>
-        <input type="text" class="form-control" name="title" id="title" value="<?= $params['post']->title ?>">
+<form action="/post/edit/<?= $params['post']->id ?>" method="POST">
+    <div class="uk-margin">
+        <label for="title">Titre de l'article</label>
+        <input class="uk-input" type="text" name="title" id="title" value="<?= $params['post']->title ?>">
     </div>
-    <div class="from-group">
+    <div class="uk-margin">
         <label for="content">Contenu de l'article</label>
-        <textarea name="content" id="content" rows="15" class="form-control"><?= $params['post']->content ?></textarea>
+        <textarea class="uk-textarea" name="content" id="content" rows="15"><?= $params['post']->content ?></textarea>
     </div>
-    <div class="form-group">
+    <div class="uk-margin">
         <label for="tags">Tags de l'article</label>
-        <select multiple class="form-control" id="tags" name="tags[]">
+        <select multiple class="uk-select" id="tags" name="tags[]">
             <?php foreach ($params['tags'] as $tag) : ?>
                 <option value="<?= $tag->id ?>"
                     <?php if(isset($params['post'])) : ?>
@@ -23,5 +22,5 @@
             <?php endforeach; ?>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+    <button type="submit" >Enregistrer les modifications</button>
 </form>

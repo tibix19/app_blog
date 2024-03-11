@@ -27,7 +27,7 @@ elseif (isset($_GET['create'])) {
     <button type="submit" class="uk-button uk-button-primary">Enregistrer le nouveau tag</button>
 </form>
 
-<table class="uk-table uk-table-divider">
+<table class="uk-table uk-table-divider uk-table-striped">
     <thead>
     <tr>
         <th scope="col">id</th>

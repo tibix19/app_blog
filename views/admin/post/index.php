@@ -15,13 +15,12 @@ elseif (isset($_GET['create'])) {
 <?php if(!empty($message)): ?>
     <div class="uk-alert-success" uk-alert>
         <a class="uk-alert-close" uk-close></a>
-        <p><?= $message ?></p>
-    </div>
+        <p><?= $message ?></p>    </div>
 <?php endif; ?>
 
 <a href="/admin/posts/create" class="uk-button uk-button-primary uk-margin-bottom">Créer un nouvel article</a>
 
-<table class="uk-table uk-table-divider">
+<table class="uk-table uk-table-striped uk-table-divider">
     <thead>
     <tr>
         <th scope="col">id</th>

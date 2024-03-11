@@ -19,7 +19,7 @@ elseif (isset($_GET['create'])) {
 <?php endif; ?>
 
 <a href="/admin/account/create" class="uk-button uk-button-primary uk-margin-bottom">Créer un nouvel utilisateur</a>
-<table class="uk-table uk-table-striped">
+<table class="uk-table uk-table-striped uk-table-divider">
     <thead>
     <tr>
         <th scope="col">id</th>
