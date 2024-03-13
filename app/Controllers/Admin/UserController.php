@@ -9,6 +9,7 @@ use App\Validation\Validator;
 
 class UserController extends Controller
 {
+    // afficher tout les users
     public function index()
     {
         $this->isAdmin();
@@ -18,13 +19,14 @@ class UserController extends Controller
         $this->view('admin.account.index', compact('users'));
     }
 
-
+    // afficher le formulaire pour créer un user
     public function create()
     {
         $this->isAdmin();
         $this->view('admin.account.formUser');
     }
 
+    // creation des user par les admins
     public function createUser()
     {
         $this->isAdmin();
@@ -63,6 +65,7 @@ class UserController extends Controller
         }
     }
 
+    // changer le level d'un user (user standard ou admin)
     public function changeLevelUser(int $id)
     {
         $this->isAdmin();
@@ -85,6 +88,7 @@ class UserController extends Controller
     }
 
 
+    // supprimer un user
     public function deleteUser(int $id)
     {
         $this->isAdmin();

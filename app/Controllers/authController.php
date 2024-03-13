@@ -89,7 +89,7 @@ class  authController extends Controller {
             exit;
         }
 
-        // si faux message d'erreur
+        // si captcha est incorrect afficher un message d'erreur
         if($this->captcha() == false)
         {
             $_SESSION['errors'][] = [["Captcha erroné !!!"]];
@@ -122,7 +122,7 @@ class  authController extends Controller {
             $_SESSION['authAdmin'] = (int) $newUser->admin;
             $_SESSION['idUser'] = (int) $newUser->id;
             // Rediriger l'utilisateur vers sa session
-            return header('Location: /account?success=true');
+            header('Location: /account?success=true');
         }
     }
 
@@ -134,6 +134,7 @@ class  authController extends Controller {
         $captcha = new Captcha();
         $data = $captcha->getSession();
 
+        // vérifie si le code entré par le user est égale au code du captcha
         if ($_POST['captcha'] !== $data['code']) {
             session_start();
             return false;

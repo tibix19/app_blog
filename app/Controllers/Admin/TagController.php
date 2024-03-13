@@ -10,6 +10,7 @@ use App\Validation\Validator;
 class TagController extends Controller
 {
 
+    // afficher un tag
     public function viewAllTag()
     {
         $this->isAdmin();
@@ -19,6 +20,7 @@ class TagController extends Controller
         $this->view('admin.tag.indexTag', compact('tags'));
     }
 
+    // supprimer un tag
     public function destroyTag(int $id)
     {
         $this->isAdmin();
@@ -32,6 +34,7 @@ class TagController extends Controller
     }
 
 
+    // update le nom d'un tag
     public function updateNameTag(int $id)
     {
         $this->isAdmin();
@@ -53,6 +56,7 @@ class TagController extends Controller
         }
     }
 
+    // Creation des tags
     public function createTag()
     {
         $this->isAdmin();
@@ -66,7 +70,6 @@ class TagController extends Controller
             header('Location: /admin/tags');
             exit;
         }
-
         // envoie des données dans vers la db
         $tag = new Tag($this->getDB());
         $result = $tag->create_model($_POST);

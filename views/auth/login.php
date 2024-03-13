@@ -1,6 +1,5 @@
 <?php
-# si pas reussi ou error afficher une erreur
-# login pour se connecter au panel admin
+# <!-- Afficher les erreurs -->
 if(isset($_SESSION['errors'])): ?>
     <?php foreach ($_SESSION['errors'] as $errorArray): ?>
         <?php foreach ($errorArray as $errors): ?>

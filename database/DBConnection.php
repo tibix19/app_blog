@@ -26,9 +26,9 @@ class DBConnection
         return $this->pdo ?? $this->pdo = new PDO("mysql:dbname={$this->dbname};host={$this->host}", $this->username, $this->password,
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            // Permet de recup les elements de la db avec des objects ($post->title) au lieu d'un array ($post[''title])
+            // Permet de recup les elements de la db avec des objects ($post->title) au lieu d'un array ($post['title'])
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-            // Pour eviter les problemes d'encodage
+            // Pour éviter les problèmes d'encodage
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET CHARACTER SET UTF8'
         ]);
 

@@ -18,6 +18,7 @@ elseif (isset($_GET['create'])) {
         <p><?= $message ?></p>    </div>
 <?php endif; ?>
 
+<!-- Afficher le panel admin des postes dans un tableau -->
 <a href="/admin/posts/create" class="uk-button uk-button-primary uk-margin-bottom">Créer un nouvel article</a>
 
 <table class="uk-table uk-table-striped uk-table-divider">

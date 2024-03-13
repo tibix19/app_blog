@@ -1,5 +1,6 @@
- <h1 style="font-family: Helvetica;">Les derniers articles</h1>
+ <h1 style="font-family: Helvetica,serif;">Les derniers articles</h1>
 
+<!-- Afficher les erreurs -->
  <?php if(!empty($params['message'])): ?>
      <div class="uk-alert-warning" uk-alert>
          <a class="uk-alert-close" uk-close></a>
@@ -7,7 +8,7 @@
      </div>
  <?php endif; ?>
 
-
+ <!-- Afficher les postes -->
  <div class="uk-container uk-container-expand uk-container-content">
      <div class="uk-child-width-1-2@m uk-grid-match uk-grid-small" uk-grid>
          <?php foreach ($params['posts'] as $post): ?>

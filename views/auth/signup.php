@@ -23,8 +23,7 @@ $captcha = new Captcha();
 $captcha->code();
 @$captcha->image();
 $captcha->storeSession();
-// pour faire les textes, c'est plus simple
-var_dump($captcha->getCode());
+// var_dump($captcha->getCode());
 
 ?>
 
@@ -43,6 +42,7 @@ var_dump($captcha->getCode());
         </div>
     </div>
 
+    <!-- Afficher le captcha -->
     <div class="uk-margin">
         <label class="uk-form-label" for="captcha">Code Captcha</label>
         <div class="uk-form-controls">

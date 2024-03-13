@@ -10,6 +10,7 @@
 </head>
 <body>
 <div class="uk-container uk-container-expand ">
+    <!-- Afficher la navbar -->
     <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
         <div class="uk-navbar-left">
             <a class="uk-navbar-item uk-logo" href="/">
@@ -25,7 +26,7 @@
 
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
-                <?php // affiche le lien pour accéder à la page admin et le bouton pour se deco si connecter
+                <?php // afficher les liens que les admins ont accès, s'ils sont connectés
                 if(isset($_SESSION['authAdmin']) &&  $_SESSION['authAdmin'] == 1 ): ?>
                     <li><a href="/create"><span uk-icon="file-edit"></span>Write</a></li>
                     <button class="uk-button uk-button-link" uk-icon="icon: user" type="button"></button>
@@ -42,14 +43,14 @@
                             <li><a href="/logout">Se déconnecter</a></li>
                         </ul>
                     </div>
-                <?php // affiche le lien pour se connecter si pas connecter, mais pour les users standard seulement ces liens vont s'afficher
+                <?php // afficher les liens que les users standards ont accès dès qu'ils sont connectés
                 elseif(isset($_SESSION['authAdmin']) == 2): ?>
                     <li><a href="/create"><span uk-icon="file-edit"></span>Write</a></li>
                     <li><a href="/myposts">Voir mes postes</a></li>
                     <li><a href="/account">Account</a></li>
                     <li><a href="/logout">Se déconnecter</a></li>
-                <?php // affiche le lien pour se connecter si pas connecter
-                else: // si pas connecter on afficher la page pour se co ?>
+                <?php // affiche le lien pour se connecter et aussi un lien pour écrire un article, mais qui redirige vers la page de login si pas connecter
+                else:  ?>
                     <li><a href="/create"><span uk-icon="file-edit"></span>Write</a></li>
                     <li><a href="/account">Se connecter</a></li>
                 <?php endif; ?>
@@ -58,6 +59,7 @@
     </nav >
     <div class="uk-grid uk-child-width-1-1 uk-margin-small-top">
         <div>
+            <!-- Affiche le contenu des views -->
             <?= $content ?>
         </div>
     </div>

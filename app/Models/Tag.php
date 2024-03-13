@@ -9,6 +9,7 @@ class Tag extends Model
 
     protected $table = 'tags';
 
+    // permet de savoir quel tag est associé avec quel poste
     public function getPosts()
     {
         return $this->querySQL("
@@ -18,11 +19,9 @@ class Tag extends Model
             ", [$this->id]);
     }
 
-
+    // met la date dans un autre format
     public function getCreatedAt(): string
     {
-        //$date =  new DateTime($this->created_at);
-        //return $date->format('d/m/y à H:i');
         return (new DateTime($this->created_at))->format('d/m/y à H:i');
     }
 

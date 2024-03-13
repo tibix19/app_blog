@@ -8,28 +8,39 @@ abstract class Controller
 
     public function __construct(DBConnection $db)
     {
-        // si pas de session on la démarre
+        // si pas de session, on la démarre
         if (session_status() === PHP_SESSION_NONE){
             session_start();
         }
         $this->db = $db;
     }
 
+    /**
+     * Affiche une vue en incluant son contenu dans une mise en page
+     * @param string $path Le chemin de la vue à afficher
+     * @param array|null $params Les paramètres à passer à la vue (pas obligatoire)
+     */
     protected function view(string $path, array $params = null): void
     {
+        // Démarre le tampon de sortie
         ob_start();
+        // Remplace les points dans le chemin par le séparateur de répertoire
         $path = str_replace('.', DIRECTORY_SEPARATOR, $path);
+        // Inclut le fichier qui va être affiché (la vue)
         require VIEWS . $path . '.php';
+        // Récupère le contenu du tampon de sortie, le vide et le stocke dans une variable
         $content = ob_get_clean();
+        // Inclut le fichier de mise en page qui enveloppera le contenu de la vue
         require VIEWS . 'layout.php';
     }
 
+    // recup la connexion à la db
     protected function getDB()
     {
         return $this->db;
     }
 
-    // permet de savoir si la personne est loguer en temps que user ou admin et de la redirige ou pas sur la page
+    // check si la personne est connecté en tant qu'admin
     protected function isAdmin(): bool
     {
         if (isset($_SESSION['authAdmin']) && $_SESSION['authAdmin'] === 1) {
@@ -40,6 +51,7 @@ abstract class Controller
         }
     }
 
+    // check si la personne est connecté en tant qu'user ou admin
     protected function isConnected(): bool
     {
         // si c'est connecté on renvoie vrai sinon faux

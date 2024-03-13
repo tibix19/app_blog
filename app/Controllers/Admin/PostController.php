@@ -10,6 +10,7 @@ use App\Validation\Validator;
 class PostController extends Controller
 {
 
+    // affiche tous les postes
     public function index()
     {
         $this->isAdmin();
@@ -19,7 +20,7 @@ class PostController extends Controller
         $this->view('admin.post.index', compact('posts'));
     }
 
-    // retourne la bonne view
+    // Affiche le formulaire pour créer un post
     public function create()
     {
         $this->isConnected();
@@ -33,6 +34,7 @@ class PostController extends Controller
         $this->isConnected();
         $post = new Post($this->getDB());
 
+        // Check les données entrées et si elles sont conformes aux restrictions sinon affiche une erreur
         $validator = new Validator($_POST);
         $errors = $validator->validate([
             'title' => ['required', 'min:4'],
@@ -44,14 +46,14 @@ class PostController extends Controller
             exit;
         }
 
-        // check si au moins tag est selectionné
+        // check si au moins tag est sélectionné
         if($_POST['tags'] == null) {
             $_SESSION['errors'][] = [['Veuillez insérer un tags']];
             header('Location: /create');
             exit;
         }
         else {
-            // array pop reprend les elements derniers du array de $_POST
+            // array pop reprend les derniers elements du array de $_POST
             $tags = array_pop($_POST);
             $result = $post->create_model($_POST, $tags);
             if ($result){
@@ -61,16 +63,19 @@ class PostController extends Controller
         }
     }
 
+    // affiche la vue pour edit un post
     public function edit(int $id)
     {
         $this->isAdmin();
         $post = (new Post($this->getDB()))->findById($id);
         $tags = (new Tag($this->getDB()))->all();
-        return $this->view('admin.post.form', compact('post', 'tags'));
+        $this->view('admin.post.form', compact('post', 'tags'));
     }
 
+    // Fait pratiquement la meme chose que pour la création
     public function update(int $id)
     {
+        // check si on est connecté en admin
         $this->isAdmin();
         $post = new Post($this->getDB());
 
@@ -84,7 +89,7 @@ class PostController extends Controller
             header('Location: /create');
             exit;
         }
-
+        // si aucun tag est selection afficher une erreur
         if($_POST['tags'] == null) {
             $_SESSION['errors'][] = [['Veuillez insérer un tags']];
             header('Location: /create');
@@ -101,6 +106,7 @@ class PostController extends Controller
         }
     }
 
+    // controller pour supprimer un post
     public function destroy(int $id)
     {
         $this->isAdmin();

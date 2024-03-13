@@ -8,12 +8,6 @@ use App\Exceptions\NotFoundException;
 
 class BlogController extends Controller
 {
-
-    public function welcome()
-    {
-        $this->view('blog.welcome');
-    }
-
     // controller qui affiche tous les articles
     public function index()
     {

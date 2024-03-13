@@ -12,6 +12,7 @@ define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR);
 // récupérer l'url
 $router = new Router($_GET['url']);
 
+// Création des routes avec les fonctions qui y sont associées et si c'est en post ou en get
 // ce qui est après le @ est la function
 // affiche les articles
 $router->get('/','App\Controllers\BlogController@index');

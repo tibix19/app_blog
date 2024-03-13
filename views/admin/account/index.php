@@ -1,4 +1,7 @@
 <h1>Administration des utilisateurs</h1>
+
+<!-- Afficher les erreurs -->
+
 <?php
 $message = "";
 if(isset($_GET['updatelevel'])) {
@@ -18,6 +21,8 @@ elseif (isset($_GET['create'])) {
     </div>
 <?php endif; ?>
 
+
+<!-- Afficher tous les comptes des users dans un tableau -->
 <a href="/admin/account/create" class="uk-button uk-button-primary uk-margin-bottom">Créer un nouvel utilisateur</a>
 <table class="uk-table uk-table-striped uk-table-divider">
     <thead>

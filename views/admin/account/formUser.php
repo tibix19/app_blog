@@ -1,4 +1,5 @@
-<?php if(isset($_SESSION['errors'])): ?>
+<?php // afficher les erreurs dans une variable de session dans une alerte
+if(isset($_SESSION['errors'])): ?>
     <?php foreach ($_SESSION['errors'] as $errorArray): ?>
         <?php foreach ($errorArray as $errors): ?>
             <div class="uk-alert uk-alert-danger" uk-alert>
@@ -11,7 +12,7 @@
             </div>
         <?php endforeach;?>
     <?php endforeach;?>
-    <?php unset($_SESSION['errors']); // supprimer la variable de session pour pas que les messages ne restent pas afficher ?>
+    <?php unset($_SESSION['errors']); // supprimer la variable de session pour pas que les messages restent afficher ?>
 <?php endif ?>
 
 <h1>Créer un nouvel utilisateur</h1>

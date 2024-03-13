@@ -10,7 +10,7 @@ use App\Validation\Validator;
 
 class UserController extends Controller
 {
-
+    // controller pour afficher la vue pour edit un son propre user
     public function editAccount()
     {
         $this->isConnected();
@@ -20,6 +20,7 @@ class UserController extends Controller
         $this->view('account.account', compact('user'));
     }
 
+    // Modifier les données de notre user
     public function updateAccount()
     {
         $this->isConnected();
@@ -56,7 +57,6 @@ class UserController extends Controller
         }
     }
 
-    
 
     // affiche les posts que l'user a créés
     public function myPostsPanelIndex()
@@ -69,11 +69,11 @@ class UserController extends Controller
         $this->view('account.postIndex', compact('myPosts'));
     } 
 
+    // afficher la vue pour edit les postes et control qu'on peut seulement modifier les postes qu'ont à créer
     public function editPostUser($postId)
     {
         // Vérifier si l'utilisateur est connecté
         $this->isConnected();
-
         // Vérifier si l'ID du post est un entier
         if (!ctype_digit($postId)) {
             // Si ce n'est pas un entier, afficher une erreur 404
@@ -106,6 +106,7 @@ class UserController extends Controller
         }
     }
 
+    // envoie les données à la db pour la modification
     public function updatePostUser(int $postId)
     {
         $this->isConnected();
@@ -138,6 +139,7 @@ class UserController extends Controller
         }
     }
 
+    // supprimer un de nos postes
     public function destroyPostUser(int $id)
     {
         $this->isConnected();
