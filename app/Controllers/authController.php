@@ -63,8 +63,8 @@ class  authController extends Controller {
     // logout
     public function logout()
     {
-        session_destroy()
-;        return header('Location: /');
+        session_destroy();
+        return header('Location: /');
     }
 
     // sign up

@@ -30,3 +30,7 @@
 - [x] (Admin peut ajouter ou enlever des tags)
 - [] Voir tous les postes d'un utilisateur
 - [] Faire en sorte que les postes aient 2 états (brouillon et en ligne)
+
+
+J'ai choisi l'utilisation des sessions au lieu des cookies parce que c'est plus simple et ça permet d'être en règle par rapport 
+à la RGPD et pas besoin de demander d'autoriser les cookies
