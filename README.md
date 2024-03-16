@@ -7,6 +7,7 @@
 - lance xampp ou autre dans le dossier public
 - faire un `composer dump-autoload` dans le meme dossier où se trouve composer.json
 - Puis se rendre sur localhost dans le navigateur
+- Il faut peut-être aussi build le fichier json de nodejs pour uikit (il faut que je test)
 
 
 
