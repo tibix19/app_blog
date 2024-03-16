@@ -19,7 +19,7 @@
     <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
         <div class="uk-navbar-left">
             <a class="uk-navbar-item uk-logo" href="/">
-                <img src="../../../public/logo/logo.png" width="260" height="160" alt="Log Your Knowledge logo">
+                <img src="../../../public/static/logo/logo.png" width="260" height="160" alt="Log Your Knowledge logo">
             </a>
             <a class="uk-navbar-item uk-logo" href="/"></a>
             <div class="uk-navbar-item">
