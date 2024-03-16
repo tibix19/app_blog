@@ -1,5 +1,4 @@
-
-<!-- Afficher les erreurs (si manque de caractère pour le titre ou le content et si aucun tag n'est sélectionner) -->
+<!-- Afficher les erreurs (si manque de caractère pour le titre ou le content et si aucun tag n'est sélectionné) -->
 <?php if(isset($_SESSION['errors'])): ?>
     <?php foreach ($_SESSION['errors'] as $errorArray): ?>
         <?php foreach ($errorArray as $errors): ?>
@@ -13,7 +12,7 @@
     <?php endforeach;?>
 <?php endif ?>
 
-<!-- Afficher le formulaire de création ou de modification si il y a un id -->
+<!-- Afficher le formulaire de création ou de modification s'il y a un id -->
 
 <h1> <?= $params['post']->title ?? 'Créer un nouvelle article'?> </h1>
 

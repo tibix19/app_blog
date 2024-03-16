@@ -22,5 +22,5 @@
             <?php endforeach; ?>
         </select>
     </div>
-    <button type="submit" >Enregistrer les modifications</button>
+    <button type="submit" class="uk-button uk-button-primary">Enregistrer les modifications</button>
 </form>

@@ -4,9 +4,14 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Log Your Knowledge</title>
+    <!-- Importation des libraires nodejs-->
+    <!-- uikit -->
     <link rel="stylesheet" href="../../../node_modules/uikit/dist/css/uikit.min.css">
     <script src="../../../node_modules/uikit/dist/js/uikit.min.js"></script>
     <script src="../../../node_modules/uikit/dist/js/uikit-icons.min.js"></script>
+    <!--  WYSIWYG tinymce -->
+    <script src="../../../node_modules/tinymce/tinymce.min.js"></script>
+    <script src="../../../public/static/tinymceTextareaConfig.js"></script>
 </head>
 <body>
 <div class="uk-container uk-container-expand ">
@@ -23,7 +28,6 @@
                 </form>
             </div>
         </div>
-
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
                 <?php // afficher les liens que les admins ont accès, s'ils sont connectés
