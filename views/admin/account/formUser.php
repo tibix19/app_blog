@@ -17,21 +17,25 @@ if(isset($_SESSION['errors'])): ?>
 
 <h1>Créer un nouvel utilisateur</h1>
 
-<form action="/admin/account/create" method="POST" class="uk-form-stacked" uk-grid>
-    <div class="uk-width-1-2@s">
+<form action="/admin/account/create" method="POST">
+    <div class="uk-width-1-1">
         <label class="uk-form-label" for="username">Nom d'utilisateur</label>
-        <input class="uk-input" type="text" name="username" id="username" value="<?= $params['user']->username ?? '' ?>">
+        <input class="uk-input uk-margin" type="text" name="username" id="username" value="<?= $params['user']->username ?? '' ?>">
     </div>
-    <div class="uk-width-1-2@s">
+    <div class="uk-width-1-1">
         <label class="uk-form-label" for="admin">Level</label>
-        <select class="uk-select" name="admin" id="admin">
+        <select class="uk-select uk-margin" name="admin" id="admin">
             <option value="0">User</option>
             <option value="1">Admin</option>
         </select>
     </div>
-    <div class="uk-width-1-2@s">
+    <div class="uk-width-1-1">
         <label class="uk-form-label" for="password">Mot de passe</label>
-        <input class="uk-input" type="password" name="password" id="password" value="<?= $params['user']->password ?? '' ?>">
+        <input class="uk-input uk-margin" type="password" name="password" id="password" value="<?= $params['user']->password ?? '' ?>">
     </div>
-    <button type="submit" class="uk-button uk-button-primary uk-width-1-2@s"><?= isset($params['user']) ? 'Enregistrer les modifications' : 'Créer un utilisateur' ?></button>
+    <div class="uk-width-1-1">
+        <button type="submit" class="uk-button uk-button-primary"><?= isset($params['user']) ? 'Enregistrer les modifications' : 'Créer un utilisateur' ?></button>
+    </div>
 </form>
+
+

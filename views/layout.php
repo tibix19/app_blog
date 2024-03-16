@@ -61,10 +61,12 @@
             </ul>
         </div>
     </nav >
-    <div class="uk-grid uk-child-width-1-1 uk-margin-small-top">
-        <div>
-            <!-- Affiche le contenu des views -->
-            <?= $content ?>
+    <div class="uk-flex uk-flex-center">
+        <div class="uk-width-2-3@l">
+            <div class=" uk-margin">
+                <!-- Affiche le contenu des views -->
+                <?= $content ?>
+            </div>
         </div>
     </div>
 </div>

@@ -28,7 +28,7 @@ elseif (isset($_GET['create'])) {
 
 <a href="/create" class="uk-button uk-button-primary uk-margin-bottom">Créer un nouvel article</a>
 
-<table class="uk-table uk-table-striped">
+<table class="uk-table uk-table-striped uk-table-divider">
     <thead>
     <tr>
         <th scope="col">id</th>

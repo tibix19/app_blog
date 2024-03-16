@@ -17,17 +17,17 @@
 <h1> <?= $params['post']->title ?? 'Créer un nouvelle article'?> </h1>
 
 <form action="<?= isset($params['post']) ? "/admin/posts/edit/{$params['post']->id}" : "/admin/posts/create"?>" method="POST" >
-    <div class="uk-margin">
-        <label for="title" >Titre de l'article</label>
-        <input type="text" class="uk-input" name="title" id="title" value="<?= $params['post']->title ?? '' ?>">
+    <div class="uk-width-1-1">
+        <label class="uk-form-label" for="title" >Titre de l'article</label>
+        <input type="text" class="uk-input uk-margin" name="title" id="title" value="<?= $params['post']->title ?? '' ?>">
     </div>
-    <div class="uk-margin">
-        <label for="content">Contenu de l'article</label>
-        <textarea name="content" id="content" rows="15" class="uk-textarea"><?= $params['post']->content ?? '' ?></textarea>
+    <div class="uk-width-1-1">
+        <label class="uk-form-label" for="content">Contenu de l'article</label>
+        <textarea name="content" id="content" rows="15" class="uk-textarea uk-margin"><?= $params['post']->content ?? '' ?></textarea>
     </div>
-    <div class="uk-margin">
-        <label for="tags">Tags de l'article</label>
-        <select multiple class="uk-select" id="tags" name="tags[]">
+    <div class="uk-width-1-1">
+        <label class="uk-form-label" for="tags">Tags de l'article</label>
+        <select multiple class="uk-select uk-margin" id="tags" name="tags[]">
             <?php foreach ($params['tags'] as $tag) : ?>
                 <option value="<?= $tag->id ?>"
                 <?php if(isset($params['post'])) : ?>

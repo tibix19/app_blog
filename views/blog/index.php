@@ -1,5 +1,3 @@
- <h1 style="font-family: Helvetica,serif;">Les derniers articles</h1>
-
 <!-- Afficher les erreurs -->
  <?php if(!empty($params['message'])): ?>
      <div class="uk-alert-warning" uk-alert>
