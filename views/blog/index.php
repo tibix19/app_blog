@@ -12,6 +12,9 @@
          <?php foreach ($params['posts'] as $post): ?>
              <div>
                  <div class="uk-card uk-card-default uk-card-hover uk-margin-bottom">
+                     <div class="uk-card-media-top">
+                         <img src="../../public/static/images/<?= $post->image ?>" width="550" height="450" alt="image of the post">
+                     </div>
                      <div class="uk-card-body" >
                          <h2 class="uk-card-title"><?= $post->title ?></h2>
                          <div>

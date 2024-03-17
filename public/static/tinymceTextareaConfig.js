@@ -12,8 +12,6 @@ tinymce.init({
     autosave_retention: '2m',
     image_advtab: true,
     importcss_append: true,
-    template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
-    template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
     height: 400,
     quickbars_selection_toolbar: 'bold italic quicklink h1 h2 blockquote quicktable',
     noneditable_class: 'mceNonEditable',
