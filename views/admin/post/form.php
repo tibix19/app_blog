@@ -22,8 +22,11 @@
         <input type="text" class="uk-input uk-margin" name="title" id="title" value="<?= $params['post']->title ?? '' ?>">
     </div>
     <div class="uk-width-1-1">
-        <label class="uk-form-label" for="image">Image actuelle</label><br>
-        <img src="../../../public/static/images/<?= $params['post']->image ?>" width="50%" height="50%"><br><br>
+        <!-- check si une image existe, l'afficher ou ne rien faire -->
+        <?php if (isset($params['post']->image)) : ?>
+            <label class="uk-form-label uk-margin" for="image">Image actuelle</label><br>
+            <img src="../../../public/static/images/<?= $params['post']->image ?>" width="50%" height="50%"><br><br>
+        <?php endif ?>
         <label class="uk-form-label" for="image">Insérer la nouvelle image</label><br>
         <input type="file" aria-label="Custom controls" class="uk-margin" name="image" id="image">
     </div>

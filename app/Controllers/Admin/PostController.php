@@ -68,8 +68,10 @@ class PostController extends Controller
                 header('Location: /create');
                 exit;
             }
-            // Générer un nom unique pour le fichier pour ne pas avoir 2 fois le meme non de fichier
-            $newFilename = uniqid() . '_' . $filename;
+            // Générer un nom unique pour le fichier pour ne pas avoir 2 fois le meme non de fichier (id + nom de l'article + extension) et aussi enlever les espaces et les apostrophes par exemple
+            $filenameWithoutSpace = str_replace(' ', '-', $_POST['title']);
+            $newFilenameWithoutSpecialChara = str_replace("'", '-', $filenameWithoutSpace);
+            $newFilename = uniqid() . '_' . $newFilenameWithoutSpecialChara . '.' . $extension;
             // Déplacer le fichier téléchargé vers le répertoire de destination
             if (!move_uploaded_file($tempFilePath, "../public/static/images/{$newFilename}")) {
                 $_SESSION['errors'][] = [['Erreur lors de l\'upload de l\'image']];
