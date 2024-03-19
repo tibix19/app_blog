@@ -33,8 +33,8 @@ class PostController extends Controller
     {
         $this->isConnected();
         $post = new Post($this->getDB());
-
-        // Check les données entrées et si elles sont conformes aux restrictions sinon affiche une erreur
+    
+        // Vérifier les données saisies et afficher une erreur si nécessaire
         $validator = new Validator($_POST);
         $errors = $validator->validate([
             'title' => ['required', 'min:4'],
@@ -45,76 +45,54 @@ class PostController extends Controller
             header('Location: /create');
             exit;
         }
-
-        // Vérifier si un fichier a été uploadé
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            // Récupérer le nom temporaire du fichier
-            $tmpName = $_FILES['image']['tmp_name'];
-
-            // Définir le dossier de destination FAUT QUE JE CHANGE
-            $uploadDir = 'C:\Users\tibix\SynologyDrive\Apprentissage\Apprentisage cours\Module EPSIC\3eme_annee\Module_151_120\dev\app_blog\public\static\images\\';
-
-            // Générer un nom unique pour le fichier
-            $imageName = $_FILES['image']['name'];
-
-            // Déplacer le fichier téléchargé vers le dossier de destination
-            if (move_uploaded_file($tmpName, $uploadDir . $imageName)) {
-                // Ajouter le nom de l'image aux données du poste
-                $_POST['image'] = $imageName;
-            } else {
-                // Gérer les erreurs d'upload
-                switch ($_FILES['image']['error']) {
-                    case UPLOAD_ERR_INI_SIZE:
-                        $errorMessage = "La taille de l'image dépasse la limite autorisée par le serveur.";
-                        break;
-                    case UPLOAD_ERR_FORM_SIZE:
-                        $errorMessage = "La taille de l'image dépasse la limite autorisée par le formulaire.";
-                        break;
-                    case UPLOAD_ERR_PARTIAL:
-                        $errorMessage = "L'image n'a été que partiellement téléchargée.";
-                        break;
-                    case UPLOAD_ERR_NO_FILE:
-                        $errorMessage = "Aucun fichier n'a été téléchargé.";
-                        break;
-                    case UPLOAD_ERR_NO_TMP_DIR:
-                        $errorMessage = "Le dossier temporaire est manquant.";
-                        break;
-                    case UPLOAD_ERR_CANT_WRITE:
-                        $errorMessage = "Échec de l'écriture du fichier sur le disque.";
-                        break;
-                    case UPLOAD_ERR_EXTENSION:
-                        $errorMessage = "Une extension PHP a arrêté l'upload de l'image.";
-                        break;
-                    default:
-                           $errorMessage = "Erreur inconnue lors de l'upload de l'image.";
-                        break;
-                }
-                //var_dump($_FILES['image']['error']); die();
-                $_SESSION['errors'][] = [[$errorMessage]];
-                header('Location: /create');
-                exit;
-            }
-
-        }
-
-        // check si au moins tag est sélectionné
-        if($_POST['tags'] == null) {
-            $_SESSION['errors'][] = [['Veuillez insérer un tags']];
+    
+        // Vérifier si au moins un tag est sélectionné
+        if(empty($_POST['tags'])) {
+            $_SESSION['errors'][] = [['Veuillez sélectionner un tag']];
             header('Location: /create');
             exit;
         }
-        else {
-            // recup des tags pour la table post_tag
-            $tags = $_POST['tags'];
-            // supprimer les tags du $_POST parce qu'ils ne sont pas dans la table posts
-            unset($_POST['tags']);
-            $result = $post->create_model($_POST, $tags);
-            if ($result){
-                // revient sur le panel admin après la creation
-                header('Location: /myposts?create=success');
+    
+        // Vérifier si un fichier a été uploadé
+        if (!empty($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            // Définir les extensions autorisées
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            // Récupérer les informations sur le fichier téléchargé
+            $filename = $_FILES['image']['name'];
+            $tempFilePath = $_FILES['image']['tmp_name'];
+            // Obtenir l'extension du fichier
+            $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            // Vérifier si l'extension est autorisée
+            if (!in_array($extension, $allowedExtensions)) {
+                $_SESSION['errors'][] = [['Extension de fichier non autorisée. Veuillez télécharger une image avec une extension JPG, JPEG, PNG ou GIF.']];
+                header('Location: /create');
+                exit;
             }
+            // Générer un nom unique pour le fichier pour ne pas avoir 2 fois le meme non de fichier
+            $newFilename = uniqid() . '_' . $filename;
+            // Déplacer le fichier téléchargé vers le répertoire de destination
+            if (!move_uploaded_file($tempFilePath, "../public/static/images/{$newFilename}")) {
+                $_SESSION['errors'][] = [['Erreur lors de l\'upload de l\'image']];
+                header('Location: /create');
+                exit;
+            }
+            // Ajouter le nom de l'image aux données du post
+            $_POST['image'] = $newFilename;
+        }
+        // Récupérer les tags pour la table post_tag
+        $tags = $_POST['tags'];
+        // Supprimer les tags du $_POST parce qu'ils ne sont pas dans la table posts
+        unset($_POST['tags']);
+    
+        // Créer le post dans la base de données
+        $result = $post->create_model($_POST, $tags);
+    
+        if ($result){
+            // Rediriger vers le panneau d'administration après la création
+            header('Location: /myposts?create=success');
         }
     }
+
 
     // affiche la vue pour edit un post
     public function edit(int $id)
@@ -163,10 +141,10 @@ class PostController extends Controller
     public function destroy(int $id)
     {
         $this->isAdmin();
-        $post = new Post($this->getDB());
+        $posts = new Post($this->getDB());
 
         // Récupérer le nom de l'image associée au post
-        $post = $post->findById($id);
+        $post = $posts->findById($id);
         $imageName = $post->image; // Remplacez "image" par le nom de votre colonne d'image
 
         // Supprimer le post de la base de données
@@ -175,7 +153,7 @@ class PostController extends Controller
         if ($result){
             // Supprimer l'image du serveur si elle existe
             if ($imageName) {
-                $imagePath = "C:\Users\\tibix\SynologyDrive\Apprentissage\Apprentisage cours\Module EPSIC\\3eme_annee\Module_151_120\dev\app_blog\public\static\images\\{$imageName}";
+                $imagePath = "../public/static/images/{$imageName}";
                 if (file_exists($imagePath)) {
                     unlink($imagePath); // Supprimer l'image du serveur
                 }

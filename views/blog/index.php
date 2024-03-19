@@ -12,8 +12,11 @@
          <?php foreach ($params['posts'] as $post): ?>
              <div>
                  <div class="uk-card uk-card-default uk-card-hover uk-margin-bottom">
+                    <!-- Si pas d'image on affiche rien -->
                      <div class="uk-card-media-top">
-                         <img src="../../public/static/images/<?= $post->image ?>" width="550" height="450" alt="image of the post">
+                         <?php if (!empty($post->image)): ?>
+                            <img src="../../public/static/images/<?= $post->image ?>" width="100%" height="100%" alt="image of the post">
+                         <?php endif; ?>
                      </div>
                      <div class="uk-card-body" >
                          <h2 class="uk-card-title"><?= $post->title ?></h2>
@@ -32,4 +35,3 @@
          <?php endforeach; ?>
      </div>
  </div>
-

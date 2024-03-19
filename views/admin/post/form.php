@@ -14,7 +14,6 @@
 
 <!-- Afficher le formulaire de création ou de modification s'il y a un id -->
 
-
 <h1> <?= $params['post']->title ?? 'Créer un nouvelle article'?> </h1>
 
 <form action="<?= isset($params['post']) ? "/admin/posts/edit/{$params['post']->id}" : "/admin/posts/create"?>" method="POST" enctype="multipart/form-data">
@@ -23,8 +22,10 @@
         <input type="text" class="uk-input uk-margin" name="title" id="title" value="<?= $params['post']->title ?? '' ?>">
     </div>
     <div class="uk-width-1-1">
-        <label class="uk-form-label" for="image">Image</label>
-        <input type="file" class="uk-input uk-margin" name="image" id="image" value="<?= $params['post']->image ?? '' ?>" required>
+        <label class="uk-form-label" for="image">Image actuelle</label><br>
+        <img src="../../../public/static/images/<?= $params['post']->image ?>" width="50%" height="50%"><br><br>
+        <label class="uk-form-label" for="image">Insérer la nouvelle image</label><br>
+        <input type="file" aria-label="Custom controls" class="uk-margin" name="image" id="image">
     </div>
     <div class="uk-width-1-1">
         <label class="uk-form-label" for="content">Contenu de l'article</label>
