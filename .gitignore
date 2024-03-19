@@ -4,3 +4,4 @@ composer.lock
 pnpm-lock.yaml
 package-lock.json
 vendor
+images
