@@ -13,7 +13,6 @@ header("Content-Type: application/rss+xml;");
             <item>
                 <guid><?= $article->id ?></guid>
                 <title><?= $article->title ?></title>
-                <description><?= substr($article->content, 0, 100). '...' ?></description>
                 <pubDate><?= date(DATE_RSS, strtotime($article->created_at)) ?></pubDate>
                 <link>http://localhost/posts/<?= $article->id ?></link>
             </item>

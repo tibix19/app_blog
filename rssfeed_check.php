@@ -19,7 +19,6 @@ if ($xml) {
     foreach ($xml->channel->item as $item) {
         echo "ID : " . $item->guid . "<br>";
         echo "Titre : " . $item->title . "<br>";
-        echo "Content : " . $item->description . "<br>";
         echo "URL : " . $item->link . "<br>";
         echo "PubDate  : " . $item->pubDate . "<br>";
         echo "<hr>";
