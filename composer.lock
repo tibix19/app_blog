@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d33566af3336a7b26e73b2c0c9b08818",
+    "content-hash": "3768364e8e8d424465c7655429f5df7b",
     "packages": [
         {
             "name": "lorddashme/php-simple-captcha",
@@ -122,7 +122,8 @@
     "prefer-lowest": false,
     "platform": {
         "ext-pdo": "*",
-        "ext-ctype": "*"
+        "ext-ctype": "*",
+        "ext-simplexml": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"
