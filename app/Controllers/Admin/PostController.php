@@ -1,4 +1,5 @@
 <?php
+// Controleur CRUD sur les postes Admin
 
 namespace App\Controllers\Admin;
 
@@ -68,10 +69,8 @@ class PostController extends Controller
                 header('Location: /create');
                 exit;
             }
-            // Générer un nom unique pour le fichier pour ne pas avoir 2 fois le meme non de fichier (id + nom de l'article + extension) et aussi enlever les espaces et les apostrophes par exemple
-            $filenameWithoutSpace = str_replace(' ', '-', $_POST['title']);
-            $newFilenameWithoutSpecialChara = str_replace("'", '-', $filenameWithoutSpace);
-            $newFilename = uniqid() . '_' . $newFilenameWithoutSpecialChara . '.' . $extension;
+            // Générer un nom unique pour le fichier pour ne pas avoir 2 fois le meme non de fichier
+            $newFilename = uniqid() . ".". $extension;
             // Déplacer le fichier téléchargé vers le répertoire de destination
             if (!move_uploaded_file($tempFilePath, "../public/static/images/{$newFilename}")) {
                 $_SESSION['errors'][] = [['Erreur lors de l\'upload de l\'image']];
@@ -122,20 +121,57 @@ class PostController extends Controller
             header('Location: /create');
             exit;
         }
-        // si aucun tag est selection afficher une erreur
-        if($_POST['tags'] == null) {
-            $_SESSION['errors'][] = [['Veuillez insérer un tags']];
-            header('Location: /create');
+        // Vérifier si au moins un tag est sélectionné
+        if(empty($_POST['tags'])) {
+            $_SESSION['errors'][] = [['Veuillez sélectionner un tag']];
+            header('Location: /admin/posts/edit/' . $id);
             exit;
         }
-        else {
-            $tags = array_pop($_POST);
-            $result = $post->update_model($id, $_POST, $tags);
 
-            if ($result){
-                // revient sur le panel admin après la modification
-                header('Location: /admin/posts?update=success?'. $id);
+        // Vérifier si un fichier a été uploadé ou erreur
+        if (!empty($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            // Définir les extensions autorisées
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            // Récupérer les informations sur le fichier téléchargé
+            $filename = $_FILES['image']['name'];
+            $tempFilePath = $_FILES['image']['tmp_name'];
+            // Obtenir l'extension du fichier
+            $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            // Vérifier si l'extension est autorisée
+            if (!in_array($extension, $allowedExtensions)) {
+                $_SESSION['errors'][] = [['Extension de fichier non autorisée. Veuillez télécharger une image avec une extension JPG, JPEG, PNG ou GIF.']];
+                header('Location: /admin/posts/edit/' . $id);
+                exit;
             }
+            // Générer un nom unique pour le fichier en utilisant l'ID du post suivi du titre du post
+            $newFilename = uniqid() . ".".  $extension;
+
+            $post_id = $post->findById($id);
+            // Supprimer l'ancienne image si elle existe
+            if (isset($post_id->image)) {
+                unlink("../public/static/images/{$post_id->image}");
+            }
+
+            // Déplacer le fichier téléchargé vers le répertoire de destination
+            if (!move_uploaded_file($tempFilePath, "../public/static/images/{$newFilename}")) {
+                $_SESSION['errors'][] = [['Erreur lors de l\'upload de l\'image']];
+                header('Location: /admin/posts/edit/' . $id);
+                exit;
+            }
+            // Mettre à jour le nom de l'image dans la base de données
+            $_POST['image'] = $newFilename;
+        }
+        // Récupérer les tags pour la table post_tag
+        $tags = $_POST['tags'];
+        // Supprimer les tags du $_POST parce qu'ils ne sont pas dans la table posts
+        unset($_POST['tags']);
+
+        // Mettre à jour le post dans la base de données
+        $result = $post->update_model($id, $_POST, $tags);
+
+        if ($result){
+            // Rediriger vers le panneau d'administration après la modification
+            header('Location: /admin/posts?update=success&' . $id);
         }
     }
 

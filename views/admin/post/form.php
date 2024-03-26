@@ -1,3 +1,5 @@
+<!-- Formulaire de modification pour les admin et aussi de creation pour tous les users connectées -->
+
 <!-- Afficher les erreurs (si manque de caractère pour le titre ou le content et si aucun tag n'est sélectionné) -->
 <?php if(isset($_SESSION['errors'])): ?>
     <?php foreach ($_SESSION['errors'] as $errorArray): ?>
@@ -17,11 +19,11 @@
 <h1> <?= $params['post']->title ?? 'Créer un nouvelle article'?> </h1>
 
 <form action="<?= isset($params['post']) ? "/admin/posts/edit/{$params['post']->id}" : "/admin/posts/create"?>" method="POST" enctype="multipart/form-data">
-    <div class="uk-width-1-1">
+    <div class="uk-margin">
         <label class="uk-form-label" for="title" >Titre de l'article</label>
         <input type="text" class="uk-input uk-margin" name="title" id="title" value="<?= $params['post']->title ?? '' ?>">
     </div>
-    <div class="uk-width-1-1">
+    <div class="uk-margin">
         <!-- check si une image existe, l'afficher ou ne rien faire -->
         <?php if (isset($params['post']->image)) : ?>
             <label class="uk-form-label uk-margin" for="image">Image actuelle</label><br>
@@ -30,11 +32,11 @@
         <label class="uk-form-label" for="image">Insérer la nouvelle image</label><br>
         <input type="file" aria-label="Custom controls" class="uk-margin" name="image" id="image">
     </div>
-    <div class="uk-width-1-1">
+    <div class="uk-margin">
         <label class="uk-form-label" for="content">Contenu de l'article</label>
         <textarea name="content" id="content" rows="15" class="uk-textarea uk-margin"><?= $params['post']->content ?? '' ?></textarea>
     </div>
-    <div class="uk-width-1-1">
+    <div class="uk-margin">
         <label class="uk-form-label" for="tags">Tags de l'article</label>
         <select multiple class="uk-select uk-margin" id="tags" name="tags[]">
             <?php foreach ($params['tags'] as $tag) : ?>

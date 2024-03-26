@@ -1,4 +1,5 @@
 <?php
+// Controlleur CRUD sur les postes pour user standard
 
 namespace App\Controllers;
 
@@ -119,23 +120,68 @@ class UserController extends Controller
         ]);
         if($errors){
             $_SESSION['errors'][] = $errors;
-            header('Location: /create');
+            header('Location: /post/edit/' . $postId);
             exit;
         }
-
-        if($_POST['tags'] == null) {
+        // Vérifier si au moins un tag est sélectionné
+        if(empty($_POST['tags'])) {
             $_SESSION['errors'][] = [['Veuillez insérer un tags']];
-            header('Location: /create');
+            header('Location: /post/edit/' . $postId);
             exit;
         }
-        else {
-            $tags = array_pop($_POST);
-            $result = $post->update_model($postId, $_POST, $tags);
 
-            if ($result){
-                // revient sur le panel admin après la modification
-                header('Location: /myposts?update=success?' . $postId);
+        // Vérifier si un fichier a été uploadé ou erreur
+        if (!empty($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            // Définir les extensions autorisées
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            // Récupérer les informations sur le fichier téléchargé
+            $filename = $_FILES['image']['name'];
+            $tempFilePath = $_FILES['image']['tmp_name'];
+            // Obtenir l'extension du fichier
+            $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            // Vérifier si l'extension est autorisée
+            if (!in_array($extension, $allowedExtensions)) {
+                $_SESSION['errors'][] = [['Extension de fichier non autorisée. Veuillez télécharger une image avec une extension JPG, JPEG, PNG ou GIF.']];
+                header('Location: /post/edit/' . $postId);
+                exit;
             }
+
+            // supprimer l'ancien image s'il y en a une
+            $postImage = $post->findById($postId);
+            $imageName = $postImage->image;
+            $imagePath = "../public/static/images/{$imageName}";
+
+            if (file_exists($imagePath)) {
+                unlink($imagePath); // Supprimer l'image du serveur
+            }
+            
+            // Générer un nom unique
+            $newFilename = uniqid() . '.' . $extension;
+            // Déplacer le fichier téléchargé vers le répertoire de destination
+            if (!move_uploaded_file($tempFilePath, "../public/static/images/{$newFilename}")) {
+                $_SESSION['errors'][] = [['Erreur lors de l\'upload de l\'image']];
+                header('Location: /post/edit/' . $postId);
+                exit;
+            }
+            // Mettre à jour le nom de l'image dans la base de données
+            $_POST['image'] = $newFilename;
+        }
+
+
+        $postImage = $post->findById($postId);
+        $imageName = $postImage->image;
+        $imageName = $_POST['image'];
+
+        // Récupérer les tags pour la table post_tag
+        $tags = $_POST['tags'];
+        // Supprimer les tags du $_POST parce qu'ils ne sont pas dans la table posts
+        unset($_POST['tags']);
+
+        $result = $post->update_model($postId, $_POST, $tags);
+
+        if ($result) {
+            // revient sur le panel admin après la modification
+            header('Location: /myposts?update=success?' . $postId);
         }
     }
 
@@ -144,9 +190,20 @@ class UserController extends Controller
     {
         $this->isConnected();
         $post = new Post($this->getDB());
-        $result = $post->destroy_model($id);
+
+        // Récupérer le nom de l'image associée au post
+        $post = $post->findById($id);
+        $imageName = $post->image; // Remplacez "image" par le nom de votre colonne d'image
+        $result = $post->destroy_model($id); // supprimer dans la db
 
         if ($result){
+            // Supprimer l'image du serveur si elle existe
+            if ($imageName) {
+                $imagePath = "../public/static/images/{$imageName}";
+                if (file_exists($imagePath)) {
+                    unlink($imagePath); // Supprimer l'image du serveur
+                }
+            }
             // revient sur le panel admin après la supp
             header('Location: /myposts?delete=success' . $id);
         }
