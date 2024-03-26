@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Log Your Knowledge</title>
+    <link rel="shortcut icon" type="image/icon" href="../../../public/static/logo/favicon.ico"/>
     <!-- Importation des libraires nodejs-->
     <!-- uikit -->
     <link rel="stylesheet" href="../../../node_modules/uikit/dist/css/uikit.min.css">
