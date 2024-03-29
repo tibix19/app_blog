@@ -1,4 +1,4 @@
-<!-- Formulaire de modification pour les admin et aussi de creation pour tous les users connectées -->
+<!-- Formulaire de modification pour les admins et aussi de creation pour tous les users connectées -->
 
 <!-- Afficher les erreurs (si manque de caractère pour le titre ou le content et si aucun tag n'est sélectionné) -->
 <?php if(isset($_SESSION['errors'])): ?>
@@ -16,7 +16,7 @@
 
 <!-- Afficher le formulaire de création ou de modification s'il y a un id -->
 
-<h1> <?= $params['post']->title ?? 'Créer un nouvelle article'?> </h1>
+<h1> <?= $params['post']->title ?? 'Créer un nouvel article'?> </h1>
 
 <form action="<?= isset($params['post']) ? "/admin/posts/edit/{$params['post']->id}" : "/admin/posts/create"?>" method="POST" enctype="multipart/form-data">
     <div class="uk-margin">
@@ -35,6 +35,13 @@
     <div class="uk-margin">
         <label class="uk-form-label" for="content">Contenu de l'article</label>
         <textarea name="content" id="content" rows="15" class="uk-textarea uk-margin"><?= $params['post']->content ?? '' ?></textarea>
+    </div>
+    <div class="uk-width-1-1">
+        <label class="uk-form-label" for="published">Etat du poste</label>
+        <select name="published" id="published" class="uk-select">
+            <option value="0" <?= (isset($params['post']) && $params['post']->published == 0) ? 'selected' : '' ?>>Brouillons</option>
+            <option value="1" <?= (isset($params['post']) && $params['post']->published == 1) ? 'selected' : '' ?>>Publié</option>
+        </select>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="tags">Tags de l'article</label>

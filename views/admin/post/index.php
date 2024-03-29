@@ -1,3 +1,5 @@
+<!-- page pour l'admin pour administer les articles -->
+
 <h1 class="uk-heading-medium">Administration des articles</h1>
 
 <?php
@@ -26,7 +28,9 @@ elseif (isset($_GET['create'])) {
     <tr>
         <th scope="col">id</th>
         <th scope="col">Titre</th>
+        <th scope="col">Etat</th>
         <th scope="col">Publié le</th>
+        <th scope="col">Créateur</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
@@ -35,7 +39,9 @@ elseif (isset($_GET['create'])) {
         <tr>
             <th scope="row"><?= $post->id ?></th>
             <td><?= $post->title ?></td>
+            <td><?= $post->published ?></td>
             <td><?= $post->getCreatedAt() ?></td>
+            <td><?= $post->getCreatorPost() ?></td>
             <td>
                 <a href="/admin/posts/edit/<?= $post->id ?>" class="uk-button uk-button-secondary uk-margin-small-right">Modifier</a>
                 <form action="/admin/posts/delete/<?= $post->id ?>" method="POST" class="uk-display-inline">

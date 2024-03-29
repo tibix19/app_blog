@@ -65,9 +65,13 @@ class UserController extends Controller
         $this->isConnected();
         $userId = $_SESSION['idUser'];
         // recupe ces postes
-        $myPosts = (new Post($this->getDB()))->myPosts();
+        $allPostsUser = new Post($this->getDB());
+        // postes brouillons
+        $PostsDraftUser = $allPostsUser->myPostsDraft();
+        // postes publiés
+        $PostsPublishedUser = $allPostsUser->myPostsPublished();
         // retourner les users dans une views
-        $this->view('account.postIndex', compact('myPosts'));
+        $this->view('account.postIndex', compact('PostsDraftUser', 'PostsPublishedUser'));
     } 
 
     // afficher la vue pour edit les postes et control qu'on peut seulement modifier les postes qu'ont à créer
@@ -182,6 +186,29 @@ class UserController extends Controller
         if ($result) {
             // revient sur le panel admin après la modification
             header('Location: /myposts?update=success?' . $postId);
+        }
+    }
+
+
+    // changer le level d'un user (user standard ou admin)
+    public function changeStatePost(int $id)
+    {
+        $this->isConnected();
+        // Vérifiez si le niveau de l'utilisateur est défini dans la requête POST
+        if (isset($_POST['published'])) {
+            // Créez un tableau de données à mettre à jour
+            $data = [
+                'published' => $_POST['published']
+            ];
+            // Mettre à jour le niveau de l'utilisateur dans la db
+            $post = new Post($this->getDB());
+            $result = $post->update_model($id, $data);
+
+            if ($result) {
+                // Redirigez vers le panneau admin après la mise à jour
+                header('Location: /myposts?updatestate=' . $id . '?' . $_POST['published']);
+                exit();
+            }
         }
     }
 

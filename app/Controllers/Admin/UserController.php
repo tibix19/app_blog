@@ -75,7 +75,8 @@ class UserController extends Controller
             $data = [
                 'admin' => $_POST['admin']
             ];
-            // Mettre à jour le niveau de l'utilisateur dans la db
+
+            // Mettre à jour l^état du post dans la db
             $user = new User($this->getDB());
             $result = $user->update_model($id, $data);
 

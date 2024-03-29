@@ -48,6 +48,9 @@ $router->get('/post/edit/:id', 'App\Controllers\UserController@editPostUser');
 $router->post('/post/edit/:id', 'App\Controllers\UserController@updatePostUser');
 $router->post('/post/delete/:id', 'App\Controllers\UserController@destroyPostUser');
 
+// update state of post
+$router->post('/post/edit/state/:id', 'App\Controllers\UserController@changeStatePost');
+
 // ADMIN
 // voir, supprimer et (modifier) les infos du user
 $router->get('/admin/account','App\Controllers\Admin\UserController@index');

@@ -35,6 +35,13 @@
         <label for="content">Contenu de l'article</label>
         <textarea class="uk-textarea" name="content" id="content" rows="15"><?= $params['post']->content ?></textarea>
     </div>
+    <div class="uk-width-1-1">
+        <label class="uk-form-label" for="published">Etat du poste</label>
+        <select name="published" id="published" class="uk-select">
+            <option value="0" <?= ($params['post']->published == 0) ? 'selected' : '' ?>>Brouillons</option>
+            <option value="1" <?= ($params['post']->published == 1) ? 'selected' : '' ?>>Publié</option>
+        </select>
+    </div>
     <div class="uk-margin">
         <label for="tags">Tags de l'article</label>
         <select multiple class="uk-select" id="tags" name="tags[]">

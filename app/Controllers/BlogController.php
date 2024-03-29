@@ -21,16 +21,16 @@ class BlogController extends Controller
             // Vérifier s'il y a des articles trouvés
             if (empty($posts)) {
                 // Afficher un message si aucun article n'est trouvé et aussi tous les posts
-                $message = "Aucun article trouvé pour le terme de recherche : '$searchTerm'";
+                $message = "Aucun poste trouvé pour le terme de recherche : '$searchTerm'";
                 $post = new Post($this->getDB());
-                $posts = $post->all();
+                $posts = $post->getPostPublished();
                 $this->view('blog.index', compact('posts', 'message'));
                 return;
             }
         } else {
             // Si aucun terme de recherche n'est présent, récupérer tous les articles
             $post = new Post($this->getDB());
-            $posts = $post->all();
+            $posts = $post->getPostPublished();
         }
         // Passer les articles à la vue
         $this->view('blog.index', compact('posts'));

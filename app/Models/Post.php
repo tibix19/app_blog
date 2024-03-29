@@ -10,6 +10,12 @@ class Post extends Model
     // définir l'attribut $table au nom de la table dans la db
     protected $table = 'posts';
 
+    // getPostPublished avoir les postes publiées état = 1
+    public function getPostPublished()
+    {
+        return $this->querySQL("SELECT * FROM {$this->table} WHERE published = 1 ORDER BY created_at DESC");
+    }
+
     // permet d'avoir les date dans un format bien précis
     public function getCreatedAt(): string
     {
@@ -88,13 +94,22 @@ HTML;
         return true;
     }
 
-    // function qui permet de recupérer les postes du user qui est connecté.
-    public function myPosts()
+    // function qui permet de recupérer les postes du user qui est connecté et qui sont en état brouillon.
+    public function myPostsDraft()
     {
         // recuper les posts du user avec la variable de session idUser
         return $this->querySQL('SELECT * FROM posts p
                                 INNER JOIN user_post up on up.post_id=p.id
-                                WHERE up.user_id=?',[$_SESSION["idUser"]]) ;
+                                WHERE up.user_id=? AND published = 0',[$_SESSION["idUser"]]) ;
+    }
+
+    // Les postes publiées d'un user
+    public function myPostsPublished()
+    {
+        // recuper les posts du user avec la variable de session idUser
+        return $this->querySQL('SELECT * FROM posts p
+                                INNER JOIN user_post up on up.post_id=p.id
+                                WHERE up.user_id=? AND published = 1',[$_SESSION["idUser"]]) ;
     }
 
     // Permet de récup les élements nécessaire pour savoir si la personne qui est connectée est bien la personne qui modifie le poste
@@ -108,7 +123,7 @@ HTML;
     public function searchPosts($searchTerm)
     {
         // Effectuer la requête SQL pour rechercher dans les titres et le contenu des articles
-        $querySearchTitleAndContent = "SELECT * FROM posts WHERE title LIKE ? OR content LIKE ?";
+        $querySearchTitleAndContent = "SELECT * FROM posts WHERE published = 1 AND title LIKE ? OR content LIKE ?";
         // Met des % pour que ça
         $searchTerm = '%' . $searchTerm . '%';
         return $this->querySQL($querySearchTitleAndContent, [$searchTerm, $searchTerm]);
