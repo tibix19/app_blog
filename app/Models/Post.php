@@ -100,7 +100,7 @@ HTML;
         // recuper les posts du user avec la variable de session idUser
         return $this->querySQL('SELECT * FROM posts p
                                 INNER JOIN user_post up on up.post_id=p.id
-                                WHERE up.user_id=? AND published = 0',[$_SESSION["idUser"]]) ;
+                                WHERE up.user_id=? AND published = 0 ORDER BY p.created_at DESC',[$_SESSION["idUser"]]) ;
     }
 
     // Les postes publiées d'un user
@@ -109,7 +109,7 @@ HTML;
         // recuper les posts du user avec la variable de session idUser
         return $this->querySQL('SELECT * FROM posts p
                                 INNER JOIN user_post up on up.post_id=p.id
-                                WHERE up.user_id=? AND published = 1',[$_SESSION["idUser"]]) ;
+                                WHERE up.user_id=? AND published = 1 ORDER BY p.created_at DESC',[$_SESSION["idUser"]]) ;
     }
 
     // Permet de récup les élements nécessaire pour savoir si la personne qui est connectée est bien la personne qui modifie le poste
@@ -123,7 +123,8 @@ HTML;
     public function searchPosts($searchTerm)
     {
         // Effectuer la requête SQL pour rechercher dans les titres et le contenu des articles
-        $querySearchTitleAndContent = "SELECT * FROM posts WHERE published = 1 AND title LIKE ? OR content LIKE ?";
+        $querySearchTitleAndContent  = "SELECT * FROM posts WHERE published = 1 AND title LIKE ? AND content LIKE ?";
+        //$querySearchTitleAndContent  = "SELECT * FROM posts WHERE published = 1 AND (SELECT * FROM posts WHERE title LIKE ? OR content LIKE ?)";
         // Met des % pour que ça
         $searchTerm = '%' . $searchTerm . '%';
         return $this->querySQL($querySearchTitleAndContent, [$searchTerm, $searchTerm]);
@@ -136,5 +137,13 @@ HTML;
         $queryLatestPost = 'SELECT created_at FROM posts ORDER BY created_at DESC LIMIT 0,1';
         $stmt = $this->db->getPDO()->query($queryLatestPost);
         return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function updatePostState(int $id, $data)
+    {
+        $query = "UPDATE posts SET published = ? WHERE id = ?";
+        //var_dump($data, $id); die();
+
+        return $this->querySQL($query, [$data, $id]);
     }
 }

@@ -171,7 +171,6 @@ class UserController extends Controller
             $_POST['image'] = $newFilename;
         }
 
-
         $postImage = $post->findById($postId);
         $imageName = $postImage->image;
         $imageName = $_POST['image'];
@@ -190,7 +189,7 @@ class UserController extends Controller
     }
 
 
-    // changer le level d'un user (user standard ou admin)
+    // changer que l'état d'un poste directement dans le panel du user ou de l'admin
     public function changeStatePost(int $id)
     {
         $this->isConnected();
@@ -200,12 +199,13 @@ class UserController extends Controller
             $data = [
                 'published' => $_POST['published']
             ];
+
             // Mettre à jour le niveau de l'utilisateur dans la db
             $post = new Post($this->getDB());
             $result = $post->update_model($id, $data);
 
             if ($result) {
-                // Redirigez vers le panneau admin après la mise à jour
+                // Redirigez vers la bonne page
                 header('Location: /myposts?updatestate=' . $id . '?' . $_POST['published']);
                 exit();
             }
@@ -235,5 +235,8 @@ class UserController extends Controller
             header('Location: /myposts?delete=success' . $id);
         }
     }
+
+
+
 }
 

@@ -39,7 +39,17 @@ elseif (isset($_GET['create'])) {
         <tr>
             <th scope="row"><?= $post->id ?></th>
             <td><?= $post->title ?></td>
-            <td><?= $post->published ?></td>
+            <td>
+                <form action="/post/edit/state/<?= $post->id ?>" method="POST" class="uk-display-inline">
+                    <label for="published" class="uk-margin-right">
+                        <select name="published" id="published" class="uk-select">
+                            <option value="0" <?= ($post->published == 0) ? 'selected' : '0' ?>>Brouillons</option>
+                            <option value="1" <?= ($post->published == 1) ? 'selected' : '1' ?>>Publié</option>
+                        </select>
+                    </label>
+                    <button type="submit" class="uk-button uk-button-warning">Save</button>
+                </form>
+            </td>
             <td><?= $post->getCreatedAt() ?></td>
             <td><?= $post->getCreatorPost() ?></td>
             <td>

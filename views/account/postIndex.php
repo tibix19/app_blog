@@ -53,7 +53,7 @@ elseif (isset($_GET['create'])) {
                     <th scope="row"><?= $post->post_id ?></th>
                     <td><?= $post->title ?></td>
                     <td>
-                        <form action="/post/edit/state/<?= $post->id ?>" method="POST" class="uk-display-inline">
+                        <form action="/post/edit/state/<?= $post->post_id ?>" method="POST" class="uk-display-inline">
                             <label for="published" class="uk-margin-right">
                                 <select name="published" id="published" class="uk-select">
                                     <option value="0" <?= ($post->published == 0) ? 'selected' : '' ?>>Brouillons</option>
@@ -92,7 +92,7 @@ elseif (isset($_GET['create'])) {
                     <th scope="row"><?= $post->post_id ?></th>
                     <td><?= $post->title ?></td>
                     <td>
-                        <form action="/post/edit/state/<?= $post->id ?>" method="POST" class="uk-display-inline">
+                        <form action="/post/edit/state/<?= $post->post_id ?>" method="POST" class="uk-display-inline">
                             <label for="published" class="uk-margin-right">
                                 <select name="published" id="published" class="uk-select">
                                     <option value="0" <?= ($post->published == 0) ? 'selected' : '' ?>>Brouillons</option>
