@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "tinymce": "^6.8.3",
+    "tinymce": "^7.0.0",
     "uikit": "^3.19.1"
   }
 }
