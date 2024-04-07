@@ -171,10 +171,6 @@ class UserController extends Controller
             $_POST['image'] = $newFilename;
         }
 
-        $postImage = $post->findById($postId);
-        $imageName = $postImage->image;
-        $imageName = $_POST['image'];
-
         // Récupérer les tags pour la table post_tag
         $tags = $_POST['tags'];
         // Supprimer les tags du $_POST parce qu'ils ne sont pas dans la table posts
@@ -193,20 +189,22 @@ class UserController extends Controller
     public function changeStatePost(int $id)
     {
         $this->isConnected();
-        // Vérifiez si le niveau de l'utilisateur est défini dans la requête POST
+        // Contrôle si le niveau de l'état est défini dans la requête POST
         if (isset($_POST['published'])) {
             // Créez un tableau de données à mettre à jour
-            $data = [
-                'published' => $_POST['published']
-            ];
+            $data = $_POST['published'];
 
             // Mettre à jour le niveau de l'utilisateur dans la db
             $post = new Post($this->getDB());
-            $result = $post->update_model($id, $data);
+            $result = $post->updatePostState($id, $data);
+            // Récupérer l'URL de redirection
+
 
             if ($result) {
-                // Redirigez vers la bonne page
-                header('Location: /myposts?updatestate=' . $id . '?' . $_POST['published']);
+                // recup l'url mais on enlève ce qu'il y a après le '?'
+                $returnTo = strtok($_POST['return_to'], '?');
+                // Redirigez vers la bonne page (ça dépend si on est sur le panel admin ou sur ces postes)
+                header('Location: '. $returnTo .'?update=' . $id . '?' . $data);
                 exit();
             }
         }
