@@ -19,19 +19,14 @@
 - [x] changer hash password to sha256 + paper et salt
 - [x] Afficher tout les postes d'un user
 - [x] Faire en sorte que la modif des tags fonctionne
-- [] les photos / paragraphe dans le texte, couleur et autre subtilité du texte dans le poste (framework nodejs pour faire ça)
+- [x] les photos / paragraphe dans le texte, couleur et autre subtilité du texte dans le poste
 - [x] les admins qui peuvent changer le level d'un user
 - [] docker
 - [] front-end uikit
 - [x] Créer un authController et mettre les function de login et de signup dedans pour simplifier le UserController
-- [x] Mettre des messages à chaque fois qu'une modfi est effectué (Modification enregistrée)
+- [x] Mettre des messages à chaque fois qu'une modification est effectuée (Modification enregistrée)
 - [x] Mettre des validations à chaque formulaire
 - [] Ajouter les commentaires
 - [x] Faire une barre de recherche
 - [x] (Admin peut ajouter ou enlever des tags)
-- [] Voir tous les postes d'un utilisateur
-- [] Faire en sorte que les postes aient 2 états (brouillon et en ligne)
-
-
-J'ai choisi l'utilisation des sessions au lieu des cookies parce que c'est plus simple et ça permet d'être en règle par rapport 
-à la RGPD et pas besoin de demander d'autoriser les cookies
+- [x] Faire en sorte que les postes aient 2 états (brouillon et en ligne)

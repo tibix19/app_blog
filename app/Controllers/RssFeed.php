@@ -11,10 +11,10 @@ class RssFeed extends Controller
     public function rssFeed()
     {
         $post = new Post($this->getDB());
-        // Récupérer le dernier article
-        $latestPost = $post->latestPost();
-        // Récupérer les autres articles
-        $posts = $post->all();
+        // Récupérer la date du dernier article
+        $latestPost = $post->dateLatestPost();
+        // Récupérer les articles publiés
+        $posts = $post->getPostPublished();
         // charger tout ça dans une vue
         include_once('../views/blog/rssFeed.php');
     }

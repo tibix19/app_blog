@@ -133,7 +133,7 @@ HTML;
     }
 
     // pour le flux rss, fonction qui va chercher la date du dernier post créer (lastBuildDate)
-    public function latestPost()
+    public function dateLatestPost()
     {
         // recup le dernier post pour afficher la date du dernier post créé
         $queryLatestPost = 'SELECT created_at FROM posts ORDER BY created_at DESC LIMIT 0,1';
