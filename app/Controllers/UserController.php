@@ -21,8 +21,8 @@ class UserController extends Controller
         $this->view('account.account', compact('user'));
     }
 
-    // Modifier les données de notre user
-    public function updateAccount()
+    // Modifier les données du user
+    public function updateUsername()
     {
         $this->isConnected();
         $user = new User($this->getDB());
@@ -30,8 +30,7 @@ class UserController extends Controller
         // Vérification des entrées utilisatrices
         $validator = new Validator($_POST);
         $errors = $validator->validate([
-            'username' => ['required', 'min:3'],
-            'password' => ['required', 'min:3']
+            'username' => ['required', 'min:3']
         ]);
         if($errors){
             $_SESSION['errors'][] = $errors;
@@ -41,22 +40,61 @@ class UserController extends Controller
 
         // recup l'id pour update
         $id = (int) $_SESSION['idUser'];
-        // Hash du mot de passe avec le salt
-        $salt = "i;151-120#";
-        $hashedPassword = hash('sha256', $salt . $_POST['password']);
-        $userData = [
-            'username' => $_POST['username'],
-            'password' => $hashedPassword
-        ];
 
-        // fait l'update dans le model avec les data
-        $result = $user->update_model($id, $userData);
+        // Vérification si le nom d'utilisateur existe déjà
+        $existingUser = $user->getByUsername($_POST['username']);
+        if ($existingUser) {
+            $_SESSION['errors'][] = $validator->userAlreadyExist();
+            header('Location: /account');
+            exit;
+        }
+
+        $username = [
+            'username' => htmlspecialchars($_POST['username']),
+        ];
+        // Update du nom d'utilisateur dans le modèle
+        $result = $user->update_model($id, $username);
 
         if ($result){
             // revient sur la page
             header('Location: /account');
         }
     }
+
+    public function updatePassword()
+    {
+        $this->isConnected();
+        $user = new User($this->getDB());
+
+        // Vérification des entrées utilisatrices
+        $validator = new Validator($_POST);
+        $errors = $validator->validate([
+            'password' => ['required', 'min:3']
+        ]);
+        if($errors){
+            $_SESSION['errors'][] = $errors;
+            header('Location: /account');
+            exit;
+        }
+        // recup l'id pour update
+        $id = (int) $_SESSION['idUser'];
+        // Hash du mot de passe avec le salt
+        $salt = "i;151-120#";
+        $hashedPassword = hash('sha256', $salt . $_POST['password']);
+        // mettre le new pwd dans un tableau avec une clé qui est égale à password comme dans le db
+        $pwd = [
+            'password' => $hashedPassword
+        ];
+
+        // Update du mot de passe dans le modèle
+        $result = $user->update_model($id, $pwd);
+
+        if ($result){
+            // revient sur la page
+            header('Location: /account');
+        }
+    }
+
 
 
     // affiche les posts que l'user a créés
@@ -234,7 +272,4 @@ class UserController extends Controller
         }
     }
 
-
-
 }
-

@@ -22,19 +22,66 @@
 
 <h1>Account</h1>
 
+<!-- Display current username -->
 <form action="/account" method="POST" class="uk-form-stacked">
     <div class="uk-margin">
         <label class="uk-form-label" for="username">Nom d'utilisateur</label>
         <div class="uk-form-controls">
-            <input class="uk-input" type="text" name="username" id="username" value="<?= $params['user']->username ?>">
+            <input class="uk-input" type="text" name="username" id="username" value="<?= $params['user']->username ?>" disabled>
         </div>
     </div>
-    <!-- <div class="uk-margin">
-        <label class="uk-form-label" for="password">Mot de passe</label>
-        <div class="uk-form-controls">
-            <input class="uk-input" type="password" name="password" id="password" value="">
-        </div>
-    </div> -->
-    <p>J'ai juste enlevé la modification de mot de passe parce que lorsque j'update le nom d'utilisateur, le mot de passe était également mis à jour avec un champ vide</p>
-    <button type="submit" class="uk-button uk-button-primary">Enregistrer les modifications</button>
+    <!-- Button to open dialog for username modification -->
+    <button class="uk-button uk-button-default" type="button" uk-toggle="target: #username-modal">Modifier le nom d'utilisateur</button>
+    <!-- Button to open dialog for password modification -->
+    <button class="uk-button uk-button-default" type="button" uk-toggle="target: #password-modal">Modifier le mot de passe</button>
 </form>
+
+<!-- Username Modification -->
+<div id="username-modal" uk-modal>
+    <div class="uk-modal-dialog">
+        <form action="/update-username" method="POST" class="uk-form-stacked">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Modifier le nom d'utilisateur</h2>
+            </div>
+            <div class="uk-modal-body">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="username">Nouveau nom d'utilisateur</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="username" id="username">
+                    </div>
+                </div>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                <button class="uk-button uk-button-primary" type="submit">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Password Modification -->
+<div id="password-modal" uk-modal>
+    <div class="uk-modal-dialog">
+        <form action="/update-password" method="POST" class="uk-form-stacked">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Modifier le mot de passe</h2>
+            </div>
+            <div class="uk-modal-body">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="password">Nouveau mot de passe</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="password" name="password" id="password">
+                    </div>
+                </div>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Annuler</button>
+                <button class="uk-button uk-button-primary" type="submit">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php unset($_SESSION['errors']); ?>
