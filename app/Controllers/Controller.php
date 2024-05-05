@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+use App\Exceptions\NotFoundException;
 use Database\DBConnection;
 
 abstract class Controller
@@ -52,10 +53,10 @@ abstract class Controller
     }
 
     // check si la personne est connecté en tant qu'user ou admin
-    protected function isConnected(): bool
+    protected function isConnected()
     {
-        // si c'est connecté on renvoie vrai sinon faux
-        if (isset($_SESSION['authAdmin']) OR $_SESSION['authAdmin'] === 2 OR $_SESSION['authAdmin'] === 1) {
+        // si c'est connecté, on renvoie vrai sinon faux
+        if (isset($_SESSION['authAdmin'])) {
             return true;
         } else{
             header('Location: /login');

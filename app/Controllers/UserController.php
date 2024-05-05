@@ -115,13 +115,17 @@ class UserController extends Controller
     // afficher la vue pour edit les postes et control qu'on peut seulement modifier les postes qu'ont à créer
     public function editPostUser($postId)
     {
-        // Vérifier si l'utilisateur est connecté
-        $this->isConnected();
         // Vérifier si l'ID du post est un entier
         if (!ctype_digit($postId)) {
             // Si ce n'est pas un entier, afficher une erreur 404
             $error = new NotFoundException();
             return $error->error404();
+        }
+
+        // Vérifier si l'utilisateur est connecté
+        if($this->isConnected() === false){
+            header('Location: /login');
+            exit();
         }
 
         // Convertir l'ID du post en entier
