@@ -1,5 +1,7 @@
 <?php
 
+// fichier de validations de données pour les entrées des utilisateurs
+
 namespace App\Validation;
 
 class Validator
@@ -11,6 +13,7 @@ class Validator
     {
         $this->data = $data;
     }
+
 
     public function validate(array $rules): ?array
     {
@@ -31,6 +34,7 @@ class Validator
         return $this->getErrors();
     }
 
+    // vérification si le champ est obligatoire
     private function required(string $name, string $value)
     {
             $value = trim($value);
@@ -40,6 +44,7 @@ class Validator
             }
     }
 
+    // Vérification de la taille minimale d'un champs
     public function min(string $name, string $value, string $rule)
     {
         preg_match_all('/(\d+)/', $rule, $matches);
@@ -51,6 +56,7 @@ class Validator
             $this->error[$name][] = "{$name} doit comprendre un minimum de {$limit} caractères.";
         }
     }
+
 
     private function getErrors(): ?array
     {

@@ -27,34 +27,36 @@ elseif (isset($_GET['create'])) {
     <button type="submit" class="uk-button uk-button-primary">Enregistrer le nouveau tag</button>
 </form>
 
-<table class="uk-table uk-table-divider uk-table-striped">
-    <thead>
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">Tag</th>
-        <th scope="col">Créé le</th>
-        <th scope="col">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($params['tags'] as $tag): ?>
+<div class="uk-overflow-auto">
+    <table class="uk-table uk-table-divider uk-table-hover uk-table-striped">
+        <thead>
         <tr>
-            <th scope="row"><?= $tag->id ?></th>
-            <td>
-                <form action="/admin/tag/update/<?= $tag->id ?>" method="post" class="uk-form-stacked uk-margin-remove-bottom">
-                    <div class="uk-inline">
-                        <input class="uk-input" type="text" name="tag" id="tag" value="<?= $tag->name; ?>">
-                    </div>
-                    <button type="submit" class="uk-button uk-button-primary uk-margin-small-left">Enregistrer</button>
-                </form>
-            </td>
-            <td><?= $tag->getCreatedAt() ?></td>
-            <td>
-                <form action="/admin/tag/delete/<?= $tag->id ?>" method="POST" class="uk-form-stacked uk-margin-remove-bottom">
-                    <button type="submit" class="uk-button uk-button-danger">Supprimer</button>
-                </form>
-            </td>
+            <th scope="col">id</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Créé le</th>
+            <th scope="col">Action</th>
         </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <?php foreach ($params['tags'] as $tag): ?>
+            <tr>
+                <th scope="row"><?= $tag->id ?></th>
+                <td>
+                    <form action="/admin/tag/update/<?= $tag->id ?>" method="post" class="uk-form-stacked uk-margin-remove-bottom">
+                        <div class="uk-inline">
+                            <input class="uk-input" type="text" name="tag" id="tag" value="<?= $tag->name; ?>">
+                        </div>
+                        <button type="submit" class="uk-button uk-button-primary uk-margin-small-left">Enregistrer</button>
+                    </form>
+                </td>
+                <td><?= $tag->getCreatedAt() ?></td>
+                <td>
+                    <form action="/admin/tag/delete/<?= $tag->id ?>" method="POST" class="uk-form-stacked uk-margin-remove-bottom">
+                        <button type="submit" class="uk-button uk-button-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

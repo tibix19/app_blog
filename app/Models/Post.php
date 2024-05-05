@@ -32,7 +32,7 @@ class Post extends Model
     public function getButton() : string
     {
         return <<<HTML
-        <a href="/posts/$this->id" class="btn btn-primary">Lire l'article</a>
+        <a class="uk-button uk-button-text" href="/posts/$this->id" >Lire l'article</a>
 HTML;
     }
 

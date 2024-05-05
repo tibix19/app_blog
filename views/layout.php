@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log Your Knowledge</title>
     <link rel="shortcut icon" type="image/icon" href="../../../public/static/logo/favicon.ico"/>
     <!-- Importation des libraires nodejs-->
@@ -15,7 +15,7 @@
     <script src="../../../public/static/tinymceTextareaConfig.js"></script>
 </head>
 <body>
-<div class="uk-container uk-container-expand ">
+<div class="uk-container uk-margin-top">
     <!-- Afficher la navbar -->
     <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
         <div class="uk-navbar-left">
@@ -61,14 +61,11 @@
                 <?php endif; ?>
             </ul>
         </div>
-    </nav >
-    <div class="uk-flex uk-flex-center">
-        <div class="uk-width-2-3@l">
-            <div class=" uk-margin">
-                <!-- Affiche le contenu des views -->
-                <?= $content ?>
-            </div>
-        </div>
+    </nav>
+    <hr>
+    <div>
+        <!-- Affiche le contenu des views -->
+        <?= $content ?>
     </div>
 </div>
 </body>

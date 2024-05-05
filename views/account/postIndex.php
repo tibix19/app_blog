@@ -37,84 +37,88 @@ elseif (isset($_GET['create'])) {
 
 <ul class="uk-switcher uk-margin">
     <li>
-        <table class="uk-table uk-table-striped uk-table-divider">
-            <thead>
-            <tr>
-                <th scope="col">id</th>
-                <th scope="col">Titre</th>
-                <th scope="col">Etat</th>
-                <th scope="col">Publié le</th>
-                <th scope="col">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($params['PostsDraftUser'] as $post): ?>
+        <div class="uk-overflow-auto">
+            <table class="uk-table uk-table-striped uk-table-hover uk-table-divider">
+                <thead>
                 <tr>
-                    <th scope="row"><?= $post->post_id ?></th>
-                    <td><?= $post->title ?></td>
-                    <td>
-                        <form action="/post/edit/state/<?= $post->post_id ?>" method="POST" class="uk-display-inline">
-                            <input type="hidden" name="return_to" value="<?= $_SERVER['REQUEST_URI'] ?>">
-                            <label for="published" class="uk-margin-right">
-                                <select name="published" id="published" class="uk-select">
-                                    <option value="0" <?= ($post->published == 0) ? 'selected' : '' ?>>Brouillons</option>
-                                    <option value="1" <?= ($post->published == 1) ? 'selected' : '' ?>>Publié</option>
-                                </select>
-                            </label>
-                            <button type="submit" class="uk-button uk-button-warning">Save</button>
-                        </form>
-                    </td>
-                    <td><?= $post->getCreatedAt() ?></td>
-                    <td>
-                        <a href="/post/edit/<?= $post->post_id ?>" class="uk-button uk-button-default">Modifier</a>
-                        <form action="/post/delete/<?= $post->post_id ?>" method="POST" class="uk-display-inline">
-                            <button type="submit" class="uk-button uk-button-danger">Supprimer</button>
-                        </form>
-                    </td>
+                    <th scope="col">id</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Etat</th>
+                    <th scope="col">Publié le</th>
+                    <th scope="col">Action</th>
                 </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <?php foreach ($params['PostsDraftUser'] as $post): ?>
+                    <tr>
+                        <th scope="row"><?= $post->post_id ?></th>
+                        <td><?= $post->title ?></td>
+                        <td>
+                            <form action="/post/edit/state/<?= $post->post_id ?>" method="POST" class="uk-display-inline">
+                                <input type="hidden" name="return_to" value="<?= $_SERVER['REQUEST_URI'] ?>">
+                                <label for="published" class="uk-margin-right">
+                                    <select name="published" id="published" class="uk-select">
+                                        <option value="0" <?= ($post->published == 0) ? 'selected' : '' ?>>Brouillons</option>
+                                        <option value="1" <?= ($post->published == 1) ? 'selected' : '' ?>>Publié</option>
+                                    </select>
+                                </label>
+                                <button type="submit" class="uk-button uk-button-warning">Save</button>
+                            </form>
+                        </td>
+                        <td><?= $post->getCreatedAt() ?></td>
+                        <td>
+                            <a href="/post/edit/<?= $post->post_id ?>" class="uk-button uk-button-default">Modifier</a>
+                            <form action="/post/delete/<?= $post->post_id ?>" method="POST" class="uk-display-inline">
+                                <button type="submit" class="uk-button uk-button-danger">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </li>
     <li>
-        <table class="uk-table uk-table-striped uk-table-divider">
-            <thead>
-            <tr>
-                <th scope="col">id</th>
-                <th scope="col">Titre</th>
-                <th scope="col">Etat</th>
-                <th scope="col">Publié le</th>
-                <th scope="col">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($params['PostsPublishedUser'] as $post): ?>
+        <div class="uk-overflow-auto">
+            <table class="uk-table uk-table-striped uk-table-hover uk-table-divider">
+                <thead>
                 <tr>
-                    <th scope="row"><?= $post->post_id ?></th>
-                    <td><?= $post->title ?></td>
-                    <td>
-                        <form action="/post/edit/state/<?= $post->post_id ?>" method="POST" class="uk-display-inline">
-                            <input type="hidden" name="return_to" value="<?= $_SERVER['REQUEST_URI'] ?>">
-                            <label for="published" class="uk-margin-right">
-                                <select name="published" id="published" class="uk-select">
-                                    <option value="0" <?= ($post->published == 0) ? 'selected' : '' ?>>Brouillons</option>
-                                    <option value="1" <?= ($post->published == 1) ? 'selected' : '' ?>>Publié</option>
-                                </select>
-                            </label>
-                            <button type="submit" class="uk-button uk-button-warning">Save</button>
-                        </form>
-                    </td>
-                    <td><?= $post->getCreatedAt() ?></td>
-                    <td>
-                        <a href="/post/edit/<?= $post->post_id ?>" class="uk-button uk-button-default">Modifier</a>
-                        <form action="/post/delete/<?= $post->post_id ?>" method="POST" class="uk-display-inline">
-                            <button type="submit" class="uk-button uk-button-danger">Supprimer</button>
-                        </form>
-                    </td>
+                    <th scope="col">id</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Etat</th>
+                    <th scope="col">Publié le</th>
+                    <th scope="col">Action</th>
                 </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <?php foreach ($params['PostsPublishedUser'] as $post): ?>
+                    <tr>
+                        <th scope="row"><?= $post->post_id ?></th>
+                        <td><?= $post->title ?></td>
+                        <td>
+                            <form action="/post/edit/state/<?= $post->post_id ?>" method="POST" class="uk-display-inline">
+                                <input type="hidden" name="return_to" value="<?= $_SERVER['REQUEST_URI'] ?>">
+                                <label for="published" class="uk-margin-right">
+                                    <select name="published" id="published" class="uk-select">
+                                        <option value="0" <?= ($post->published == 0) ? 'selected' : '' ?>>Brouillons</option>
+                                        <option value="1" <?= ($post->published == 1) ? 'selected' : '' ?>>Publié</option>
+                                    </select>
+                                </label>
+                                <button type="submit" class="uk-button uk-button-warning">Save</button>
+                            </form>
+                        </td>
+                        <td><?= $post->getCreatedAt() ?></td>
+                        <td>
+                            <a href="/post/edit/<?= $post->post_id ?>" class="uk-button uk-button-default">Modifier</a>
+                            <form action="/post/delete/<?= $post->post_id ?>" method="POST" class="uk-display-inline">
+                                <button type="submit" class="uk-button uk-button-danger">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </li>
 </ul>
 
