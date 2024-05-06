@@ -33,7 +33,7 @@
 </head>
 
 <!-- Cards Begin -->
-<div class="uk-section uk-margin-medium-bottom">
+<div class="uk-section">
     <div id="cards" class="uk-container uk-width-5-6">
         <div class="uk-child-width-1-3@m uk-child-width-1-2@s uk-grid-match" uk-grid="masonry: pack">
             <!-- card des postes-->
@@ -48,13 +48,13 @@
                         </div>
                         <div class="uk-card-body">
                             <h2 class="uk-card-title"><?= $post->title ?></h2>
-                            <div class="uk-margin">
+                            <div class="uk-margin-small-bottom">
                                 <?php foreach($post->getTags() as $tag): ?>
-                                    <span class="uk-badge uk-margin-small-right"><a href="/tags/<?= $tag->id ?>" class="uk-link-muted uk-text-emphasis"><?= $tag->name ?></a></span>
+                                    <span class="uk-badge uk-margin-small-right" style="background: #01324b;"><a style="color: white; " href="/tags/<?= $tag->id ?>" class="uk-link-text"><?= $tag->name ?></a></span>
                                 <?php endforeach; ?>
                             </div>
-                            <small class="uk-text-meta">Publié le <?= $post->getCreatedAt() ?></small>
-                            <small class="uk-text-meta">par <?= $post->getCreatorPost(); ?></small>
+                            <small class="uk-text-meta uk-margin-remove">Publié le <?= $post->getCreatedAt() ?></small>
+                            <small class="uk-text-meta uk-margin-remove">par <?= $post->getCreatorPost(); ?></small>
                         </div>
                     </div>
                 </div>
