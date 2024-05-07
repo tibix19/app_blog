@@ -66,7 +66,7 @@
     <hr class="uk-margin-remove" style="border-bottom: 2px solid black; color: #01324b">
 
     <!-- Affiche le contenu des views -->
-    <div class="uk-container">
+    <div class="uk-container" uk-height-viewport="expand: true">
         <div>
 
             <?= $content ?>
