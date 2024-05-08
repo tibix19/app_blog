@@ -1,4 +1,4 @@
-<h1>Mes postes</h1>
+<h1 class="uk-heading-small uk-padding uk-padding-remove-left">Mes postes</h1>
 
 <?php if(isset($_GET['success'])): ?>
     <div class="uk-alert uk-alert-success" uk-alert>
@@ -27,8 +27,6 @@ elseif (isset($_GET['create'])) {
 <?php endif; ?>
 
 <a href="/create" class="uk-button uk-button-primary uk-margin-bottom">Créer un nouvel article</a>
-
-
 
 <ul class="uk-tab" uk-tab>
     <li class="uk-active"><a href="#">Brouillons</a></li>

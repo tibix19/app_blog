@@ -1,7 +1,8 @@
-<h1>Administration des utilisateurs</h1>
+<!-- Afficher tous les utilisateurs du site -->
 
-<!-- Afficher les erreurs -->
+<h1 class="uk-heading-small uk-padding uk-padding-remove-left">Administration des utilisateurs</h1>
 
+<!-- Afficher les erreurs ou autre message -->
 <?php
 $message = "";
 if(isset($_GET['updatelevel'])) {
@@ -43,7 +44,7 @@ elseif (isset($_GET['create'])) {
                 <td>
                     <form action="/admin/account/edit/<?= $user->id ?>" method="POST" class="uk-display-inline">
                         <label for="admin" class="uk-margin-right">
-                            <select name="admin" id="admin" class="uk-select">
+                            <select name="admin" id="admin" class="uk-select uk-width-1-2">
                                 <option value="0" <?= ($user->admin == 0) ? 'selected' : '' ?>>User</option>
                                 <option value="1" <?= ($user->admin == 1) ? 'selected' : '' ?>>Admin</option>
                             </select>

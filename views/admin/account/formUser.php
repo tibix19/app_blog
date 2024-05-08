@@ -1,3 +1,7 @@
+<!-- Page pour que l'admin puisse créer des utilisateurs depuis sa session  -->
+
+<h1 class="uk-padding-remove uk-margin-top">Créer un nouvel utilisateur</h1>
+
 <?php // afficher les erreurs dans une variable de session dans une alerte
 if(isset($_SESSION['errors'])): ?>
     <?php foreach ($_SESSION['errors'] as $errorArray): ?>
@@ -14,8 +18,6 @@ if(isset($_SESSION['errors'])): ?>
     <?php endforeach;?>
     <?php unset($_SESSION['errors']); // supprimer la variable de session pour pas que les messages restent afficher ?>
 <?php endif ?>
-
-<h1>Créer un nouvel utilisateur</h1>
 
 <form action="/admin/account/create" method="POST">
     <div class="uk-width-1-1">

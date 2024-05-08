@@ -1,12 +1,3 @@
-
-<!-- Afficher les erreurs -->
-<?php if(!empty($params['message'])): ?>
-    <div class="uk-alert-warning" uk-alert>
-        <a class="uk-alert-close" uk-close></a>
-        <p><?php echo $params['message']; ?></p>
-    </div>
-<?php endif; ?>
-
 <script>
     // Ajouter un gestionnaire d'événements sur chaque carte
     document.addEventListener("DOMContentLoaded", function() {
@@ -33,8 +24,15 @@
 </head>
 
 <!-- Cards Begin -->
-<div class="uk-section">
+<div class="uk-section uk-padding-remove-left uk-padding-remove-right">
     <div id="cards" class="uk-container uk-width-5-6">
+        <!-- Afficher les erreurs -->
+        <?php if(!empty($params['message'])): ?>
+            <div class="uk-alert-warning" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p><?php echo $params['message']; ?></p>
+            </div>
+        <?php endif; ?>
         <div class="uk-child-width-1-3@m uk-child-width-1-2@s uk-grid-match" uk-grid="masonry: pack">
             <!-- card des postes-->
             <?php foreach ($params['posts'] as $post): ?>

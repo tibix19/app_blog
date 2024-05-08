@@ -1,4 +1,5 @@
-<h1 class="uk-heading-medium">Administration des tags</h1>
+<!-- page pour admin pour administer les tags -->
+<h1 class="uk-heading-small uk-padding uk-padding-remove-left">Administration des tags</h1>
 
 <?php
 $message = "";
@@ -19,12 +20,12 @@ elseif (isset($_GET['create'])) {
     </div>
 <?php endif; ?>
 
-<form action="/admin/tag/create/" method="post" class="uk-form-stacked uk-margin">
-    <label class="uk-form-label" for="name">Nom du tag :</label>
+<form action="/admin/tag/create/" method="post" class="uk-form-stacked uk-margin uk-width-1-2" style="display: inline-flex; align-items: center;"">
+    <label class="uk-form-label uk-margin-right" for="name">Ajouter un nouveau tag :</label>
     <div class="uk-form-controls">
         <input class="uk-input" type="text" name="name" id="name">
     </div>
-    <button type="submit" class="uk-button uk-button-primary">Enregistrer le nouveau tag</button>
+    <button type="submit" class="uk-button uk-button-primary uk-margin-left">Enregistrer</button>
 </form>
 
 <div class="uk-overflow-auto">
@@ -46,7 +47,7 @@ elseif (isset($_GET['create'])) {
                         <div class="uk-inline">
                             <input class="uk-input" type="text" name="tag" id="tag" value="<?= $tag->name; ?>">
                         </div>
-                        <button type="submit" class="uk-button uk-button-primary uk-margin-small-left">Enregistrer</button>
+                        <button type="submit" class="uk-button uk-button-warning uk-margin-small-left">Enregistrer</button>
                     </form>
                 </td>
                 <td><?= $tag->getCreatedAt() ?></td>

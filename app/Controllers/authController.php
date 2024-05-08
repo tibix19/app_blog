@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use App\Validation\Validator;
 use LordDashMe\SimpleCaptcha\Captcha;
-
 
 class  authController extends Controller {
 
@@ -63,15 +63,20 @@ class  authController extends Controller {
     // logout
     public function logout()
     {
+        session_unset();
         session_destroy();
-        return header('Location: /');
+        // retourne sur la page index en affichant les postes et en affichant un message
+        $message = "Vous êtes déconnecté";
+        $post = new Post($this->getDB());
+        $posts = $post->getPostPublished();
+        $this->view('blog.index', compact('posts','message'));
     }
 
     // sign up
     public function signup()
     {
         // Afficher le formulaire avec le captcha
-        return $this->view('auth.signup',);
+        $this->view('auth.signup',);
     }
 
 
