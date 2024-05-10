@@ -26,11 +26,12 @@ elseif (isset($_GET['create'])) {
 <!-- Afficher tous les comptes des users dans un tableau -->
 <a href="/admin/account/create" class="uk-button uk-button-primary uk-margin-bottom">Créer un nouvel utilisateur</a>
 <div class="uk-overflow-auto">
-    <table class="uk-table uk-table-striped uk-table-hover uk-table-divider">
+    <table class="uk-table uk-table-striped uk-table-small uk-table-hover uk-table-divider">
         <thead>
         <tr>
             <th scope="col">id</th>
             <th scope="col">Username</th>
+            <th scope="col">E-Mail</th>
             <th scope="col">Level</th>
             <th scope="col">Créer le</th>
             <th scope="col">Action</th>
@@ -41,6 +42,7 @@ elseif (isset($_GET['create'])) {
             <tr>
                 <th scope="row"><?= $user->id ?></th>
                 <td><?= $user->username ?></td>
+                <td><?= $user->email ?></td>
                 <td>
                     <form action="/admin/account/edit/<?= $user->id ?>" method="POST" class="uk-display-inline">
                         <label for="admin" class="uk-margin-right">

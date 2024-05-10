@@ -1,6 +1,10 @@
+<!-- Page pour que les users puissent modifier leurs informations personnelles  -->
+
+<h1 class="uk-heading-small uk-padding uk-padding-remove-left">Account</h1>
+
 <?php if(isset($_GET['success'])): ?>
     <div class="uk-alert uk-alert-success" uk-alert>
-        <a class="uk-alert-close" uk-close></a>
+        <a class="uk-alert-close uk-width-1-2" uk-close></a>
         Vous êtes connecté !
     </div>
 <?php endif; ?>
@@ -20,7 +24,6 @@
     <?php endforeach;?>
 <?php endif ?>
 
-<h1>Account</h1>
 
 <!-- Display current username -->
 <form action="/account" method="POST" class="uk-form-stacked">
@@ -48,7 +51,7 @@
                 <div class="uk-margin">
                     <label class="uk-form-label" for="username">Nouveau nom d'utilisateur</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" type="text" name="username" id="username">
+                        <input class="uk-input" type="text" name="username" id="username" value="<?= $params['user']->username ?>">
                     </div>
                 </div>
             </div>

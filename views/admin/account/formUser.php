@@ -1,6 +1,6 @@
 <!-- Page pour que l'admin puisse créer des utilisateurs depuis sa session  -->
 
-<h1 class="uk-padding-remove uk-margin-top">Créer un nouvel utilisateur</h1>
+<h1 class="uk-heading-small uk-padding uk-padding-remove-left">Créer un nouvel utilisateur</h1>
 
 <?php // afficher les erreurs dans une variable de session dans une alerte
 if(isset($_SESSION['errors'])): ?>

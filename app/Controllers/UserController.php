@@ -37,10 +37,15 @@ class UserController extends Controller
             header('Location: /account');
             exit;
         }
-
         // recup l'id pour update
         $id = (int) $_SESSION['idUser'];
 
+        // si l'utilisateur entre le même nom d'utilisateur qu'il a déjà ça ne met pas de message d'erreur
+        $user = $user->findById($_SESSION['idUser']);
+        if($_POST['username'] == $user->username){
+            header('Location: /account');
+            exit;
+        }
         // Vérification si le nom d'utilisateur existe déjà
         $existingUser = $user->getByUsername($_POST['username']);
         if ($existingUser) {
@@ -97,9 +102,10 @@ class UserController extends Controller
 
 
 
-    // affiche les posts que l'user a créés
+    // Affiche les posts que l'user a créés
     public function myPostsPanelIndex()
     {
+        // Vérifie si l'utilisteur est bien connecté
         $this->isConnected();
         $userId = $_SESSION['idUser'];
         // recupe ces postes
@@ -112,7 +118,7 @@ class UserController extends Controller
         $this->view('account.postIndex', compact('PostsDraftUser', 'PostsPublishedUser'));
     } 
 
-    // afficher la vue pour edit les postes et control qu'on peut seulement modifier les postes qu'ont à créer
+    // Afficher la vue pour edit les postes et control qu'on peut seulement modifier les postes qu'ont à créer
     public function editPostUser($postId)
     {
         // Vérifier si l'ID du post est un entier
@@ -153,7 +159,7 @@ class UserController extends Controller
         }
     }
 
-    // envoie les données à la db pour la modification
+    // Envoie les données à la db pour la modification des postes des utilisateurs
     public function updatePostUser(int $postId)
     {
         $this->isConnected();

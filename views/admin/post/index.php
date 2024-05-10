@@ -22,22 +22,22 @@ elseif (isset($_GET['create'])) {
 
 <!-- Afficher le panel admin des postes dans un tableau -->
 <a href="/admin/posts/create" class="uk-button uk-button-primary uk-margin-bottom">Créer un nouvel article</a>
-<div class="uk-overflow-auto ">
-    <table class="uk-table uk-table-striped uk-table-hover uk-table-divider">
+<div class="uk-overflow-auto">
+    <table class="uk-table uk-table-striped uk-table-small uk-table-hover uk-table-divider">
         <thead>
         <tr>
-            <th scope="col">id</th>
-            <th  class="uk-text-center">Titre</th>
+            <th class="uk-text-center">id</th>
+            <th class="uk-text-center">Titre</th>
             <th class="uk-text-center">Etat</th>
-            <th scope="col">Publié le</th>
-            <th scope="col">Créateur</th>
-            <th class="uk-text-center" scope="col">Action</th>
+            <th class="uk-text-center">Publié le</th>
+            <th class="uk-text-center">Créateur</th>
+            <th class="uk-text-center">Action</th>
         </tr>
         </thead>
         <tbody>
         <?php foreach ($params['posts'] as $post): ?>
             <tr>
-                <th class="uk-text"><?= $post->id ?></th>
+                <th><?= $post->id ?></th>
                 <td><?= $post->title ?></td>
                 <td>
                     <form action="/post/edit/state/<?= $post->id ?>" method="POST" class="uk-display-inline">
@@ -47,15 +47,15 @@ elseif (isset($_GET['create'])) {
                                 <option value="0" <?= ($post->published == 0) ? 'selected' : '0' ?>>Brouillons</option>
                                 <option value="1" <?= ($post->published == 1) ? 'selected' : '1' ?>>Publié</option>
                             </select>
-                            <button type="submit" class="uk-button uk-button-warning">Save</button>
+                            <button type="submit" class="uk-button uk-button-warning" style="padding-left: 3%; padding-right: 3%;">Save</button>
                         </label>
 
                     </form>
                 </td>
-                <td><?= $post->getCreatedAt() ?></td>
-                <td><?= $post->getCreatorPost() ?></td>
+                <td class="uk-text-center"><?= $post->getCreatedAt() ?></td>
+                <td class="uk-text-center"><?= $post->getCreatorPost() ?></td>
                 <td class="uk-width-1-3 uk-padding-right-remove uk-text-center">
-                    <a href="/admin/posts/edit/<?= $post->id ?>" class="uk-button uk-button-secondary uk-margin-small-right" style="padding-left: 3%; padding-right: 3%;">Modifier</a>
+                    <a href="/admin/posts/edit/<?= $post->id ?>" class="uk-button uk-button-secondary" style="padding-left: 3%; padding-right: 3%;">Modifier</a>
                     <form action="/admin/posts/delete/<?= $post->id ?>" method="POST" class="uk-display-inline">
                         <button type="submit" class="uk-button uk-button-danger" style="padding-left: 3%; padding-right: 3%;" >Supprimer</button>
                     </form>

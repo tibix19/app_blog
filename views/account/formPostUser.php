@@ -15,7 +15,7 @@
 <?php endif ?>
 
 
-<h1><?= $params['post']->title ?> </h1>
+<h1 class="uk-heading-small uk-padding uk-padding-remove-left"><?= $params['post']->title ?> </h1>
 
 <form action="/post/edit/<?= $params['post']->id ?>" method="POST" enctype="multipart/form-data">
     <div class="uk-margin">
@@ -25,7 +25,7 @@
     <div class="uk-margin">
         <!-- check si une image existe, l'afficher ou ne rien faire -->
         <?php if (isset($params['post']->image)) : ?>
-            <label class="uk-form-label uk-margin" for="image">Image actuelle</label><br>
+            <label class="uk-form-label " for="image">Image actuelle</label><br>
             <img src="../../../public/static/images/<?= $params['post']->image ?>" width="50%" height="50%"><br><br>
         <?php endif ?>
         <label class="uk-form-label" for="image">Insérer la nouvelle image</label><br>

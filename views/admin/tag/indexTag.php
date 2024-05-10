@@ -29,7 +29,7 @@ elseif (isset($_GET['create'])) {
 </form>
 
 <div class="uk-overflow-auto">
-    <table class="uk-table uk-table-divider uk-table-hover uk-table-striped">
+    <table class="uk-table uk-table-divider uk-table-hover uk-table-striped uk-table-small">
         <thead>
         <tr>
             <th scope="col">id</th>

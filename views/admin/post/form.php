@@ -16,7 +16,7 @@
 
 <!-- Afficher le formulaire de création ou de modification s'il y a un id -->
 
-<h1 class="uk-heading-xsmall uk-padding uk-padding-remove-left"> <?= $params['post']->title ?? 'Créer un nouvel article'?> </h1>
+<h1 class="uk-heading-small uk-padding uk-padding-remove-left"> <?= $params['post']->title ?? 'Créer un nouvel article'?> </h1>
 
 <form action="<?= isset($params['post']) ? "/admin/posts/edit/{$params['post']->id}" : "/admin/posts/create"?>" method="POST" enctype="multipart/form-data">
     <div class="uk-margin">

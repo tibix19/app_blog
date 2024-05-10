@@ -68,22 +68,22 @@
     <!-- Affiche le contenu des views -->
     <div class="uk-container" uk-height-viewport="expand: true">
         <div>
-
             <?= $content ?>
         </div>
     </div>
 
     <!-- footer (bas de la page) -->
-    <footer id="footer" class="uk-margin-large-top">
-        <div class="uk-section uk-section-large uk-padding" style="background: #01324b;">
-            <div class="uk-container uk-container-large uk-width-2-3 uk-height-1-1">
-                <p style="color: white; font-size: 14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam minus aperiam recusandae eos eaque sint nobis officiis adipisci sed quisquam consequuntur beatae harum laborum non dolores, natus perferendis molestias. Aliquam.</p>
-
-                <p class="uk-padding-small-top uk-margin-remove" style="color: white; font-size: 14px;">© 2024 LogYourKnowledge</p>
-                <p class="uk-padding-small-top uk-margin-remove" style="color: white; font-size: 14px;">Timéo Beuchat</p>
+    <div class="uk-container uk-padding-remove uk-container-expand">
+        <footer id="footer" class="uk-margin-large-top">
+            <div class="uk-padding" style="background: #01324b;">
+                <div class="uk-container uk-container">
+                    <p style="color: white; font-size: 14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam minus aperiam recusandae eos eaque sint nobis officiis adipisci sed quisquam consequuntur beatae harum laborum non dolores, natus perferendis molestias. Aliquam.</p>
+                    <p class="uk-padding-small-top uk-margin-remove" style="color: white; font-size: 14px;">© 2024 LogYourKnowledge</p>
+                    <p class="uk-padding-small-top uk-margin-remove" style="color: white; font-size: 14px;">Timéo Beuchat</p>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
 </body>
 </html>

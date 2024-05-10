@@ -39,7 +39,7 @@ class BlogController extends Controller
     // controller qui affiche les posts seuls
     public function show($id)
     {
-        // Vérifie si $id est une chaîne de caractères représentant un entier
+        // Vérifie si $id est bien un entier
         if (!ctype_digit($id)) {
             // Si ce n'est pas un entier, redirige vers la page d'erreur 404
             $error = new NotFoundException();
