@@ -9,7 +9,7 @@ use App\Validation\Validator;
 
 class UserController extends Controller
 {
-    // afficher tout les users
+    // afficher tous les users
     public function index()
     {
         $this->isAdmin();
@@ -50,13 +50,24 @@ class UserController extends Controller
             header('Location: /admin/account/create');
             exit;
         }
+
+        // Vérification si le mail existe déjà
+        $user = new User($this->getDB());
+        $existingEmail = $user->getByEmail($_POST['email']);
+        if ($existingEmail) {
+            $_SESSION['errors'][] = $validator->emailAlreadyUse();
+            header('Location: /admin/account/create');
+            exit;
+        }
+
         // hash du mot de passe avec le salt
         $salt = "i;151-120#";
         $hashedPassword = hash('sha256', $salt . $_POST['password']);
         $userData = [
-            'username' => $_POST['username'],
+            'username' => htmlspecialchars($_POST['username']),
+            'email' => htmlspecialchars($_POST['email']),
             'password' => $hashedPassword,
-            'admin' => $_POST['admin']
+            'admin' => htmlspecialchars($_POST['admin'])
         ];
         // envoie des données dans vers la db
         $result = $user->create_model($userData);

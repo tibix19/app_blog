@@ -20,7 +20,7 @@ elseif (isset($_GET['create'])) {
     </div>
 <?php endif; ?>
 
-<form action="/admin/tag/create/" method="post" class="uk-form-stacked uk-margin uk-width-1-2" style="display: inline-flex; align-items: center;"">
+<form action="/admin/tag/create/" method="post" class="uk-form-stacked uk-margin uk-width-1-2" style="display: inline-flex; align-items: center;">
     <label class="uk-form-label uk-margin-right" for="name">Ajouter un nouveau tag :</label>
     <div class="uk-form-controls">
         <input class="uk-input" type="text" name="name" id="name">

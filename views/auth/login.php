@@ -25,7 +25,7 @@
                     <div class="uk-margin">
                         <div class="uk-inline uk-width-1-1">
                             <span class="uk-form-icon" uk-icon="icon: mail"></span>
-                            <input class="uk-input uk-form-large" placeholder="E-mail" type="text" name="username" id="username">
+                            <input class="uk-input uk-form-large" placeholder="E-mail" type="text" name="email" id="email">
                         </div>
                     </div>
                     <div class="uk-margin">

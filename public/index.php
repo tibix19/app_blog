@@ -36,6 +36,7 @@ $router->post('/signup', 'App\Controllers\authController@signupPost');
 // modifier les credentials de son compte
 $router->get('/account','App\Controllers\UserController@editAccount');
 $router->post('/update-username','App\Controllers\UserController@updateUsername');
+$router->post('/update-email','App\Controllers\UserController@updateEmail');
 $router->post('/update-password','App\Controllers\UserController@updatePassword');
 
 

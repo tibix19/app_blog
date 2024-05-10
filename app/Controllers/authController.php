@@ -22,7 +22,7 @@ class  authController extends Controller {
         // check si les entrées des user sont ok
         $validator = new Validator($_POST);
         $errors = $validator->validate([
-            'username' => ['required', 'min:3'],
+            'email' => ['required','email'],
             'password' => ['required']
         ]);
         if($errors){
@@ -32,7 +32,7 @@ class  authController extends Controller {
         }
         // puis, on regarde si le user est existant
         $users = new User($this->getDB());
-        $user = $users->getByUsername($_POST['username']);
+        $user = $users->getByEmail($_POST['email']);
 
         // Vérifier si un utilisateur a été trouvé
         if ($user) {
@@ -79,13 +79,13 @@ class  authController extends Controller {
         $this->view('auth.signup',);
     }
 
-
     public function signupPost()
     {
         // Vérification des entrées utilisatrices
         $validator = new Validator($_POST);
         $errors = $validator->validate([
             'username' => ['required', 'min:3'],
+            'email' => ['required', 'email'],
             'password' => ['required', 'min:3']
         ]);
         if($errors){
@@ -101,7 +101,6 @@ class  authController extends Controller {
             header('Location: /signup');
             exit();
         }
-
         // Vérification si le nom d'utilisateur existe déjà
         $user = new User($this->getDB());
         $existingUser = $user->getByUsername($_POST['username']);
@@ -110,12 +109,20 @@ class  authController extends Controller {
             header('Location: /signup');
             exit;
         }
-
+        // Vérification si le mail existe déjà
+        $user = new User($this->getDB());
+        $existingEmail = $user->getByEmail($_POST['email']);
+        if ($existingEmail) {
+            $_SESSION['errors'][] = $validator->emailAlreadyUse();
+            header('Location: /signup');
+            exit;
+        }
         // Hash du mot de passe avec le salt
         $salt = "i;151-120#";
         $hashedPassword = hash('sha256', $salt . $_POST['password']);
         $userData = [
-            'username' => $_POST['username'],
+            'username' => htmlspecialchars($_POST['username']),
+            'email' => htmlspecialchars($_POST['email']),
             'password' => $hashedPassword
         ];
         // Envoie les données vers la base de données
@@ -130,6 +137,7 @@ class  authController extends Controller {
             header('Location: /account?success=true');
         }
     }
+
 
 
     // check si le code du captcha correspond à l'entrée du user

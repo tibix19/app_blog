@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $this->isConnected();
         $users = new User($this->getDB());
-        // on recup les infos du user avec son id qui es dans une variable de session initier quand le user se connecte
+        // on récupère les infos du user avec son id qui est dans une variable de session initier quand le user se connecte
         $user = $users->findById($_SESSION['idUser']);
         $this->view('account.account', compact('user'));
     }
@@ -30,7 +30,7 @@ class UserController extends Controller
         // Vérification des entrées utilisatrices
         $validator = new Validator($_POST);
         $errors = $validator->validate([
-            'username' => ['required', 'min:3']
+            'username' => ['required', 'min:3'],
         ]);
         if($errors){
             $_SESSION['errors'][] = $errors;
@@ -47,18 +47,61 @@ class UserController extends Controller
             exit;
         }
         // Vérification si le nom d'utilisateur existe déjà
-        $existingUser = $user->getByUsername($_POST['username']);
+        $username = new User($this->getDB());
+        $existingUser = $username->getByUsername($_POST['username']);
         if ($existingUser) {
             $_SESSION['errors'][] = $validator->userAlreadyExist();
             header('Location: /account');
             exit;
         }
-
         $username = [
             'username' => htmlspecialchars($_POST['username']),
         ];
         // Update du nom d'utilisateur dans le modèle
         $result = $user->update_model($id, $username);
+
+        if ($result){
+            // revient sur la page
+            header('Location: /account');
+        }
+    }
+
+    // Modifier de l'adresse mail
+    public function updateEmail()
+    {
+        $this->isConnected();
+        $user = new User($this->getDB());
+        // Vérification des entrées utilisatrices
+        $validator = new Validator($_POST);
+        $errors = $validator->validate([
+            'email' => ['required', 'email'],
+        ]);
+        if($errors){
+            $_SESSION['errors'][] = $errors;
+            header('Location: /account');
+            exit;
+        }
+        // recup l'id pour update
+        $id = (int) $_SESSION['idUser'];
+        // si l'utilisateur entre le même nom d'utilisateur qu'il a déjà ça ne met pas de message d'erreur
+        $user = $user->findById($_SESSION['idUser']);
+        if($_POST['email'] == $user->email){
+            header('Location: /account');
+            exit;
+        }
+        // Vérification si le nom d'utilisateur existe déjà
+        $username = new User($this->getDB());
+        $existingUser = $username->getByEmail($_POST['email']);
+        if ($existingUser) {
+            $_SESSION['errors'][] = $validator->emailAlreadyUse();
+            header('Location: /account');
+            exit;
+        }
+        $email = [
+            'email' => htmlspecialchars($_POST['email']),
+        ];
+        // Update du nom d'utilisateur dans le modèle
+        $result = $user->update_model($id, $email);
 
         if ($result){
             // revient sur la page

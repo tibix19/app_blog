@@ -15,6 +15,11 @@ class User extends Model
         return $this->querySQL("SELECT * FROM {$this->table} WHERE username = ?", [$username], true);
     }
 
+    public function getByEmail(string $email)
+    {
+        return $this->querySQL("SELECT * FROM {$this->table} WHERE email = ?", [$email], true);
+    }
+
     public function getCreatedAt(): string
     {
         return (new DateTime($this->created_at))->format('d/m/y à H:i');

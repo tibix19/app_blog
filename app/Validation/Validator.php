@@ -29,6 +29,10 @@ class Validator
                         // Si le champ doit avoir une longueur minimale
                         case substr($rule, 0, 3) === 'min':
                             $this->min($name, $this->data[$name], $rule);
+                            break;
+                        case 'email':
+                            $this->validateEmail($name, $this->data[$name]);
+                            break;
                         default:
                             // Autres règles si nécessaire
                     }
@@ -63,6 +67,17 @@ class Validator
     }
 
 
+    private function validateEmail(string $name, string $value)
+    {
+        // Supprimer les espaces blancs inutiles
+        $value = trim($value);
+        // Vérifier si l'adresse e-mail est valide
+        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            $this->error[$name][] = "L'adresse e-mail {$value} n'est pas valide.";
+        }
+    }
+
+
     // Méthode pour obtenir les erreurs de validation
     private function getErrors(): ?array
     {
@@ -73,7 +88,7 @@ class Validator
     public function IncorrectCredentials()
     {
         http_response_code(401);
-        return [['incorrectCredentials' => 'Le nom d\'utilisateur ou le mot de passe est incorrect.']];
+        return [['incorrectCredentials' => 'L\' adresse mail ou le mot de passe est incorrect.']];
     }
 
     // Méthode pour indiquer que les modifications ont été enregistrées avec succès
@@ -86,5 +101,10 @@ class Validator
     public function userAlreadyExist()
     {
         return  $this->error = [['userAlreadyExist' => 'Le nom d\'utilisateur existe déjà']];
+    }
+
+    public function emailAlreadyUse()
+    {
+        return  $this->error = [['emailAlreadyUse' => 'Cette adresse e-mail est déjà utilisé']];
     }
 }

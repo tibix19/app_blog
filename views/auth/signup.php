@@ -1,6 +1,5 @@
 <!-- Vue pour la page de création du compte -->
-
-<div class="uk-section">
+<div class="uk-section uk-margin-remove">
     <div class="uk-width-1-1">
         <div class="uk-width-1-1">
             <div class="uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
@@ -41,7 +40,12 @@
                             <input class="uk-input" type="text" name="username" id="username">
                         </div>
                     </div>
-
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="email">E-mail</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="email" id="email">
+                        </div>
+                    </div>
                     <!-- Champs password -->
                     <div class="uk-margin">
                         <label class="uk-form-label" for="password">Mot de passe</label>
@@ -49,7 +53,6 @@
                             <input class="uk-input" type="password" name="password" id="password">
                         </div>
                     </div>
-
                     <!-- Afficher le captcha et le champs pour le code du captcha -->
                     <div class="uk-margin">
                         <label class="uk-form-label" for="captcha">Captcha</label>
