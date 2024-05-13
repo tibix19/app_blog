@@ -1,5 +1,5 @@
-<div class="uk-margin-large-top uk-margin-auto-right uk-margin-auto-left uk-width-2-3">
-     <h1 class="uk-heading-small uk-padding uk-padding-remove-left"><?= $params['post']->title ?></h1>
+<div class="uk-margin-auto-right uk-margin-auto-left uk-width-2-3">
+     <h1 class="uk-heading-small uk-padding uk-padding-remove-left uk-padding-remove-bottom"><?= $params['post']->title ?></h1>
      <img class="uk-margin uk-width-4-5 uk-flex-center" src="../../public/static/images/<?= $params['post']->image ?>" alt="">
      <div class="uk-margin-bottom">
          <?php foreach($params['post']->getTags() as $tag): ?>

@@ -19,17 +19,20 @@
         <!-- Afficher la navbar -->
         <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar >
             <div class="uk-navbar-left" >
+                <!-- Afficher le logo -->
                 <a class="uk-navbar-item uk-logo" href="/">
                     <img src="../../../public/static/logo/logo.png" width="260" height="160" alt="Log Your Knowledge logo">
                 </a>
                 <a class="uk-navbar-item uk-logo" href="/"></a>
-                <div class="uk-navbar-item">
-                    <form action="/posts" method="GET">
-                        <input class="uk-input" type="search" name="search" placeholder="Rechercher...">
-                    </form>
-                </div>
             </div>
             <div class="uk-navbar-right">
+                <!-- Afficher la barre de recherche -->
+                <div class="uk-search uk-search-default">
+                    <form action="/posts" method="GET">
+                        <span uk-search-icon></span>
+                        <input class="uk-search-input" aria-label="Search" type="search" name="search" placeholder="Rechercher...">
+                    </form>
+                </div>
                 <ul class="uk-navbar-nav">
                     <?php // afficher les liens que les admins ont accès, s'ils sont connectés
                     if(isset($_SESSION['authAdmin']) &&  $_SESSION['authAdmin'] == 1 ): ?>
@@ -39,6 +42,7 @@
                             <ul class="uk-nav uk-dropdown-nav">
                                 <li class="uk-active"><a href="/account">Profil</a></li>
                                 <li class="uk-active"><a href="/myposts">Mes postes</a></li>
+                                <li class="uk-active"><a href="/rss.xml">RSS Feed</a></li>
                                 <li class="uk-nav-divider"></li>
                                 <li class="uk-nav-header">Panel Admin</li>
                                 <li><a href="/admin/posts">Postes</a></li>

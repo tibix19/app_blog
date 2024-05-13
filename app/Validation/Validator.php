@@ -71,7 +71,7 @@ class Validator
     {
         // Supprimer les espaces blancs inutiles
         $value = trim($value);
-        // Vérifier si l'adresse e-mail est valide
+        // Vérifier si l'adresse e-mail est valide avec ce filtre qui est interne à PHP
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
             $this->error[$name][] = "L'adresse e-mail {$value} n'est pas valide.";
         }

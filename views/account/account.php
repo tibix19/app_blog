@@ -30,7 +30,7 @@
     <label for="username">Nom d'utilisateur</label>
     <div class="uk-form-controls uk-margin-top">
         <input class="uk-input uk-width-1-4" type="text" name="username" id="username" value="<?= $params['user']->username ?>" disabled>
-        <button class="uk-button uk-button-default" type="button" uk-toggle="target: #username-modal">Modifier le nom d'utilisateur</button>
+        <button class="uk-button uk-button-default" style="background: lightgrey;" type="button" uk-toggle="target: #username-modal">Modifier le nom d'utilisateur</button>
     </div>
 
 </div>
@@ -39,12 +39,12 @@
     <label for="username">E-Mail</label>
     <div class="uk-form-controls uk-margin-top">
         <input class="uk-input uk-width-1-4" type="text" name="email" id="email" value="<?= $params['user']->email ?>" disabled>
-        <button class="uk-button uk-button-default" type="button" uk-toggle="target: #email-modal">Modifier l'adresse E-mail</button>
+        <button class="uk-button uk-button-default" style="background: lightgrey;" type="button" uk-toggle="target: #email-modal">Modifier l'adresse E-mail</button>
     </div>
 </div>
-
+<br>
 <!-- Button to open dialog for password modification -->
-<button class="uk-button uk-button-default" type="button" uk-toggle="target: #password-modal">Modifier le mot de passe</button>
+<button class="uk-button uk-button-secondary" type="button" uk-toggle="target: #password-modal">Modifier le mot de passe</button>
 
 <!-- Username modification box -->
 <div id="username-modal" uk-modal>

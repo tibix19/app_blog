@@ -1,6 +1,6 @@
 <!-- Afficher tous les utilisateurs du site -->
 
-<h1 class="uk-heading-small uk-padding uk-padding-remove-left">Administration des utilisateurs</h1>
+<h1 class="uk-heading-small uk-padding uk-padding-remove-left">Administration des utilisateurs (<?= count($params['users']) ?>)</h1>
 
 <!-- Afficher les erreurs ou autre message -->
 <?php

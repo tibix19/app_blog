@@ -12,7 +12,7 @@ use App\Validation\Validator;
 class UserController extends Controller
 {
     // controller pour afficher la vue pour edit un son propre user
-    public function editAccount()
+    public function editAccount(): void
     {
         $this->isConnected();
         $users = new User($this->getDB());

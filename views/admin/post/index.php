@@ -1,5 +1,5 @@
 <!-- page pour l'admin pour administer les articles -->
-<h1 class="uk-heading-small uk-padding uk-padding-remove-left">Administration des postes</h1>
+<h1 class="uk-heading-small uk-padding uk-padding-remove-left">Administration des postes (<?= count($params['posts']) ?>)</h1>
 
 <!-- Afficher les actions effectuées -->
 <?php

@@ -1,5 +1,5 @@
 <!-- page pour admin pour administer les tags -->
-<h1 class="uk-heading-small uk-padding uk-padding-remove-left">Administration des tags</h1>
+<h1 class="uk-heading-small uk-padding uk-padding-remove-left">Administration des tags (<?= count($params['tags']) ?>)</h1>
 
 <?php
 $message = "";

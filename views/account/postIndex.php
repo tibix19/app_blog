@@ -29,8 +29,8 @@ elseif (isset($_GET['create'])) {
 <a href="/create" class="uk-button uk-button-primary uk-margin-bottom">Créer un nouvel article</a>
 
 <ul class="uk-tab" uk-tab>
-    <li class="uk-active"><a href="#">Brouillons</a></li>
-    <li><a href="#">Publiées</a></li>
+    <li class="uk-active"><a href="#">Brouillons (<?= count($params['PostsDraftUser']) ?>)</a></li>
+    <li><a href="#">Publiées (<?= count($params['PostsPublishedUser']) ?>)</a></li>
 </ul>
 
 <ul class="uk-switcher uk-margin">
