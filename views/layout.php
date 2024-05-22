@@ -37,27 +37,41 @@
                     <?php // afficher les liens que les admins ont accès, s'ils sont connectés
                     if(isset($_SESSION['authAdmin']) &&  $_SESSION['authAdmin'] == 1 ): ?>
                         <li><a href="/create"><span uk-icon="file-edit"></span>Write</a></li>
-                        <button class="uk-button uk-button-link" uk-icon="icon: user" type="button"></button>
-                        <div uk-dropdown="mode: click">
-                            <ul class="uk-nav uk-dropdown-nav">
-                                <li class="uk-active"><a href="/account">Profil</a></li>
-                                <li class="uk-active"><a href="/myposts">Mes postes</a></li>
-                                <li class="uk-active"><a href="/rss.xml">RSS Feed</a></li>
-                                <li class="uk-nav-divider"></li>
-                                <li class="uk-nav-header">Panel Admin</li>
-                                <li><a href="/admin/posts">Postes</a></li>
-                                <li><a href="/admin/account">Comptes</a></li>
-                                <li><a href="/admin/tags">Tags</a></li>
-                                <li class="uk-nav-divider"></li>
-                                <li><a href="/logout">Se déconnecter</a></li>
-                            </ul>
+                        <button class="uk-button uk-button-link" uk-icon="icon: user" type="button" uk-toggle="target: #offcanvas-flip"></button>
+                        <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+                            <div class="uk-offcanvas-bar" style="background: white">
+                                <ul class="uk-nav uk-dropdown-nav">
+                                    <li class="uk-nav-header">Profil</li>
+                                    <li class="uk-active"><a href="/account">Account</a></li>
+                                    <li class="uk-active"><a href="/myposts">Mes postes</a></li>
+                                    <li class="uk-active"><a href="/rss.xml">RSS Feed</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li class="uk-nav-header">Panel Admin</li>
+                                    <li><a href="/admin/posts">Postes</a></li>
+                                    <li><a href="/admin/account">Comptes</a></li>
+                                    <li><a href="/admin/tags">Tags</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a href="/logout">Se déconnecter</a></li>
+                                </ul>
+                            </div>
                         </div>
                     <?php // afficher les liens que les users standards ont accès dès qu'ils sont connectés
                     elseif(isset($_SESSION['authAdmin']) == 2): ?>
                         <li><a href="/create"><span uk-icon="file-edit"></span>Write</a></li>
-                        <li><a href="/myposts">Voir mes postes</a></li>
-                        <li><a href="/account">Account</a></li>
-                        <li><a href="/logout">Se déconnecter</a></li>
+                        <button class="" type="button" uk-toggle="target: #offcanvas-flip" uk-icon="icon: user"></button>
+                        <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+                            <div class="uk-offcanvas-bar" style="background: white">
+                                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                                <ul class="uk-nav uk-dropdown-nav">
+                                    <li class="uk-nav-header">Profil</li>
+                                    <li><a href="/account">Account</a></li>
+                                    <li><a href="/myposts">Mes postes</a></li>
+                                    <li><a href="/rss.xml">RSS Feed</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a href="/logout">Se déconnecter</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     <?php // affiche le lien pour se connecter et aussi un lien pour écrire un article, mais qui redirige vers la page de login si pas connecter
                     else:  ?>
                         <li><a href="/create"><span uk-icon="file-edit"></span>Write</a></li>
@@ -81,13 +95,12 @@
         <footer id="footer" class="uk-margin-large-top">
             <div class="uk-padding" style="background: #01324b;">
                 <div class="uk-container uk-container">
-                    <p style="color: white; font-size: 14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam minus aperiam recusandae eos eaque sint nobis officiis adipisci sed quisquam consequuntur beatae harum laborum non dolores, natus perferendis molestias. Aliquam.</p>
+                    <p style="color: white; font-size: 14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam minus aperiam recusandae eos eaque sint nobis officiis adipisci sed quisquam consequuntur beatae harum laborum</p>
                     <p class="uk-padding-small-top uk-margin-remove" style="color: white; font-size: 14px;">© 2024 LogYourKnowledge</p>
-                    <p class="uk-padding-small-top uk-margin-remove" style="color: white; font-size: 14px;">Timéo Beuchat</p>
+                    <p class="uk-padding-small-top uk-margin-remove" style="color: white; font-size: 14px;"><a href="https://github.com/tibix19/app_blog" uk-icon="github">Timéo Beuchat </a></p>
                 </div>
             </div>
         </footer>
     </div>
-
 </body>
 </html>

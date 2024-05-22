@@ -1,5 +1,5 @@
 <?php
-
+// Controller pour l'authentification des utilisateurs (Création de compte et connexion)
 namespace App\Controllers;
 
 use App\Models\Post;
@@ -11,12 +11,13 @@ class  authController extends Controller {
 
     private string $codeCaptcha;
 
-    // login
+    // Controller pour afficher la page de connexion
     public function login()
     {
         $this->view('auth.login');
     }
 
+    // controller pour la connexion des utilisateurs
     public function loginPost()
     {
         // check si les entrées des user sont ok
@@ -25,14 +26,14 @@ class  authController extends Controller {
             'email' => ['required','email'],
             'password' => ['required']
         ]);
-        if($errors){
+        if($errors){ // si erreur, on les affiche
             $_SESSION['errors'][] = $errors;
             header('Location: /login');
             exit;
         }
         // puis, on regarde si le user est existant
         $users = new User($this->getDB());
-        $user = $users->getByEmail($_POST['email']);
+        $user = $users->getByEmail(htmlspecialchars($_POST['email']));
 
         // Vérifier si un utilisateur a été trouvé
         if ($user) {
@@ -40,27 +41,27 @@ class  authController extends Controller {
             $salt = "i;151-120#";
             $hashedPassword = hash('sha256', $salt . $_POST['password']);
 
-            // Vérifier si le mot de passe hashé correspond au hachage stocké dans la base de données
+            // Vérifier si le mot de passe haché correspond au hash stocké dans la base de données
             if (hash_equals($hashedPassword, $user->password)) {
                 // Définir les informations d'authentification de session
                 $_SESSION['authAdmin'] = (int)$user->admin;
                 $_SESSION['idUser'] = (int)$user->id;
                 header('Location: /account?success=true');
             } else {
-                // Mauvaises informations d'identification
+                // Mauvaises informations d'identification, afficher message d'erreurs
                 $errorsCred = $validator->incorrectCredentials();
                 $_SESSION['errors'][] = $errorsCred;
                 header('Location: /login?credentials=false');
             }
         } else {
-            // Mauvaises informations d'identification
+            // Mauvaises informations d'identification, afficher message d'erreur
             $errorsCred = $validator->incorrectCredentials();
             $_SESSION['errors'][] = $errorsCred;
             header('Location: /login?credentials=false');
         }
     }
 
-    // logout
+    // controller pour la déconnexion des utilisateurs
     public function logout()
     {
         session_unset();
@@ -72,13 +73,14 @@ class  authController extends Controller {
         $this->view('blog.index', compact('posts','message'));
     }
 
-    // sign up
+    // controller pour afficher la page de création de compte
     public function signup()
     {
         // Afficher le formulaire avec le captcha
         $this->view('auth.signup',);
     }
 
+    // controller pour la création de compte
     public function signupPost()
     {
         // Vérification des entrées utilisatrices
@@ -88,7 +90,7 @@ class  authController extends Controller {
             'email' => ['required', 'email'],
             'password' => ['required', 'min:3']
         ]);
-        if($errors){
+        if($errors){ // si il y a des erreurs, on les affiche
             $_SESSION['errors'][] = $errors;
             header('Location: /signup');
             exit;
@@ -103,7 +105,7 @@ class  authController extends Controller {
         }
         // Vérification si le nom d'utilisateur existe déjà
         $user = new User($this->getDB());
-        $existingUser = $user->getByUsername($_POST['username']);
+        $existingUser = $user->getByUsername(htmlspecialchars($_POST['username']));
         if ($existingUser) {
             $_SESSION['errors'][] = $validator->userAlreadyExist();
             header('Location: /signup');
@@ -111,7 +113,7 @@ class  authController extends Controller {
         }
         // Vérification si le mail existe déjà
         $user = new User($this->getDB());
-        $existingEmail = $user->getByEmail($_POST['email']);
+        $existingEmail = $user->getByEmail(htmlspecialchars($_POST['email']));
         if ($existingEmail) {
             $_SESSION['errors'][] = $validator->emailAlreadyUse();
             header('Location: /signup');
@@ -120,27 +122,29 @@ class  authController extends Controller {
         // Hash du mot de passe avec le salt
         $salt = "i;151-120#";
         $hashedPassword = hash('sha256', $salt . $_POST['password']);
+        // récupération des données dans une variable + nettoie des caractères anormaux
         $userData = [
             'username' => htmlspecialchars($_POST['username']),
             'email' => htmlspecialchars($_POST['email']),
             'password' => $hashedPassword
         ];
-        // Envoie les données vers la base de données
+        // Envoie les données vers la base de données si toutes les conditions en dessus sont remplis
         $result = $user->create_model($userData);
 
         if ($result){
             // Connexion automatique après la création du compte
             $newUser = $user->getByUsername($_POST['username']);
+            // définition des variables de session
             $_SESSION['authAdmin'] = (int) $newUser->admin;
             $_SESSION['idUser'] = (int) $newUser->id;
-            // Rediriger l'utilisateur vers sa session
+            // Rediriger l'utilisateur vers la page de son profil
             header('Location: /account?success=true');
         }
     }
 
 
-
     // check si le code du captcha correspond à l'entrée du user
+    // de type private par que cette méthode est utilisé que dans cette classe
     private function captcha(): bool
     {
         session_abort();

@@ -63,9 +63,9 @@ class BlogController extends Controller
                 // check si le user est connecté
                 if(isset($_SESSION['idUser']))
                 {
-                    // si le user est connecté, il faut regarder si le post est celui du qui est connecté
+                    // si le user est connecté, il faut regarder si le post créer est bien de celui du qui est connecté ou si c'est un admin, il peut voir de toute manière le poste
                     $isAuthor = (new Post($this->getDB()))->checkPostAuthor($id);
-                    if($isAuthor->user_id == $_SESSION['idUser'])
+                    if($isAuthor->user_id == $_SESSION['idUser'] OR $_SESSION['authAdmin'] === 1)
                     {
                         // afficher le post
                         $this->view('blog.show', compact('post'));
