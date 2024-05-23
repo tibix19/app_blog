@@ -5,7 +5,7 @@
 <!-- Afficher les erreurs ou autre message -->
 <?php
 $message = "";
-if(isset($_GET['updatelevel'])) {
+if(isset($_GET['updateuser'])) {
     $message = "Modification effectuée !";
 }
 elseif(isset($_GET['delete'])) {
@@ -32,13 +32,14 @@ elseif (isset($_GET['create'])) {
             <th scope="col">id</th>
             <th scope="col">Username</th>
             <th scope="col">E-Mail</th>
-            <th scope="col">Level</th>
+            <th scope="col">Actions</th>
             <th scope="col">Créer le</th>
             <th scope="col">IP</th>
-            <th scope="col">Action</th>
+            <th scope="col">Supprimer</th>
         </tr>
         </thead>
         <tbody>
+        <!--  bouclé sur les utilisateurs pour les afficher dans un tableau-->
         <?php foreach ($params['users'] as $user): ?>
             <tr>
                 <th scope="row"><?= $user->id ?></th>
@@ -46,18 +47,29 @@ elseif (isset($_GET['create'])) {
                 <td><?= $user->email ?></td>
                 <td>
                     <form action="/admin/account/edit/<?= $user->id ?>" method="POST" class="uk-display-inline">
-                        <label for="admin" class="uk-margin-right">
-                            <select name="admin" id="admin" class="uk-select uk-width-1-2">
+                        <!-- Afficher si le user un champ option pour modifier si le user est admin ou User standard -->
+                        <label for="admin" class="uk-margin-right uk-margin-remove-right">
+                            <select name="admin" id="admin" class="uk-select uk-width-1-4">
                                 <option value="0" <?= ($user->admin == 0) ? 'selected' : '' ?>>User</option>
                                 <option value="1" <?= ($user->admin == 1) ? 'selected' : '' ?>>Admin</option>
+                            </select>
+                        </label>
+                        <!-- Afficher le champ de modification si le compte est bloqué ou actif  -->
+                        <label for="etat_compte" class="uk-margin-righ uk-padding-remove-left">
+                            <select name="etat_compte" id="admin" class="uk-select uk-width-1-3">
+                                <option value="0" <?= ($user->etat_compte == 0) ? 'selected' : '' ?>>Actif</option>
+                                <option value="1" <?= ($user->etat_compte == 1) ? 'selected' : '' ?>>Bloqué</option>
                             </select>
                         </label>
                         <button type="submit" class="uk-button uk-button-warning">Save</button>
                     </form>
                 </td>
+                <!--  Afficher la date de création du user-->
                 <td><?= $user->getCreatedAt() ?></td>
+                <!--  Afficher la dernière adresse IP de connexion de l'utilisateur -->
                 <td><?= $user->ip_addr ?></td>
                 <td>
+                    <!-- bouton supprimer pour supprimer les utilisateurs -->
                     <form action="/admin/account/delete/<?= $user->id ?>" method="POST" class="uk-display-inline">
                         <button type="submit" class="uk-button uk-button-danger">Supprimer</button>
                     </form>

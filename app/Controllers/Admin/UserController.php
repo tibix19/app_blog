@@ -77,14 +77,15 @@ class UserController extends Controller
     }
 
     // changer le level d'un user (user standard ou admin)
-    public function changeLevelUser(int $id)
+    public function editUserAdmin(int $id)
     {
         $this->isAdmin();
-        // Vérifiez si le niveau de l'utilisateur est défini dans la requête POST
-        if (isset($_POST['admin'])) {
+        // Vérifiez si le niveau de l'utilisateur et si le compte est actif ou non, est défini dans la requête POST
+        if (isset($_POST['admin']) && isset($_POST['etat_compte'])) {
             // Créez un tableau de données à mettre à jour
             $data = [
-                'admin' => $_POST['admin']
+                'admin' => htmlspecialchars($_POST['admin']),
+                'etat_compte' => htmlspecialchars($_POST['etat_compte']),
             ];
 
             // Mettre à jour l^état du post dans la db
@@ -93,7 +94,7 @@ class UserController extends Controller
 
             if ($result) {
                 // Redirigez vers le panneau admin après la mise à jour
-                header('Location: /admin/account?updatelevel=' . $id . '?' . $_POST['admin']);
+                header('Location: /admin/account?updateuser=' . $id);
                 exit();
             }
         }

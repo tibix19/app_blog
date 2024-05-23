@@ -62,7 +62,7 @@ $router->post('/admin/account/create','App\Controllers\Admin\UserController@crea
 // delete user
 $router->post('/admin/account/delete/:id','App\Controllers\Admin\UserController@deleteUser');
 // modifier le level du user
-$router->post('/admin/account/edit/:id','App\Controllers\Admin\UserController@changeLevelUser');
+$router->post('/admin/account/edit/:id','App\Controllers\Admin\UserController@editUserAdmin');
 
 // route qui affiche les posts
 $router->get('/admin/posts', 'App\Controllers\Admin\PostController@index');

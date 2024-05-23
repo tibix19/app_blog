@@ -36,7 +36,7 @@ class  authController extends Controller {
         $user = $users->getByEmail(htmlspecialchars($_POST['email']));
 
         // Vérifier si un utilisateur a été trouvé
-        if ($user) {
+        if ($user && $user->etat_compte == 0 ) {
             // Hacher le mot de passe fourni par l'utilisateur en utilisant SHA-256 avec un sel
             $salt = "i;151-120#";
             $hashedPassword = hash('sha256', $salt . $_POST['password']);
