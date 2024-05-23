@@ -9,13 +9,13 @@ class Tag extends Model
 
     protected $table = 'tags';
 
-    // permet de savoir quel tag est associé avec quel poste
+    // permet de savoir quel tag est associé avec quel poste, mais seulement sur les postes publiés
     public function getPosts()
     {
         return $this->querySQL("
             SELECT p.* FROM posts p
             INNER JOIN post_tag pt ON pt.post_id = p.id
-            WHERE pt.tag_id = ?
+            WHERE pt.tag_id = ? AND published = 1
             ", [$this->id]);
     }
 

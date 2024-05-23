@@ -40,12 +40,15 @@ class  authController extends Controller {
             // Hacher le mot de passe fourni par l'utilisateur en utilisant SHA-256 avec un sel
             $salt = "i;151-120#";
             $hashedPassword = hash('sha256', $salt . $_POST['password']);
-
             // Vérifier si le mot de passe haché correspond au hash stocké dans la base de données
             if (hash_equals($hashedPassword, $user->password)) {
                 // Définir les informations d'authentification de session
                 $_SESSION['authAdmin'] = (int)$user->admin;
                 $_SESSION['idUser'] = (int)$user->id;
+                //recuperation de l'adresse ip et la mettre dans un tableau
+                $ipAddrArray = ['ip_addr' => getenv("REMOTE_ADDR")];
+                // mise à jour de l'ip de connexion dans la base de donnée
+                $user->update_model($user->id, $ipAddrArray);
                 header('Location: /account?success=true');
             } else {
                 // Mauvaises informations d'identification, afficher message d'erreurs
@@ -126,7 +129,8 @@ class  authController extends Controller {
         $userData = [
             'username' => htmlspecialchars($_POST['username']),
             'email' => htmlspecialchars($_POST['email']),
-            'password' => $hashedPassword
+            'password' => $hashedPassword,
+            'ip_addr' => getenv("REMOTE_ADDR")
         ];
         // Envoie les données vers la base de données si toutes les conditions en dessus sont remplis
         $result = $user->create_model($userData);

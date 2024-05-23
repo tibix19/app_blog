@@ -97,7 +97,11 @@
                 <div class="uk-container uk-container">
                     <p style="color: white; font-size: 14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam minus aperiam recusandae eos eaque sint nobis officiis adipisci sed quisquam consequuntur beatae harum laborum</p>
                     <p class="uk-padding-small-top uk-margin-remove" style="color: white; font-size: 14px;">© 2024 LogYourKnowledge</p>
-                    <p class="uk-padding-small-top uk-margin-remove" style="color: white; font-size: 14px;"><a href="https://github.com/tibix19/app_blog" uk-icon="github">Timéo Beuchat </a></p>
+                    <p class="uk-padding-small-top uk-margin-remove" style="color: white; font-size: 14px;">Timéo Beuchat
+                        <!-- lien du github avec le code source du projet et lien faire le feed RSS -->
+                        <a href="https://github.com/tibix19/app_blog" uk-icon="github"></a>
+                        <a href="http://localhost/rss.xml" uk-icon="rss"></a>
+                    </p>
                 </div>
             </div>
         </footer>

@@ -34,6 +34,7 @@ elseif (isset($_GET['create'])) {
             <th scope="col">E-Mail</th>
             <th scope="col">Level</th>
             <th scope="col">Créer le</th>
+            <th scope="col">IP</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
@@ -55,6 +56,7 @@ elseif (isset($_GET['create'])) {
                     </form>
                 </td>
                 <td><?= $user->getCreatedAt() ?></td>
+                <td><?= $user->ip_addr ?></td>
                 <td>
                     <form action="/admin/account/delete/<?= $user->id ?>" method="POST" class="uk-display-inline">
                         <button type="submit" class="uk-button uk-button-danger">Supprimer</button>
