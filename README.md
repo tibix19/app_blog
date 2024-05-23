@@ -30,5 +30,5 @@
 - [x] Faire une barre de recherche
 - [x] (Admin peut ajouter ou enlever des tags)
 - [x] Faire en sorte que les postes aient 2 états (brouillon et en ligne)
-- [x] Récupération de l'adresse des utilisateurs connectés et modification à chaque nouvelle connexion
-- [x] Fonctionnalité que les admins puissent activer ou bloquer un compte utilisateur 
+- [x] Récupération de l'adresse IP des utilisateurs connectés et modification à chaque nouvelle connexion
+- [x] Fonctionnalité pour que les admins puissent activer ou bloquer un compte utilisateur 
