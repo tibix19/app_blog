@@ -15,9 +15,9 @@ class DBConnection
     public function __construct()
     {
               $this->dbname = "blog_db";
-              $this->host = "127.0.0.1";
-              $this->username = "root";
-              $this->password = "";
+              $this->host = "host.docker.internal";
+              $this->username = "timeo";
+              $this->password = "timeo";
     }
 
     public function getPDO(): PDO

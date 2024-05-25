@@ -6,10 +6,10 @@
     <!--  Contrôle si une image est présente, on l'affiche sinon on ne fait rien (!is_null => si le champ n'est pas nul)-->
     <?php if (!is_null($params['post']->image)): ?>
         <!-- Afficher l'image -->
-        <img class="uk-margin uk-width-4-5 uk-flex-center uk-border-rounded" src="../../public/static/images/<?= $params['post']->image ?>" alt="">
+        <img class="uk-margin uk-width-4-5 uk-flex-center uk-border-rounded" src="../../../static/images/<?= $params['post']->image ?>" alt="">
     <?php endif; ?>
     <div class="uk-margin-bottom">
-        <!-- Afficher les tags du postes -->
+        <!-- Afficher les tags du poste -->
         <?php foreach ($params['post']->getTags() as $tag): ?>
             <span class="uk-badge uk-margin-small-right" style="background: #01324b;"><?= $tag->name ?></span>
         <?php endforeach; ?>

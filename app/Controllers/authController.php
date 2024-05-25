@@ -38,7 +38,7 @@ class  authController extends Controller {
         // Vérifier si un utilisateur a été trouvé
         if ($user) {
             // vérifier si le compte est bloqué
-            if($user->etat_compte == 1){ // Afficher un message d'erreur
+            if($user->etat_compte == 1){ // Afficher un message d'erreur si le champ etat_compte est égale à 1
                 $_SESSION['errors'][] = [['Le compte a été bloqué']];
                 header('Location: /login?compte?blocked');
                 exit();

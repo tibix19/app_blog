@@ -41,7 +41,7 @@
                     <!-- Si pas d'image on affiche rien -->
                     <div class="uk-card-media-top">
                         <?php if (!empty($post->image)): ?>
-                            <img class="" src="../../public/static/images/<?= $post->image ?>" width="100%" height="100%" alt="image of the post">
+                            <img class="" src="../../../static/images/<?= $post->image ?>" width="100%" height="100%" alt="image of the post">
                         <?php endif; ?>
                     </div>
                     <div class="uk-card-body uk-padding-small uk-padding-right-">
