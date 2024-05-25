@@ -50,9 +50,7 @@ RUN npm install
 RUN apt-get purge -y g++ \
     && apt-get autoremove -y \
     && rm -r /var/lib/apt/lists/* \
-    && rm -rf /tmp/* \
-    && sh ./install-composer.sh \
-    && rm ./install-composer.sh
+    && rm -rf /tmp/*
 
 # Change the current working directory
 WORKDIR /var/www
