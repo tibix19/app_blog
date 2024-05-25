@@ -80,7 +80,7 @@ class UserController extends Controller
     public function editUserAdmin(int $id)
     {
         $this->isAdmin();
-        // Vérifiez si le niveau de l'utilisateur et si le compte est actif ou non, est défini dans la requête POST
+        // Vérifiez si le niveau de l'utilisateur et si le compte est actif ou non, est bien défini dans la requête POST
         if (isset($_POST['admin']) && isset($_POST['etat_compte'])) {
             // Créez un tableau de données à mettre à jour
             $data = [

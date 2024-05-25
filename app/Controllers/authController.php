@@ -36,25 +36,33 @@ class  authController extends Controller {
         $user = $users->getByEmail(htmlspecialchars($_POST['email']));
 
         // Vérifier si un utilisateur a été trouvé
-        if ($user && $user->etat_compte == 0 ) {
-            // Hacher le mot de passe fourni par l'utilisateur en utilisant SHA-256 avec un sel
-            $salt = "i;151-120#";
-            $hashedPassword = hash('sha256', $salt . $_POST['password']);
-            // Vérifier si le mot de passe haché correspond au hash stocké dans la base de données
-            if (hash_equals($hashedPassword, $user->password)) {
-                // Définir les informations d'authentification de session
-                $_SESSION['authAdmin'] = (int)$user->admin;
-                $_SESSION['idUser'] = (int)$user->id;
-                //recuperation de l'adresse ip et la mettre dans un tableau
-                $ipAddrArray = ['ip_addr' => getenv("REMOTE_ADDR")];
-                // mise à jour de l'ip de connexion dans la base de donnée
-                $user->update_model($user->id, $ipAddrArray);
-                header('Location: /account?success=true');
-            } else {
-                // Mauvaises informations d'identification, afficher message d'erreurs
-                $errorsCred = $validator->incorrectCredentials();
-                $_SESSION['errors'][] = $errorsCred;
-                header('Location: /login?credentials=false');
+        if ($user) {
+            // vérifier si le compte est bloqué
+            if($user->etat_compte == 1){ // Afficher un message d'erreur
+                $_SESSION['errors'][] = [['Le compte a été bloqué']];
+                header('Location: /login?compte?blocked');
+                exit();
+            }
+            else { // le compte n'est pas bloqué essayé de se connecter
+                // Hacher le mot de passe fourni par l'utilisateur en utilisant SHA-256 avec un sel
+                $salt = "i;151-120#";
+                $hashedPassword = hash('sha256', $salt . $_POST['password']);
+                // Vérifier si le mot de passe haché correspond au hash stocké dans la base de données
+                if (hash_equals($hashedPassword, $user->password)) {
+                    // Définir les informations d'authentification de session
+                    $_SESSION['authAdmin'] = (int)$user->admin;
+                    $_SESSION['idUser'] = (int)$user->id;
+                    //recuperation de l'adresse ip et la mettre dans un tableau
+                    $ipAddrArray = ['ip_addr' => getenv("REMOTE_ADDR")];
+                    // mise à jour de l'ip de connexion dans la base de donnée
+                    $user->update_model($user->id, $ipAddrArray);
+                    header('Location: /account?success=true');
+                } else {
+                    // Mauvaises informations d'identification, afficher message d'erreurs
+                    $errorsCred = $validator->incorrectCredentials();
+                    $_SESSION['errors'][] = $errorsCred;
+                    header('Location: /login?credentials=false');
+                }
             }
         } else {
             // Mauvaises informations d'identification, afficher message d'erreur
@@ -93,7 +101,7 @@ class  authController extends Controller {
             'email' => ['required', 'email'],
             'password' => ['required', 'min:3']
         ]);
-        if($errors){ // si il y a des erreurs, on les affiche
+        if($errors){ // s'il y a des erreurs, on les affiche
             $_SESSION['errors'][] = $errors;
             header('Location: /signup');
             exit;
