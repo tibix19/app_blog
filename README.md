@@ -22,7 +22,7 @@
 - [x] les photos / paragraphe dans le texte, couleur et autre subtilité du texte dans le poste
 - [x] les admins qui peuvent changer le level d'un user
 - [] docker
-- [] front-end uikit
+- [x] front-end uikit
 - [x] Créer un authController et mettre les function de login et de signup dedans pour simplifier le UserController
 - [x] Mettre des messages à chaque fois qu'une modification est effectuée (Modification enregistrée)
 - [x] Mettre des validations à chaque formulaire
@@ -30,3 +30,5 @@
 - [x] Faire une barre de recherche
 - [x] (Admin peut ajouter ou enlever des tags)
 - [x] Faire en sorte que les postes aient 2 états (brouillon et en ligne)
+- [x] Récupération de l'adresse IP des utilisateurs connectés et modification à chaque nouvelle connexion
+- [x] Fonctionnalité pour que les admins puissent activer ou bloquer un compte utilisateur 
