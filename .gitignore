@@ -1,5 +1,4 @@
 .idea
-node_modules
 composer.lock
 pnpm-lock.yaml
 package-lock.json

@@ -26,7 +26,7 @@
         <!-- check si une image existe, l'afficher ou ne rien faire -->
         <?php if (isset($params['post']->image)) : ?>
             <label class="uk-form-label " for="image">Image actuelle</label><br>
-            <img src="../../../public/static/images/<?= $params['post']->image ?>" width="50%" height="50%"><br><br>
+            <img src="../../../static/images/<?= $params['post']->image ?>" width="50%" height="50%"><br><br>
         <?php endif ?>
         <label class="uk-form-label" for="image">Insérer la nouvelle image</label><br>
         <input type="file" aria-label="Custom controls" class="uk-margin" name="image" id="image">

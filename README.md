@@ -1,14 +1,10 @@
 # App blog CMS en PHP POO MVC
 
-- avoir composer installer
-- clone the repo
+- Avoir composer et docker installer
+- Clone le repository `git clone https://github.com/tibix19/app_blog.git`
 - modifier les infos de connexion à la db (DBConnexion.php)
-- importer le dump qui est dans le dossier database
-- lance xampp ou autre dans le dossier public
-- faire un `composer dump-autoload` dans le meme dossier où se trouve composer.json
-- Puis se rendre sur localhost dans le navigateur
-- Il faut peut-être aussi build le fichier json de nodejs pour uikit (il faut que je test)
-
+- Faire un `docker-compose up` dans le meme dossier où se trouve docker-compose.yml
+- Puis se rendre sur `http://localhost/`
 
 
 **TO DO**
@@ -32,3 +28,4 @@
 - [x] Faire en sorte que les postes aient 2 états (brouillon et en ligne)
 - [x] Récupération de l'adresse IP des utilisateurs connectés et modification à chaque nouvelle connexion
 - [x] Fonctionnalité pour que les admins puissent activer ou bloquer un compte utilisateur 
+- [] Compresser les images

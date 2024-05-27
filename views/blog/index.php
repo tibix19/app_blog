@@ -14,7 +14,7 @@
     });
 </script>
 
-<!-- quand on passe la souris sur une card le curseur change (main) -->
+<!-- quand on passe la souris sur une card le curseur change (pointeur à main) -->
 <head>
     <style>
         .uk-card {

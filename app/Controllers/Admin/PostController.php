@@ -33,15 +33,17 @@ class PostController extends Controller
     public function createPost()
     {
         $this->isConnected();
+        // Augmenter la limite de mémoire pour que les images volumineuses puissent être traitées
+        ini_set('memory_limit', '256M');
+
         $post = new Post($this->getDB());
-    
         // Vérifier les données saisies et afficher une erreur si nécessaire
         $validator = new Validator($_POST);
         $errors = $validator->validate([
             'title' => ['required', 'min:4'],
             'content' => ['required' , 'min:10']
         ]);
-        if($errors){
+        if($errors){ // s'il y a des erreurs affichées un message en fonction de l'erreur
             $_SESSION['errors'][] = $errors;
             header('Location: /create');
             exit;
@@ -71,29 +73,53 @@ class PostController extends Controller
             }
             // Générer un nom unique pour le fichier pour ne pas avoir 2 fois le meme non de fichier
             $newFilename = uniqid() . ".". $extension;
-            // Déplacer le fichier téléchargé vers le répertoire de destination
-            if (!move_uploaded_file($tempFilePath, "../public/static/images/{$newFilename}")) {
-                $_SESSION['errors'][] = [['Erreur lors de l\'upload de l\'image']];
+            // Compresser et déplacer le fichier téléchargé vers le répertoire de destination
+            try {
+                switch ($extension) {
+                    case 'jpg':
+                    case 'jpeg':
+                        // Créer une image à partir du fichier JPEG
+                        $image = imagecreatefromjpeg($tempFilePath);
+                        // Compresser et sauvegarder l'image avec une qualité de 40% (0% est le pire)
+                        imagejpeg($image, "../public/static/images/{$newFilename}", 40);
+                        break;
+                    case 'png':
+                        // Créer une image à partir du fichier PNG
+                        $image = imagecreatefrompng($tempFilePath);
+                        // Compresser et sauvegarder l'image avec un niveau de compression de 7 (0-9, 9 compression total)
+                        imagepng($image, "../public/static/images/{$newFilename}", 7);
+                        break;
+                    case 'gif':
+                        $image = imagecreatefromgif($tempFilePath);
+                        // Sauvegarder l'image sans compression (GIF n'a pas de compression configurable)
+                        imagegif($image, "../public/static/images/{$newFilename}");
+                        break;
+                    default:
+                        // Si l'extension n'est pas reconnue, enregistrer une erreur en session et rediriger l'utilisateur
+                        $_SESSION['errors'][] = [['Erreur lors de la compression de l\'image']];
+                        header('Location: /create');
+                        exit;
+                }
+                imagedestroy($image);
+            } catch (Exception $e) {
+                $_SESSION['errors'][] = [['Erreur lors de l\'upload ou la compression de l\'image']];
                 header('Location: /create');
                 exit;
             }
-            // Ajouter le nom de l'image aux données du post
+            // Ajouter le nom de l'image aux données du $_POST
             $_POST['image'] = $newFilename;
         }
         // Récupérer les tags pour la table post_tag
         $tags = $_POST['tags'];
         // Supprimer les tags du $_POST parce qu'ils ne sont pas dans la table posts
         unset($_POST['tags']);
-    
-        // Créer le post dans la base de données
+        // Envoie des données dans le modèle
         $result = $post->create_model($_POST, $tags);
-    
         if ($result){
             // Rediriger vers le panneau d'administration après la création
             header('Location: /myposts?create=success');
         }
     }
-
 
     // affiche la vue pour edit un post
     public function edit(int $id)

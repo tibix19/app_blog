@@ -4,24 +4,24 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log Your Knowledge</title>
-    <link rel="shortcut icon" type="image/icon" href="../../../public/static/logo/favicon.ico"/>
+    <link rel="shortcut icon" type="image/icon" href="./static/logo/favicon.ico"/>
     <!-- Importation des libraires nodejs-->
     <!-- uikit -->
-    <link rel="stylesheet" href="../../../node_modules/uikit/dist/css/uikit.min.css">
-    <script src="../../../node_modules/uikit/dist/js/uikit.min.js"></script>
-    <script src="../../../node_modules/uikit/dist/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="./../../../node_modules/uikit/dist/css/uikit.min.css">
+    <script src="./../../../node_modules/uikit/dist/js/uikit.min.js"></script>
+    <script src="./../../../node_modules/uikit/dist/js/uikit-icons.min.js"></script>
     <!--  WYSIWYG tinymce -->
-    <script src="../../../node_modules/tinymce/tinymce.min.js"></script>
-    <script src="../../../public/static/tinymceTextareaConfig.js"></script>
+    <script src="./../../node_modules/tinymce/tinymce.js"></script>
+    <script src="./../../static/tinymceTextareaConfig.js"></script>
 </head>
 <body>
-    <div class="uk-container">
-        <!-- Afficher la navbar -->
-        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar >
-            <div class="uk-navbar-left" >
-                <!-- Afficher le logo -->
-                <a class="uk-navbar-item uk-logo" href="/">
-                    <img src="../../../public/static/logo/logo.png" width="260" height="160" alt="Log Your Knowledge logo">
+<div class="uk-container">
+    <!-- Afficher la navbar -->
+    <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar >
+        <div class="uk-navbar-left" >
+            <!-- Afficher le logo -->
+            <a class="uk-navbar-item uk-logo" href="/">
+                <img src="../../../static/logo/logo.png" width="260" height="160" alt="Log Your Knowledge logo">
                 </a>
                 <a class="uk-navbar-item uk-logo" href="/"></a>
             </div>

@@ -1,7 +1,7 @@
 services:
   app:
     build:
-      context: ./docker # Le contexte de construction devrait être le répertoire contenant votre Dockerfile
+      context: ./ # Le contexte de construction devrait être le répertoire contenant votre Dockerfile
       dockerfile: Dockerfile # Le nom du Dockerfile à utiliser
     container_name: my-php-app
     ports:
