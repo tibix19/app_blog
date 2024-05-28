@@ -1,13 +1,19 @@
 # App blog CMS en PHP POO MVC
 
-- Avoir composer et docker installer
+### Requirement
+
+- Docker
+
+### Installation
 - Clone le repository `git clone https://github.com/tibix19/app_blog.git`
-- modifier les infos de connexion à la db (DBConnexion.php)
-- Faire un `docker-compose up` dans le meme dossier où se trouve docker-compose.yml
-- Puis se rendre sur `http://localhost/`
+- Aller dans le dossier racine du projet `cd app_blog`
+- Faire un `docker-compose up --build -d` pour créer le conteneur pour l'application
+- Attendre quelque seconde le temps que la db se charge correctement
+- Puis se rendre sur http://localhost/ ou http://localhost:8080 -> phpmyadmin 
 
 
-**TO DO**
+
+### TO DO
 - [x] faire en sorte que le nom du user qui a fait le poste s'enregistre pour qu'il s'affiche
 - [x] Chaque user peut créer, modifier et supprimer leurs propres postes
 - [x] Captcha https://github.com/LordDashMe/php-simple-captcha
@@ -28,4 +34,4 @@
 - [x] Faire en sorte que les postes aient 2 états (brouillon et en ligne)
 - [x] Récupération de l'adresse IP des utilisateurs connectés et modification à chaque nouvelle connexion
 - [x] Fonctionnalité pour que les admins puissent activer ou bloquer un compte utilisateur 
-- [] Compresser les images
+- [x] Compresser les images
