@@ -12,7 +12,6 @@
 - Puis se rendre sur http://localhost/ ou http://localhost:8080 -> phpmyadmin 
 
 
-
 ### TO DO
 - [x] faire en sorte que le nom du user qui a fait le poste s'enregistre pour qu'il s'affiche
 - [x] Chaque user peut créer, modifier et supprimer leurs propres postes
