@@ -11,8 +11,8 @@
     <script src="./../../../node_modules/uikit/dist/js/uikit.min.js"></script>
     <script src="./../../../node_modules/uikit/dist/js/uikit-icons.min.js"></script>
     <!--  WYSIWYG tinymce -->
-    <script src="./../../node_modules/tinymce/tinymce.js"></script>
-    <script src="./../../static/tinymceTextareaConfig.js"></script>
+    <script src="./../../../node_modules/tinymce/tinymce.js"></script>
+    <script src="./../../../static/tinymceTextareaConfig.js"></script>
 </head>
 <body>
 <div class="uk-container">
