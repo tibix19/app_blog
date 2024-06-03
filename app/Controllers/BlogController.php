@@ -1,4 +1,5 @@
 <?php
+// Controller pour afficher la page index, les postes associés à un tag et la page pour afficher un poste dans son intégralité
 
 namespace App\Controllers;
 

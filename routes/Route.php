@@ -1,14 +1,14 @@
 <?php
+// Ce fichier définit la classe Route, qui gère le traitement des URL et l'exécution des actions associées dans l'application.
 
 namespace Router;
-
 use Database\DBConnection;
 
 class Route
 {
     public string $path; // Définit le chemin de la route
     public $action; // Définit l'action à exécuter lorsque la route est atteinte
-    public $matches;
+    public $matches; // Stocke les correspondances d'URL capturé
 
     public function __construct($path, $action)
     {
@@ -16,7 +16,7 @@ class Route
         $this->action = $action; // Initialise l'action associée à la route
     }
 
-
+    // Méthode pour vérifier si l'URL correspond au chemin de la route
     public function matches(string $url)
     {
         // Convertit le chemin de la route en une expression régulière pour les correspondances d'URL
@@ -34,6 +34,7 @@ class Route
         }
     }
 
+    // Méthode pour exécuter l'action associée à la route
     public function execute()
     {
         // Divise l'action en un nom de contrôleur et une méthode

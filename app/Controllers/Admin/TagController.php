@@ -1,5 +1,5 @@
 <?php
-
+// Controller pour les tags
 namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
@@ -23,8 +23,11 @@ class TagController extends Controller
     // supprimer un tag
     public function destroyTag(int $id)
     {
+        // check si admin
         $this->isAdmin();
+        // Instancie la class Tag dans le modèle
         $post = new Tag($this->getDB());
+        // suppression du tag dans la DB
         $result = $post->destroy_model($id);
 
         if ($result){
@@ -77,6 +80,4 @@ class TagController extends Controller
             header('Location: /admin/tags?create=success');
         }
     }
-
-
 }

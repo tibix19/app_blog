@@ -1,5 +1,5 @@
 <?php
-
+// Modèle des utilisateurs
 namespace App\Models;
 
 use DateTime;
@@ -15,6 +15,7 @@ class User extends Model
         return $this->querySQL("SELECT * FROM {$this->table} WHERE username = ?", [$username], true);
     }
 
+    // recupération des infos du user en fonction du mail
     public function getByEmail(string $email)
     {
         return $this->querySQL("SELECT * FROM {$this->table} WHERE email = ?", [$email], true);

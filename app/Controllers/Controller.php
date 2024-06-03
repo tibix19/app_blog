@@ -1,4 +1,6 @@
 <?php
+// Class controller de base avec les fonctions que les autres classes vont tout le temps utiliser
+
 namespace App\Controllers;
 use App\Exceptions\NotFoundException;
 use Database\DBConnection;

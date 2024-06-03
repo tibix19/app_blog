@@ -1,5 +1,5 @@
 <?php
-
+// Controller pour la gestion des utilisateurs par les administrateurs
 namespace App\Controllers\Admin;
 
 use App\Exceptions\NotFoundException;
@@ -113,6 +113,4 @@ class UserController extends Controller
             header('Location: /admin/account?delete=' . $id);
         }
     }
-
-
 }

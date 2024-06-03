@@ -1,5 +1,5 @@
 <?php
-
+ // classe Modèle de base avec toutes les fonctions de base utils pour toutes les tables
 namespace App\Models;
 
 use Database\DBConnection;

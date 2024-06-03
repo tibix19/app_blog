@@ -1,5 +1,5 @@
 <?php
-// Controlleur CRUD sur les postes pour user standard
+// Controller CRUD sur les postes pour user standard
 
 namespace App\Controllers;
 

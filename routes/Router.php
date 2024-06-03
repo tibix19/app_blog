@@ -1,13 +1,18 @@
 <?php
+// Ce fichier définit le routeur de l'application, gère les routes GET et POST, et exécute les actions associées.
+
+// Définition du namespace
 namespace Router;
 
 use App\Exceptions\NotFoundException;
 
 class Router
 {
+    // Définition des attributs
     public $url;
     public $routes = [];
 
+    // Constructeur de la classe Router
     public function __construct($url)
     {
         // Nettoie l'URL en enlevant les barres obliques inutiles au début et à la fin
@@ -33,7 +38,7 @@ class Router
     {
         // Parcourt les routes enregistrées pour la méthode de requête actuelle (GET ou POST)
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route){
-            // Vérifie si l'URL actuelle matche avec l'une des routes créé
+            // Vérifie si l'URL actuelle matche avec l'une des routes créées
             if ($route->matches($this->url)) {
                 // Exécute l'action associée à la route
                 return $route->execute();

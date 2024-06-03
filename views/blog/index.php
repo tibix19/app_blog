@@ -1,3 +1,5 @@
+<!-- Page index (page par défaut du site "/") C'est là que tous les postes sont affichés -->
+
 <script>
     // Ajouter un gestionnaire d'événements sur chaque carte
     document.addEventListener("DOMContentLoaded", function() {

@@ -1,3 +1,5 @@
+<!-- Page index pour les informations de l'utilisateur -->
+
 <h1 class="uk-heading-small uk-padding uk-padding-remove-left">Mes postes</h1>
 
 <?php if(isset($_GET['success'])): ?>

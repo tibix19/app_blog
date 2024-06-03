@@ -1,4 +1,5 @@
 <?php
+// Modèle des postes, requête vers la db
 
 namespace App\Models;
 

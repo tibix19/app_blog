@@ -1,4 +1,5 @@
 <?php
+// Page pour le flucx RSS
 header("Content-Type: application/rss+xml;");
 ?>
 <rss version="2.0">

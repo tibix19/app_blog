@@ -1,5 +1,5 @@
 <?php
-
+// fichier de connexion à la base de données
 namespace Database;
 use PDO;
 
