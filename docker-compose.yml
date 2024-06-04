@@ -20,10 +20,10 @@ services:
       - mysql-data:/var/lib/mysql
       - ./database/blog_db.sql:/docker-entrypoint-initdb.d/blog_db.sql
     environment:
-      MYSQL_ROOT_PASSWORD: timeo
+      MYSQL_ROOT_PASSWORD: arogeiro
       MYSQL_DATABASE: blog_db
-      MYSQL_USER: timeo
-      MYSQL_PASSWORD: timeo
+      MYSQL_USER: arogeiro
+      MYSQL_PASSWORD: arogeiro
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -34,7 +34,7 @@ services:
       - "8080:80"
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: timeo
+      MYSQL_ROOT_PASSWORD: arogeiro
 
 volumes:
   mysql-data:

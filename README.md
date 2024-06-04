@@ -1,4 +1,4 @@
-# App blog CMS en PHP POO MVC
+# Blog CMS en PHP MVC - Module 120/151
 
 ### Requirement
 
@@ -13,8 +13,8 @@
 
 
 ### Credentials
-- Le mot de passe et login pour se connecter à la DB c'est : `root` et `root`.
-- Un compte administrateur avec comme mail : `angelo.rogeiro@eduvaud.ch" et comme mdp` : `arogeiro`, est créé automatiquement.
+- Le mot de passe et login pour se connecter à la DB c'est : `arogeiro` et `arogeiro`.
+- Un compte administrateur, avec le mail : `angelo.rogeiro@eduvaud.ch` et le mdp : `arogeiro`, est créé automatiquement.
 
 
 ### TO DO

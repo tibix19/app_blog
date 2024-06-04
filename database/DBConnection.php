@@ -16,10 +16,11 @@ class DBConnection
     {
               $this->dbname = "blog_db";
               $this->host = "host.docker.internal";
-              $this->username = "timeo";
-              $this->password = "timeo";
+              $this->username = "arogeiro";
+              $this->password = "arogeiro";
     }
 
+    // récupération de la connexion à la base de données
     public function getPDO(): PDO
     {
         // instancier une nouvelle con si pas null en faisant un opérateur ternaire
@@ -33,6 +34,4 @@ class DBConnection
         ]);
 
     }
-
-
 }
