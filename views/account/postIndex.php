@@ -1,4 +1,4 @@
-<!-- Page index pour les informations de l'utilisateur -->
+<!-- Page index pour afficher les postes de l'utilisateur connecté -->
 
 <h1 class="uk-heading-small uk-padding uk-padding-remove-left">Mes postes</h1>
 
@@ -35,7 +35,9 @@ elseif (isset($_GET['create'])) {
     <li><a href="#">Publiées (<?= count($params['PostsPublishedUser']) ?>)</a></li>
 </ul>
 
+
 <ul class="uk-switcher uk-margin">
+    <!-- Poste brouillon -->
     <li>
         <div class="uk-overflow-auto">
             <table class="uk-table uk-table-striped uk-table-hover uk-table-divider uk-table-small">
@@ -78,6 +80,7 @@ elseif (isset($_GET['create'])) {
         </div>
     </li>
     <li>
+        <!-- Poste publié -->
         <div class="uk-overflow-auto">
             <table class="uk-table uk-table-striped uk-table-hover uk-table-divider uk-table-small">
                 <thead>

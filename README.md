@@ -7,9 +7,14 @@
 ### Installation
 - Clone le repository `git clone https://github.com/tibix19/app_blog.git`
 - Aller dans le dossier racine du projet `cd app_blog`
-- Faire un `docker-compose up --build -d` pour créer le conteneur pour l'application
+- Faire un `docker-compose up --build -d` pour créer le conteneur de l'application
 - Attendre quelque seconde le temps que la db se charge correctement
 - Puis se rendre sur http://localhost/ ou http://localhost:8080 -> phpmyadmin 
+
+
+### Credentials
+- Le mot de passe et login pour se connecter à la DB c'est : `root` et `root`.
+- Un compte administrateur avec comme mail : `angelo.rogeiro@eduvaud.ch" et comme mdp` : `arogeiro`, est créé automatiquement.
 
 
 ### TO DO
@@ -22,12 +27,11 @@
 - [x] Faire en sorte que la modif des tags fonctionne
 - [x] les photos / paragraphe dans le texte, couleur et autre subtilité du texte dans le poste
 - [x] les admins qui peuvent changer le level d'un user
-- [] docker
+- [x] docker
 - [x] front-end uikit
 - [x] Créer un authController et mettre les function de login et de signup dedans pour simplifier le UserController
 - [x] Mettre des messages à chaque fois qu'une modification est effectuée (Modification enregistrée)
 - [x] Mettre des validations à chaque formulaire
-- [] Ajouter les commentaires
 - [x] Faire une barre de recherche
 - [x] (Admin peut ajouter ou enlever des tags)
 - [x] Faire en sorte que les postes aient 2 états (brouillon et en ligne)
