@@ -8,8 +8,8 @@
 - Clone le repository `git clone https://github.com/tibix19/app_blog.git`
 - Aller dans le dossier racine du projet `cd app_blog`
 - Faire un `docker-compose up --build -d` pour créer le conteneur de l'application
-- Attendre quelque seconde le temps que la db se charge correctement
-- Puis se rendre sur http://localhost/ ou http://localhost:8080 -> phpmyadmin 
+- Se rendre sur phpmyadmin http://localhost:8080 pour vérifier que la db blog_db se soit importé correctement (mdp et login : `arogeiro`)
+- Puis se rendre sur http://localhost/ 
 
 
 ### Credentials
