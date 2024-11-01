@@ -15,7 +15,7 @@ class DBConnection
     public function __construct()
     {
               $this->dbname = "blog_db";
-              $this->host = "host.docker.internal";
+              $this->host = "db";
               $this->username = "arogeiro";
               $this->password = "arogeiro";
     }
